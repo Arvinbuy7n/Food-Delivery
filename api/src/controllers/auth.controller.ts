@@ -23,22 +23,18 @@ export const login: RequestHandler = async (req, res) => {
   res.json({
     token,
   });
-
-  return res.json(user);
 };
 
 export const signUp: RequestHandler = async (req, res) => {
   const { name, email, password } = req.body;
 
-  const userExist = await UserModel.find({ email: email });
+  const userExist = await UserModel.findOne({ email: email });
 
-  if (!userExist) {
+  if (userExist) {
     return res.status(401).json({
       message: "User already exist",
     });
   }
-
-  return res.json(userExist);
 
   await UserModel.create({
     name,

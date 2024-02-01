@@ -33,7 +33,7 @@ export const HomeHead = () => {
         height="788px"
         direction={"row"}
         justifyContent={"center"}
-        px={40}
+        px={60}
       >
         <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
           <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
@@ -68,7 +68,7 @@ export const HomeHead = () => {
         </Stack>
       </Stack>
 
-      <Stack px={40}>
+      <Stack px={60}>
         <Stack
           direction={"row"}
           py={12}
@@ -121,7 +121,7 @@ export const HomeHead = () => {
           </Stack>
 
           <Stack>
-            <Grid container>
+            <Grid container justifyContent={"space-between"}>
               {new Array(4).fill(0).map((_, index) => (
                 <Grid key={index} item>
                   <CardFood
