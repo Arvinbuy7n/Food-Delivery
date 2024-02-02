@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { OrderDetail } from "./auto/OrderDetail";
+import { MyOrder } from "./MyOrder";
 
 type CardFoodProps = {
   foodname: string;

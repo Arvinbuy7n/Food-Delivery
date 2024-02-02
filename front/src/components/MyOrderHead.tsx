@@ -10,7 +10,7 @@ export const MyOrderHead = () => {
         gap: 4,
       }}
     >
-      <Stack direction={"row"} gap={22}>
+      <Stack direction={"row"} gap={22} pb={2}>
         <InputAdornment position="start" sx={{ mt: 2 }}>
           <IconButton>
             <ArrowBackIos />

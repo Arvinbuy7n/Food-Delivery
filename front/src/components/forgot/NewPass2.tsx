@@ -3,16 +3,25 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { CustomInput } from "..";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  code: yup.string().length(6).required(),
+});
 
 export const NewPass2 = () => {
   const router = useRouter();
 
-  const [passCreate, setPassCreate] = useState("");
-
-  const handlePassword = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setPassCreate(e.target.value)
-  }
+  const formik = useFormik({
+    initialValues: {
+      code: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(values.code);
+    },
+  });
 
   return (
     <Container>
@@ -37,8 +46,12 @@ export const NewPass2 = () => {
             placeholder="Нууц үг сэргээх"
             type="password"
             size="medium"
-            value={passCreate}
-            onChange={handlePassword}
+            name="code"
+            value={formik.values.code}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.code && Boolean(formik.errors.code)}
+            helperText={formik.touched.code && formik.errors.code}
           />
         </Stack>
 
@@ -46,7 +59,7 @@ export const NewPass2 = () => {
           <Button
             variant="contained"
             disableElevation
-            disabled={!passCreate}
+            disabled={!formik.values.code}
             sx={{
               width: 384,
               fontSize: 13,

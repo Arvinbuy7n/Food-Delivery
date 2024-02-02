@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { MyOrderHead } from "../MyOrderHead";
 import { Newtreh } from "../auto/Newtreh";
+import { MyOrder } from "../MyOrder";
 
 export const Header = () => {
   const router = useRouter();
@@ -124,10 +125,15 @@ export const Header = () => {
             Сагс
           </Typography>
 
-          <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
-            <Box role="presentation" onClick={closeDrawer} width={"600px"}>
+          <Drawer anchor={"right"} open={isDrawerOpen}>
+            <Box
+              role="presentation"
+              onClick={closeDrawer}
+              width={"630px"}
+              px={4}
+            >
               <MyOrderHead />
-              <Divider />
+              <MyOrder />
             </Box>
           </Drawer>
         </Stack>

@@ -3,13 +3,27 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import { CustomInput } from "..";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object({
+  newPassword: yup.string().required(),
+  newPassAgain: yup.string().required(),
+});
 
 export const NewPass3 = () => {
   const router = useRouter();
 
-  const [newPass, setNewPass] = useState("");
-  const [passAgain, setPassAgain] = useState("")
+  const formik = useFormik({
+    initialValues: {
+      newPassword: "",
+      newPassAgain: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      alert(values.newPassword || values.newPassAgain);
+    },
+  });
 
   return (
     <Container>
@@ -29,40 +43,50 @@ export const NewPass3 = () => {
             placeholder="********"
             type="password"
             size="medium"
-            value={newPass}
-            onChange={(e) => {
-              setNewPass(e.target.value)
-            }}
+            name="newPassword"
+            value={formik.values.newPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.touched.newPassword && Boolean(formik.errors.newPassword)
+            }
+            helperText={formik.touched.newPassword && formik.errors.newPassword}
           />
           <CustomInput
             label="Нууц үг давтах"
             placeholder="********"
             type="password"
             size="medium"
-            value={passAgain}
-            onChange={(e) => {
-              setPassAgain(e.target.value)
-            }}
+            name="newPassAgain"
+            value={formik.values.newPassAgain}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.touched.newPassAgain && Boolean(formik.errors.newPassAgain)
+            }
+            helperText={
+              formik.touched.newPassAgain && formik.errors.newPassAgain
+            }
           />
         </Stack>
 
-          <Button
-            variant="contained"
-            disableElevation
-            disabled={!newPass || !passAgain}
-            sx={{
-              width: 384,
-              fontSize: 13,
-              px: 2,
-              py: 1.3,
-            }}
-            onClick={() => {
-              router.push("login");
-            }}
-          >
-            Үргэлжлүүлэх
-          </Button>
-        </Stack>
+        <Button
+          variant="contained"
+          disableElevation
+          disabled={!formik.values.newPassword || !formik.values.newPassAgain}
+          sx={{
+            width: 384,
+            fontSize: 13,
+            px: 2,
+            py: 1.3,
+          }}
+          onClick={() => {
+            router.push("login");
+          }}
+        >
+          Үргэлжлүүлэх
+        </Button>
+      </Stack>
     </Container>
   );
 };

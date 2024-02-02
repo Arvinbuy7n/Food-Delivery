@@ -19,11 +19,6 @@ type AuthContextType = {
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLogged, setIsLogged] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const getData = () => {
-    setIsOpen((p) => !p);
-  };
 
   const login = async (email: string, password: string) => {
     try {
