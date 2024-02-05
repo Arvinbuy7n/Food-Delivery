@@ -5,6 +5,7 @@ import { CustomInput } from "../CustomInput";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -13,6 +14,7 @@ const validationSchema = yup.object({
 
 export const LoginCard = () => {
   const router = useRouter();
+  const { login } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +23,7 @@ export const LoginCard = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(values.email || values.password);
+      login(values.email, values.password);
     },
   });
 

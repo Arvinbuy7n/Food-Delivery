@@ -2,6 +2,8 @@
 
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { api } from "../common/axios";
+import { toast } from "react-toastify";
+import axios, { AxiosError } from "axios";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -15,6 +17,7 @@ type AuthContextType = {
   signUp: (name: string, email: string, password: string) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
+  newPassword: (email: string) => void;
 };
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
@@ -32,8 +35,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("token", token);
 
       setIsLogged(true);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+      console.log(error), "FFF";
     }
   };
 
@@ -55,6 +63,23 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const newPassword = async (email: string) => {
+    try {
+      const { data } = await api.post("/auth/new", {
+        email,
+      });
+
+      toast.success(data.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+      console.log(error), "FFF";
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,6 +87,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         signUp,
         login,
         logout: () => {},
+        newPassword,
       }}
     >
       {children}

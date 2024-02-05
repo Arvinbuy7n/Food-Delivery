@@ -9,6 +9,8 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { theme } from "../theme";
 import { Footer } from "../components/layout/Footer";
 import { AuthProvider } from "../components/provider/AuthProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +30,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 <Header />
                 <AuthProvider>{children}</AuthProvider>
                 <Footer />
+                <ToastContainer />
               </Stack>
             </Box>
           </ThemeProvider>

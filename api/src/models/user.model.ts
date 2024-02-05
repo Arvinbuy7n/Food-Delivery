@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     type: String,
     require: true,
   },
+  otp: {
+    type: Number,
+    require: false,
+  },
 });
 
 export const UserModel = model("user", UserSchema);

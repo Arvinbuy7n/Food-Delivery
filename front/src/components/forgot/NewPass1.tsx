@@ -5,6 +5,7 @@ import { CustomInput } from "../CustomInput";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
@@ -12,14 +13,16 @@ const validationSchema = yup.object({
 
 export const NewPass1 = () => {
   const router = useRouter();
+  const { newPassword } = useAuth();
 
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(values.email);
+    onSubmit: async (values) => {
+      console.log("ff", values);
+      await newPassword(values.email);
     },
   });
 
@@ -31,14 +34,7 @@ export const NewPass1 = () => {
         justifyContent={"center"}
         gap={6}
       >
-        <Typography
-          alignSelf={"center"}
-          fontSize={28}
-          fontWeight={700}
-          onClick={() => {
-            router.push("login");
-          }}
-        >
+        <Typography alignSelf={"center"} fontSize={28} fontWeight={700}>
           Нууц үг сэргээх
         </Typography>
 
@@ -66,7 +62,7 @@ export const NewPass1 = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("new2");
+              formik.handleSubmit();
             }}
           >
             Үргэлжлүүлэх

@@ -12,7 +12,7 @@ export const login: RequestHandler = async (req, res) => {
 
   if (!user) {
     return res.status(401).json({
-      message: "Invalid Credentials",
+      message: "User not found",
     });
   }
 
@@ -46,5 +46,31 @@ export const signUp: RequestHandler = async (req, res) => {
 
   return res.json({
     message: "New user created",
+  });
+};
+
+export const newPassword: RequestHandler = async (req, res) => {
+  const { email } = req.body;
+
+  console.log(req.body);
+
+  const otp = Math.floor(Math.random() * 1000000);
+
+  const user = await UserModel.findOne({ email });
+
+  if (!user) {
+    return res.status(401).json({
+      message: "Email not found",
+    });
+  }
+
+  const newUser = await UserModel.findOneAndUpdate(
+    { _id: user._id },
+    {
+      otp: "1",
+    }
+  );
+  return res.json({
+    message: "Email found",
   });
 };
