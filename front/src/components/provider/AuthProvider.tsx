@@ -14,7 +14,12 @@ type User = {
 
 type AuthContextType = {
   isLogged: Boolean;
-  signUp: (name: string, email: string, password: string) => void;
+  signUp: (
+    name: string,
+    email: string,
+    password: string,
+    address: string
+  ) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
   newPassword: (email: string) => void;
@@ -45,12 +50,18 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const signUp = async (name: string, email: string, password: string) => {
+  const signUp = async (
+    name: string,
+    email: string,
+    password: string,
+    address: string
+  ) => {
     try {
       const { data } = await api.post("/sign", {
         name,
         email,
         password,
+        address,
       });
 
       const { token } = data;

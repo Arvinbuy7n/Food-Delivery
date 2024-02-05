@@ -26,7 +26,7 @@ export const login: RequestHandler = async (req, res) => {
 };
 
 export const signUp: RequestHandler = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, address } = req.body;
 
   const userExist = await UserModel.findOne({ email: email });
 
@@ -40,6 +40,7 @@ export const signUp: RequestHandler = async (req, res) => {
     name,
     email,
     password,
+    address,
     updatedAt: new Date(),
     createdAt: new Date(),
   });
