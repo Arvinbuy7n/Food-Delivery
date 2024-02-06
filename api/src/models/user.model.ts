@@ -22,6 +22,14 @@ const UserSchema = new Schema({
     type: Number,
     require: false,
   },
+  updatedAt: {
+    type: Date,
+    require: false,
+  },
+  createdAt: {
+    type: Date,
+    require: false,
+  },
 });
 
 export const UserModel = model("user", UserSchema);

@@ -68,10 +68,10 @@ export const newPassword: RequestHandler = async (req, res) => {
   const newUser = await UserModel.findOneAndUpdate(
     { _id: user._id },
     {
-      otp: "1",
+      otp: otp,
     }
   );
   return res.json({
-    message: "Email found",
+    message: "Имэйл зөв байна",
   });
 };

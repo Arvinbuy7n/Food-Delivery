@@ -1,9 +1,9 @@
 "use client";
 
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { api } from "../common/axios";
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
+import { api } from "@/src/common/axios";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await api.post("/auth/login", {
+      const { data } = await axios.post("http://localhost:8000/auth/login", {
         email,
         password,
       });
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const newPassword = async (email: string) => {
     try {
-      const { data } = await api.post("/auth/new", {
+      const { data } = await axios.post("http://localhost:8000/auth/new", {
         email,
       });
 

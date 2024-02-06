@@ -1,5 +1,7 @@
 import { RequestHandler } from "express";
 import nodemailer from "nodemailer";
+import { UserModel } from "../models";
+
 export const sendEmail: RequestHandler = async (req, res) => {
   const { email } = req.body;
 

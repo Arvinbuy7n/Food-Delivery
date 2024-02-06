@@ -21,7 +21,6 @@ export const NewPass1 = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log("ff", values);
       await newPassword(values.email);
     },
   });

@@ -5,12 +5,11 @@ import {
   Search,
   ShoppingBasketOutlined,
 } from "@mui/icons-material";
-import { Box, Divider, Drawer, Modal, Stack, Typography } from "@mui/material";
+import { Box, Drawer, Modal, Stack, Typography } from "@mui/material";
 import { CustomInput } from "../CustomInput";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import { MyOrderHead } from "../MyOrderHead";
 import { Newtreh } from "../auto/Newtreh";
 import { MyOrder } from "../MyOrder";
 
@@ -19,7 +18,8 @@ export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const pathname = usePathname();
+  console.log(pathname);
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -120,19 +120,18 @@ export const Header = () => {
             }}
             fontSize={16}
             fontWeight={700}
-            onClick={openDrawer}
+            onClick={() => {
+              if (pathname == "/foodmenu") {
+                openDrawer();
+              }
+              return false;
+            }}
           >
             Сагс
           </Typography>
 
-          <Drawer anchor={"right"} open={isDrawerOpen}>
-            <Box
-              role="presentation"
-              onClick={closeDrawer}
-              width={"630px"}
-              px={4}
-            >
-              <MyOrderHead />
+          <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
+            <Box role="presentation" width={"630px"} px={4}>
               <MyOrder />
             </Box>
           </Drawer>
@@ -148,12 +147,18 @@ export const Header = () => {
             }}
             fontSize={16}
             fontWeight={700}
-            onClick={openModal}
+            onClick={() => {
+              if (pathname == "/home" || pathname == "/foodmenu") {
+                openModal();
+              } else {
+                router.push("/login");
+              }
+            }}
           >
             Нэвтрэх
           </Typography>
-          <Modal open={isModalOpen}>
-            <Box onClick={closeModal}>
+          <Modal open={isModalOpen} onClick={closeModal}>
+            <Box>
               <Newtreh />
             </Box>
           </Modal>
