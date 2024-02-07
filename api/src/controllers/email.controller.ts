@@ -4,8 +4,23 @@ import { UserModel } from "../models";
 
 export const sendEmail: RequestHandler = async (req, res) => {
   const { email } = req.body;
+  const otp = Math.floor(Math.random() * 1000000);
 
   try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        message: "Email not found",
+      });
+    }
+
+    const newUser = await UserModel.findOneAndUpdate(
+      { _id: user._id },
+      {
+        otp: otp,
+      }
+    );
     const transforter = nodemailer.createTransport({
       service: "Gmail",
       host: "smtp.gmail.com",
@@ -13,15 +28,15 @@ export const sendEmail: RequestHandler = async (req, res) => {
       secure: true,
       auth: {
         user: "arwinbuyan88705548@gmail.com",
-        pass: "mvlv cnge ovuu muom",
+        pass: "mvlvcngeovuumuom",
       },
     });
 
     const mailOptions = {
       from: "arwinbuyan88705548@gmail.com",
-      to: "email",
-      subject: "Hello from nodemailer",
-      text: "This is a test email sent using Nodemailer",
+      to: email,
+      subject: "Hello! from Food Delivery",
+      text: `Neg udaagiin code: ${otp}`,
     };
 
     await transforter.sendMail(mailOptions);

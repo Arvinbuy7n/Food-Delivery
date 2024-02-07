@@ -29,11 +29,11 @@ export const HomeHead = () => {
           backgroundImage: "url(back.png)",
           width: "auto",
           justifyContent: "space-between",
+          px: { md: 60, lg: 32 },
         }}
         height="788px"
         direction={"row"}
         justifyContent={"center"}
-        px={60}
       >
         <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
           <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
@@ -68,7 +68,11 @@ export const HomeHead = () => {
         </Stack>
       </Stack>
 
-      <Stack px={60}>
+      <Stack
+        sx={{
+          px: { md: 60, lg: 32 },
+        }}
+      >
         <Stack
           direction={"row"}
           py={12}

@@ -87,7 +87,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           hideProgressBar: true,
         });
       }
-      console.log(error), "FFF";
     }
   };
 

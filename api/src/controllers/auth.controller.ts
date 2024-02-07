@@ -53,15 +53,13 @@ export const signUp: RequestHandler = async (req, res) => {
 export const newPassword: RequestHandler = async (req, res) => {
   const { email } = req.body;
 
-  console.log(req.body);
-
   const otp = Math.floor(Math.random() * 1000000);
 
   const user = await UserModel.findOne({ email });
 
   if (!user) {
     return res.status(401).json({
-      message: "Email not found",
+      message: "Ийм нэртэй хэрэглэгч олдсонгүй.",
     });
   }
 

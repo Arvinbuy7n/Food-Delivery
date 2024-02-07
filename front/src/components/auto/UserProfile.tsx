@@ -21,6 +21,8 @@ export const UserProfile = () => {
           Chekist
         </Typography>
       </Stack>
+
+      <Stack></Stack>
     </Stack>
   );
 };
