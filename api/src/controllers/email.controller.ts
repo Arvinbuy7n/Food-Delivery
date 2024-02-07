@@ -46,3 +46,17 @@ export const sendEmail: RequestHandler = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+export const otp: RequestHandler = async (req, res) => {
+  const { code, email } = req.body;
+
+  const user = UserModel.find({
+    email,
+  });
+
+  if (!user) {
+    return res.status(401).json({
+      message: "Invalid credentials",
+    });
+  }
+};
