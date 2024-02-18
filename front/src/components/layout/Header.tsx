@@ -19,7 +19,7 @@ export const Header = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
-  console.log(pathname);
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <Stack
       direction={"row"}
-      sx={{ justifyContent: "space-between", px: { xl: 60, lg: 32 }, py: 1 }}
+      sx={{ justifyContent: "space-between", px: { xl: 40 }, py: 1 }}
     >
       <Stack direction={"row"} gap={1}>
         <Stack mt={0.3}>

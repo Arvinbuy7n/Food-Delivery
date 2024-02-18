@@ -2,7 +2,6 @@
 
 import { Button, Card, Container, Stack, Typography } from "@mui/material";
 import { CustomInput } from "../CustomInput";
-import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";

@@ -26,12 +26,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <Box sx={{ minHeight: "100vh" }} m={"auto"}>
-              <Stack sx={{ border: 1, borderColor: "grey.500" }}>
-                <Header />
-                <AuthProvider>{children}</AuthProvider>
-                <Footer />
-                <ToastContainer />
-              </Stack>
+              <Header />
+              <AuthProvider>{children}</AuthProvider>
+              <Footer />
+              <ToastContainer />
             </Box>
           </ThemeProvider>
           <CssBaseline />

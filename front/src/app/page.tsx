@@ -1,8 +1,8 @@
 "use client";
 
-import { LoginCard } from "../components/auto/LoginCard";
-import { UserProfile } from "../components/auto/UserProfile";
+import { FoodCategory } from "../components/auto/FoodCategory";
+import { MoreVertEdit } from "../components/auto/MoreVert";
 
 export default function Home() {
-  return <UserProfile />;
+  return <FoodCategory />;
 }

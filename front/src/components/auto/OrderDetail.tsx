@@ -1,5 +1,4 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
-import { count } from "console";
 import Image from "next/image";
 import React from "react";
 
