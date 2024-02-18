@@ -48,7 +48,7 @@ export const sendEmail: RequestHandler = async (req, res) => {
 };
 
 export const otp: RequestHandler = async (req, res) => {
-  const { code, email } = req.body;
+  const { email } = req.body;
 
   const user = UserModel.find({
     email,

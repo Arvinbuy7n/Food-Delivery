@@ -73,3 +73,5 @@ export const newPassword: RequestHandler = async (req, res) => {
     message: "Имэйл зөв байна",
   });
 };
+
+export const checkOtp: RequestHandler = async (req, res) => {};

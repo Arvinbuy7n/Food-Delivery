@@ -61,7 +61,8 @@ export const NewPass1 = () => {
               py: 1.3,
             }}
             onClick={() => {
-              formik.handleSubmit();
+              router.push("/new2");
+              // formik.handleSubmit();
             }}
           >
             Үргэлжлүүлэх

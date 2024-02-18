@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import { FoodModel } from "../models";
 
-export const getAllFoods: RequestHandler = async (req, res) => {
+export const getAllFoods: RequestHandler = async (_req, res) => {
   const foods = await FoodModel.find({});
 
   res.json(foods);
@@ -9,8 +9,6 @@ export const getAllFoods: RequestHandler = async (req, res) => {
 
 export const addFood: RequestHandler = async (req, res) => {
   const { foodName, price, discount } = req.body;
-
-  return res.json(req.body);
 
   const findFood = await FoodModel.findOne({ foodName });
 
