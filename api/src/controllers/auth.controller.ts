@@ -50,16 +50,30 @@ export const signUp: RequestHandler = async (req, res) => {
   });
 };
 
+export const checkOtp: RequestHandler = async (req, res) => {
+  const { email, otp } = req.body;
+
+  const check = await UserModel.find({ email, otp });
+
+  if (!check) {
+    return res.status(401).json({
+      message: "Invalid credentials",
+    });
+  }
+
+  return res.json(true);
+};
+
 export const newPassword: RequestHandler = async (req, res) => {
-  const { email } = req.body;
+  const { email, password, passAgain } = req.body;
 
   const otp = Math.floor(Math.random() * 1000000);
 
-  const user = await UserModel.findOne({ email });
+  const user = await UserModel.findOne({ email, password, passAgain });
 
   if (!user) {
     return res.status(401).json({
-      message: "Ийм нэртэй хэрэглэгч олдсонгүй.",
+      message: "Password is correct.",
     });
   }
 
@@ -73,18 +87,4 @@ export const newPassword: RequestHandler = async (req, res) => {
   return res.json({
     message: "Email sent",
   });
-};
-
-export const checkOtp: RequestHandler = async (req, res) => {
-  const { email, otp } = req.body;
-
-  const check = await UserModel.find({ email, otp });
-
-  if (!check) {
-    return res.status(401).json({
-      message: "Invalid credentials",
-    });
-  }
-
-  return res.json(true);
 };

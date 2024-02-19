@@ -5,7 +5,7 @@ import { CheckBox, LocationOn } from "@mui/icons-material";
 
 export const AlhamNeg = () => {
   return (
-    <Stack py={10} ml={20} gap={6}>
+    <Stack py={8} gap={6}>
       <Stack direction={"row"}>
         <CustomRadio />
 
@@ -40,7 +40,7 @@ export const AlhamNeg = () => {
               Нэмэлт мэдээлэл
             </Typography>
 
-            <TextField placeholder="placeholder"></TextField>
+            <TextField placeholder="Орц, давхар, орцны код ..."></TextField>
           </Stack>
 
           <Stack>

@@ -23,7 +23,7 @@ type AuthContextType = {
   ) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
-  newPassword: (email: string) => void;
+  newPassword: (email: string, password: string, passAgain: string) => void;
   sendEmail: (email: string) => void;
   checkOtp: (email: string, otp: string) => void;
 };
@@ -44,6 +44,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("token", token);
 
       setIsLogged(true);
+
+      router.push("/home");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -86,25 +88,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const newPassword = async (email: string) => {
-    try {
-      const { data } = await axios.post("http://localhost:8000/auth/new", {
-        email,
-      });
-
-      toast.success(data.message);
-      if (data) {
-        router.push("/new3");
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message ?? error.message, {
-          hideProgressBar: true,
-        });
-      }
-    }
-  };
-
   const sendEmail = async (email: string) => {
     try {
       const { data } = await axios.post("http://localhost:8000/email/send", {
@@ -128,6 +111,31 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       const { data } = await axios.post("http://localhost:8000/auth/code", {
         email,
         otp,
+      });
+
+      toast.success(data.message);
+      if (data) {
+        router.push("/new3");
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+    }
+  };
+
+  const newPassword = async (
+    email: string,
+    password: string,
+    passAgain: string
+  ) => {
+    try {
+      const { data } = await axios.post("http://localhost:8000/auth/new", {
+        email,
+        password,
+        passAgain,
       });
 
       toast.success(data.message);

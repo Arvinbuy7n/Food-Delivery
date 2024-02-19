@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
+import { Upload } from "../upload/page";
 
 type CreateFoodProps = {
   onClose: () => void;
@@ -93,6 +94,12 @@ export const CreateFood = (props: CreateFoodProps) => {
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
               ></TextField>
+            </Stack>
+
+            <Stack>
+              <Typography fontWeight={500}>Хоолны зураг</Typography>
+
+              <Upload />
             </Stack>
           </Stack>
 

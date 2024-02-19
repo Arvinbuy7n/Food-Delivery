@@ -33,8 +33,8 @@ export const Upload = () => {
   };
   return (
     <Stack>
-      <Container>
-        <Stack py={8} alignItems="center">
+      <Container sx={{ border: 1, borderColor: "#D6D7DC" }}>
+        <Stack py={2} alignItems="center">
           <Stack gap={3} width={400}>
             <TextField
               type="file"
@@ -45,8 +45,8 @@ export const Upload = () => {
               Upload
             </Button>
             {imageUrl && (
-              <Stack width="100%" pt="100%" position="relative">
-                <Image src={imageUrl} alt="Uploaded" fill />
+              <Stack width="100px" position="relative">
+                <img src={imageUrl} alt="Uploaded" />
               </Stack>
             )}
           </Stack>

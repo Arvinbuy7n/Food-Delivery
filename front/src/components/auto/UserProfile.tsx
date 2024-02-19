@@ -1,4 +1,13 @@
-import { IconButton, InputAdornment, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardMedia,
+  IconButton,
+  InputAdornment,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import { UserInput } from "../UserInput";
 import {
@@ -9,17 +18,31 @@ import {
   MailLockOutlined,
   PersonOutlineOutlined,
 } from "@mui/icons-material";
+import React, { useState } from "react";
+import { LogOut } from "./LogOut";
 
-export const UserProfile = () => {
+type openModal = {
+  open?: boolean;
+  setClose?: boolean;
+};
+
+export const UserProfile = (props: openModal) => {
+  const [open, setClose] = React.useState(false);
+
+  const handleOpen = () => {
+    setClose(true);
+  };
+
+  const handleClose = () => {
+    setClose(false);
+  };
+
   return (
-    <Stack
-      alignItems={"center"}
-      justifyContent={"center"}
-      height={"70vh"}
-      gap={4}
-    >
+    <Stack alignItems={"center"} justifyContent={"center"} gap={4} py={12}>
       <Stack alignItems={"center"} justifyContent={"space-between"} gap={4}>
-        <Image src={"/pro.jpeg"} alt="" width={70} height={70} />
+        <Card sx={{ borderRadius: "60%" }}>
+          <Image src={"/pro.jpeg"} alt="" width={120} height={120} />
+        </Card>
 
         <Typography fontSize={28} fontWeight={700}>
           Chekist
@@ -53,7 +76,7 @@ export const UserProfile = () => {
           </Typography>
         </Stack>
 
-        <Stack direction={"row"} gap={1.5} px={2} py={1}>
+        <Stack direction={"row"} gap={1.5} px={2} py={1} onClick={handleOpen}>
           <IconButton sx={{ bgcolor: "#FFF", border: 1, color: "#000" }}>
             {<Logout />}
           </IconButton>
@@ -62,6 +85,12 @@ export const UserProfile = () => {
             Гарах
           </Typography>
         </Stack>
+
+        <Modal open={open}>
+          <Box>
+            <LogOut handleClose={handleClose} />
+          </Box>
+        </Modal>
       </Stack>
     </Stack>
   );

@@ -5,6 +5,7 @@ import { CustomInput } from "..";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
   code: yup.string().length(6).required(),
@@ -12,6 +13,7 @@ const validationSchema = yup.object({
 
 export const NewPass2 = () => {
   const router = useRouter();
+  const { sendEmail } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -19,7 +21,7 @@ export const NewPass2 = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(values.code);
+      sendEmail(values.code);
     },
   });
 
@@ -67,7 +69,7 @@ export const NewPass2 = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("new3");
+              formik.handleSubmit();
             }}
           >
             Үргэлжлүүлэх
