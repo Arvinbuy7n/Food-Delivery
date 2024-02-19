@@ -6,8 +6,8 @@ import { CardFood } from "..";
 
 export const FoodMenu = () => {
   return (
-    <Stack sx={{ px: { xl: 40 } }} gap={6}>
-      <Stack direction={"row"} gap={2} py={4}>
+    <Stack sx={{ px: { xl: 60 } }} gap={6}>
+      <Stack direction={"row"} justifyContent={"space-between"} py={4}>
         <MenuItem label={"Main course"} />
         <MenuItem label={"Appetizers"} />
         <MenuItem label={"Beverage"} />

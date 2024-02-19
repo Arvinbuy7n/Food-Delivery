@@ -21,7 +21,7 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack sx={{ px: 32 }} direction={"row"}>
+    <Stack sx={{ px: 60 }} direction={"row"}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu

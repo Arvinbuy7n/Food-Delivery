@@ -29,7 +29,7 @@ export const HomeHead = () => {
           backgroundImage: "url(back.png)",
           width: "auto",
           justifyContent: "space-between",
-          px: { xl: 40 },
+          px: { xl: 60 },
         }}
         height="788px"
         direction={"row"}
@@ -70,7 +70,7 @@ export const HomeHead = () => {
 
       <Stack
         sx={{
-          px: { xl: 40 },
+          px: { xl: 60 },
         }}
       >
         <Stack

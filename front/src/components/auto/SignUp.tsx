@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { WbCloudyOutlined } from "@mui/icons-material";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
   name: yup.string().required(),
@@ -24,6 +25,7 @@ const validationSchema = yup.object({
 
 export const SignUp = () => {
   const router = useRouter();
+  const { signUp } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -35,12 +37,12 @@ export const SignUp = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(
-        values.name ||
-          values.email ||
-          values.address ||
-          values.password ||
-          values.passAgain
+      signUp(
+        values.name,
+        values.email,
+        values.address,
+        values.password,
+        values.passAgain
       );
     },
   });
@@ -86,7 +88,7 @@ export const SignUp = () => {
           <CustomInput
             label="Хаяг"
             placeholder="Та хаягаа оруулна уу"
-            type="password"
+            type="text"
             size="medium"
             name="address"
             value={formik.values.address}
@@ -99,7 +101,7 @@ export const SignUp = () => {
           <CustomInput
             label="Нууц үг"
             placeholder="Нууц үгээ оруулна уу"
-            type="text"
+            type="password"
             size="medium"
             name="password"
             value={formik.values.password}
@@ -152,7 +154,7 @@ export const SignUp = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("login");
+              formik.handleSubmit();
             }}
           >
             Бүртгүүлэх

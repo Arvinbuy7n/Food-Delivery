@@ -46,7 +46,7 @@ export const signUp: RequestHandler = async (req, res) => {
   });
 
   return res.json({
-    message: "New user created",
+    message: "Амжилттай бүртгэгдлээ.",
   });
 };
 
@@ -69,9 +69,22 @@ export const newPassword: RequestHandler = async (req, res) => {
       otp: otp,
     }
   );
+
   return res.json({
-    message: "Имэйл зөв байна",
+    message: "Email sent",
   });
 };
 
-export const checkOtp: RequestHandler = async (req, res) => {};
+export const checkOtp: RequestHandler = async (req, res) => {
+  const { email, otp } = req.body;
+
+  const check = await UserModel.find({ email, otp });
+
+  if (!check) {
+    return res.status(401).json({
+      message: "Invalid credentials",
+    });
+  }
+
+  return res.json(true);
+};

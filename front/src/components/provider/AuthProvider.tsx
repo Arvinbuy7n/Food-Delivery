@@ -3,7 +3,7 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
-import { api } from "@/src/common/axios";
+import { useRouter } from "next/navigation";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -18,15 +18,19 @@ type AuthContextType = {
     name: string,
     email: string,
     password: string,
-    address: string
+    address: string,
+    passAgain: string
   ) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
   newPassword: (email: string) => void;
+  sendEmail: (email: string) => void;
+  checkOtp: (email: string, otp: string) => void;
 };
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLogged, setIsLogged] = useState(false);
+  const router = useRouter();
 
   const login = async (email: string, password: string) => {
     try {
@@ -57,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     address: string
   ) => {
     try {
-      const { data } = await api.post("/sign", {
+      const { data } = await axios.post("http://localhost:8000/auth/sign", {
         name,
         email,
         password,
@@ -69,8 +73,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("token", token);
 
       setIsLogged(true);
+
+      router.push("/login");
+
+      toast.success(data.message);
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
     }
   };
 
@@ -81,6 +93,47 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       });
 
       toast.success(data.message);
+      if (data) {
+        router.push("/new3");
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+    }
+  };
+
+  const sendEmail = async (email: string) => {
+    try {
+      const { data } = await axios.post("http://localhost:8000/email/send", {
+        email,
+      });
+
+      toast.success(data.message);
+
+      router.push("/new2");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+    }
+  };
+
+  const checkOtp = async (email: string, otp: string) => {
+    try {
+      const { data } = await axios.post("http://localhost:8000/auth/code", {
+        email,
+        otp,
+      });
+
+      toast.success(data.message);
+      if (data) {
+        router.push("/new3");
+      }
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -98,6 +151,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         login,
         logout: () => {},
         newPassword,
+        sendEmail,
+        checkOtp,
       }}
     >
       {children}

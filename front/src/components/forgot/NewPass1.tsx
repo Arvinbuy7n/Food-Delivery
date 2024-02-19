@@ -13,15 +13,15 @@ const validationSchema = yup.object({
 
 export const NewPass1 = () => {
   const router = useRouter();
-  const { newPassword } = useAuth();
+  const { sendEmail } = useAuth();
 
   const formik = useFormik({
     initialValues: {
       email: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      await newPassword(values.email);
+    onSubmit: (values) => {
+      sendEmail(values.email);
     },
   });
 
@@ -61,8 +61,7 @@ export const NewPass1 = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("/new2");
-              // formik.handleSubmit();
+              formik.handleSubmit();
             }}
           >
             Үргэлжлүүлэх

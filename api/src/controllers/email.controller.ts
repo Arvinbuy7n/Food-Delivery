@@ -4,6 +4,7 @@ import { UserModel } from "../models";
 
 export const sendEmail: RequestHandler = async (req, res) => {
   const { email } = req.body;
+
   const otp = Math.floor(Math.random() * 1000000);
 
   try {
@@ -41,7 +42,9 @@ export const sendEmail: RequestHandler = async (req, res) => {
 
     await transforter.sendMail(mailOptions);
 
-    res.json("Email sent");
+    res.json({
+      message: "Email sent",
+    });
   } catch (err) {
     res.status(500).json(err);
   }
