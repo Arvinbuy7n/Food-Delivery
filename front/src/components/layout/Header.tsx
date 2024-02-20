@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <Stack
       direction={"row"}
-      sx={{ justifyContent: "space-between", px: { xl: 60, lg: 40 }, py: 1 }}
+      sx={{ justifyContent: "space-between", px: { md: 40, sm: 60 }, py: 1 }}
     >
       <Stack direction={"row"} gap={1}>
         <Stack mt={0.3}>

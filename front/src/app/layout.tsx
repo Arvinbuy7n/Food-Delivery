@@ -11,6 +11,7 @@ import { Footer } from "../components/layout/Footer";
 import { AuthProvider } from "../components/provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { FoodProvider } from "../components/FoodProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <ThemeProvider theme={theme}>
             <Box sx={{ minHeight: "100vh" }} m={"auto"}>
               <Header />
-              <AuthProvider>{children}</AuthProvider>
+              <AuthProvider>
+                <FoodProvider>{children}</FoodProvider>
+              </AuthProvider>
               <Footer />
               <ToastContainer />
             </Box>

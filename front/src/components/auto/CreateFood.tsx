@@ -40,14 +40,15 @@ export const CreateFood = (props: CreateFoodProps) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      addFood(
-        values.foodName,
-        values.foodCategory,
-        values.ingredient,
-        values.price,
-        values.discount,
-        values.foodImage
-      );
+      // addFood(
+      //   values.foodName,
+      //   values.foodCategory,
+      //   values.ingredient,
+      //   values.price,
+      //   values.discount,
+      //   values.foodImage
+      // );
+      alert(values.foodImage);
     },
   });
 
@@ -90,6 +91,7 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                type="text"
                 name="foodName"
                 value={formik.values.foodName}
                 onChange={formik.handleChange}
@@ -107,6 +109,7 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                type="text"
                 name="foodCategory"
                 value={formik.values.foodCategory}
                 onChange={formik.handleChange}
@@ -126,6 +129,7 @@ export const CreateFood = (props: CreateFoodProps) => {
 
               <TextField
                 placeholder="placeholder"
+                type="text"
                 sx={{ bgcolor: "#F4F4F4" }}
                 name="ingredient"
                 value={formik.values.ingredient}
@@ -145,6 +149,7 @@ export const CreateFood = (props: CreateFoodProps) => {
 
               <TextField
                 placeholder="placeholder"
+                type="text"
                 sx={{ bgcolor: "#F4F4F4" }}
                 name="price"
                 value={formik.values.price}
@@ -163,6 +168,7 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                type="text"
                 name="discount"
                 value={formik.values.discount}
                 onChange={formik.handleChange}
@@ -188,7 +194,9 @@ export const CreateFood = (props: CreateFoodProps) => {
 
             <Button
               sx={{ bgcolor: "#393939", color: "#FFF" }}
-              onClick={() => formik.handleSubmit()}
+              onClick={() => {
+                formik.handleSubmit();
+              }}
             >
               Continue
             </Button>

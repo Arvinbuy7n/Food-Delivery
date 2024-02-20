@@ -3,13 +3,10 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { api } from "../common/axios";
 
 const FoodContext = createContext<FoodContextType>({} as FoodContextType);
-
-type User = {
-  email: String;
-  _id: string;
-};
 
 type FoodContextType = {
   addFood: (
@@ -20,6 +17,7 @@ type FoodContextType = {
     discount?: string,
     foodImage?: string
   ) => void;
+  addCategory: (category: string) => void;
 };
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
@@ -41,9 +39,41 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
         foodImage,
       });
 
-      const { token } = data;
+      toast.success(data.message);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
+    }
+  };
 
-      localStorage.setItem("token", token);
+  const getFood = async () => {
+    try {
+      const { data } = await api.get("/food", {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addCategory = async (category: string) => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/foods/title",
+        {
+          category,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       toast.success(data.message);
     } catch (error) {
@@ -55,10 +85,23 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const getCategory = async () => {
+    try {
+      const { data } = await api.get("/category", {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <FoodContext.Provider
       value={{
         addFood,
+        addCategory,
       }}
     >
       {children}

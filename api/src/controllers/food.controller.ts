@@ -32,3 +32,23 @@ export const addFood: RequestHandler = async (req, res) => {
     message: "New food added",
   });
 };
+
+export const addCategory: RequestHandler = async (req, res) => {
+  const { category } = req.body;
+
+  const findCategory = await FoodModel.findOne({ category });
+
+  if (findCategory) {
+    return res.status(401).json({
+      message: "Category is added",
+    });
+  }
+
+  const categories = await FoodModel.create({
+    category,
+  });
+
+  return res.json({
+    message: "New category created",
+  });
+};

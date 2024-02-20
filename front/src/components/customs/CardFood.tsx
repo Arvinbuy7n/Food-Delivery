@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  CardMedia,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React from "react";
 import { OrderDetail } from "../auto/OrderDetail";
 import Image from "next/image";
