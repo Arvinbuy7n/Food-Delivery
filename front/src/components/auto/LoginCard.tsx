@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Stack, Typography } from "@mui/material";
-import { CustomInput } from "../CustomInput";
+import { CustomInput } from "../customs/CustomInput";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";

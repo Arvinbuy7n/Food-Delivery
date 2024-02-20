@@ -1,6 +1,6 @@
 import { Box, Button, Card, IconButton, Stack } from "@mui/material";
 import React, { ReactNode } from "react";
-import { MoreVertEdit } from "./auto/MoreVert";
+import { MoreVertEdit } from "../auto/MoreVert";
 
 type MenuProps = {
   label?: String;

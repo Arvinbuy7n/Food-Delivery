@@ -17,15 +17,15 @@ type AuthContextType = {
   signUp: (
     name: string,
     email: string,
-    password: string,
     address: string,
+    password: string,
     passAgain: string
   ) => void;
   login: (email: string, password: string) => void;
   logout: () => void;
-  newPassword: (email: string, password: string, passAgain: string) => void;
+  newPassword: (password: string, otp: string) => void;
   sendEmail: (email: string) => void;
-  checkOtp: (email: string, otp: string) => void;
+  checkOtp: (otp: string) => void;
 };
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
@@ -59,15 +59,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const signUp = async (
     name: string,
     email: string,
-    password: string,
-    address: string
+    address: string,
+    password: string
   ) => {
     try {
       const { data } = await axios.post("http://localhost:8000/auth/sign", {
         name,
         email,
-        password,
         address,
+        password,
       });
 
       const { token } = data;
@@ -94,6 +94,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         email,
       });
 
+      localStorage.setItem("email", email);
+
       toast.success(data.message);
 
       router.push("/new2");
@@ -106,14 +108,19 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const checkOtp = async (email: string, otp: string) => {
+  const checkOtp = async (otp: string) => {
+    const email = localStorage.getItem("email");
+
     try {
       const { data } = await axios.post("http://localhost:8000/auth/code", {
         email,
         otp,
       });
 
+      localStorage.setItem("otp", otp);
+
       toast.success(data.message);
+
       if (data) {
         router.push("/new3");
       }
@@ -126,22 +133,20 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const newPassword = async (
-    email: string,
-    password: string,
-    passAgain: string
-  ) => {
+  const newPassword = async (password: string) => {
+    const email = localStorage.getItem("email");
+    const otp = localStorage.getItem("otp");
+
     try {
       const { data } = await axios.post("http://localhost:8000/auth/new", {
         email,
         password,
-        passAgain,
+        otp,
       });
 
       toast.success(data.message);
-      if (data) {
-        router.push("/new3");
-      }
+
+      router.push("/login");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {

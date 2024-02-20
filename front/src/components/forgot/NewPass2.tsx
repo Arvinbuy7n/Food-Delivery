@@ -8,12 +8,15 @@ import * as yup from "yup";
 import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
-  code: yup.string().length(6).required(),
+  code: yup.string().required(),
 });
 
-export const NewPass2 = () => {
+type checkProps = {
+  checkOtp: () => void;
+};
+export const NewPass2 = (props: checkProps) => {
   const router = useRouter();
-  const { sendEmail } = useAuth();
+  const { checkOtp } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +24,7 @@ export const NewPass2 = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      sendEmail(values.code);
+      checkOtp(values.code);
     },
   });
 
@@ -39,8 +42,7 @@ export const NewPass2 = () => {
 
         <Stack gap={4}>
           <Typography>
-            Таны example@pinecone.mn хаяг руу сэргээх <br></br> код илгээх
-            болно.{" "}
+            Таны хаяг руу сэргээх <br></br> код илгээх болно.{" "}
           </Typography>
 
           <CustomInput

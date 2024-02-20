@@ -1,18 +1,26 @@
 "use client";
 
 import { Button, Card, Container, Stack, Typography } from "@mui/material";
-import { CustomInput } from "../CustomInput";
-import { useRouter } from "next/navigation";
+import { CustomInput } from "../customs/CustomInput";
+import { usePathname, useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().required(),
 });
 
-export const Newtreh = () => {
+type handleProps = {
+  handleSign: () => void;
+};
+
+export const Newtreh = (props: handleProps) => {
   const router = useRouter();
+  const { login } = useAuth();
+  const { handleSign } = props;
+  const pathname = usePathname();
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +29,7 @@ export const Newtreh = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(values.email || values.password);
+      login(values.email, values.password);
     },
   });
 
@@ -37,7 +45,7 @@ export const Newtreh = () => {
         borderRadius: 3,
       }}
     >
-      <Stack gap={6} alignItems={"center"} p={4}>
+      <Stack gap={6} p={4} alignItems={"center"}>
         <Typography alignSelf={"center"} fontSize={28} fontWeight={700}>
           Нэвтрэх
         </Typography>
@@ -85,7 +93,7 @@ export const Newtreh = () => {
           </Stack>
         </Stack>
 
-        <Stack gap={4} alignItems={"center"}>
+        <Stack gap={4} display={"flex"} alignItems={"center"}>
           <Button
             variant="contained"
             disableElevation
@@ -119,7 +127,10 @@ export const Newtreh = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("/sign");
+              if (pathname) {
+                router.push("/sign");
+              }
+              handleSign();
             }}
           >
             Бүртгүүлэх

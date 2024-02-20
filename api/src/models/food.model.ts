@@ -5,11 +5,23 @@ export const foodSchema = new Schema({
     type: String,
     require: true,
   },
+  foodCategory: {
+    type: String,
+    require: true,
+  },
+  ingredient: {
+    type: String,
+    require: true,
+  },
   price: {
     type: String,
     require: true,
   },
   discount: {
+    type: String,
+    require: true,
+  },
+  foodImage: {
     type: String,
     require: true,
   },

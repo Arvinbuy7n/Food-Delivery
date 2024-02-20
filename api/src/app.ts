@@ -13,7 +13,7 @@ app.use(json());
 
 app.use("/auth", authRouter);
 
-app.use("/foods", authMiddleware);
+// app.use("/foods", authMiddleware);
 
 app.use("/foods", foodRouter);
 app.use("/email", emailRouter);

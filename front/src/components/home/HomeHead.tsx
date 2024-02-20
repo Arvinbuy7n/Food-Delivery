@@ -10,14 +10,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CardMenu } from "../CardMenu";
+import { CardMenu } from "../customs/CardMenu";
 import {
   AccessTime,
   ArrowForwardIos,
   ImportContacts,
   LunchDiningOutlined,
 } from "@mui/icons-material";
-import { CardFood } from "../CardFood";
+import { CardFood } from "../customs/CardFood";
 import Image from "next/image";
 
 export const HomeHead = () => {
@@ -29,7 +29,7 @@ export const HomeHead = () => {
           backgroundImage: "url(back.png)",
           width: "auto",
           justifyContent: "space-between",
-          px: { md: 60, lg: 40 },
+          px: { xl: 60, lg: 40 },
         }}
         height="788px"
         direction={"row"}
@@ -70,7 +70,7 @@ export const HomeHead = () => {
 
       <Stack
         sx={{
-          px: { md: 60, lg: 40 },
+          px: { xl: 60, lg: 40 },
         }}
       >
         <Stack

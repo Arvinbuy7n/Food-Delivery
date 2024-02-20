@@ -5,23 +5,29 @@ import { CustomInput } from "..";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAuth } from "../provider/AuthProvider";
 
 const validationSchema = yup.object({
-  newPassword: yup.string().required(),
-  newPassAgain: yup.string().required(),
+  password: yup.string().required(),
+  passAgain: yup.string().required(),
 });
 
-export const NewPass3 = () => {
+type handleProps = {
+  newPassword: () => void;
+};
+
+export const NewPass3 = (props: handleProps) => {
   const router = useRouter();
+  const { newPassword } = useAuth();
 
   const formik = useFormik({
     initialValues: {
-      newPassword: "",
-      newPassAgain: "",
+      password: "",
+      passAgain: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(values.newPassword || values.newPassAgain);
+      newPassword(values.password, values.passAgain);
     },
   });
 
@@ -43,37 +49,31 @@ export const NewPass3 = () => {
             placeholder="********"
             type="password"
             size="medium"
-            name="newPassword"
-            value={formik.values.newPassword}
+            name="password"
+            value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched.newPassword && Boolean(formik.errors.newPassword)
-            }
-            helperText={formik.touched.newPassword && formik.errors.newPassword}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
           <CustomInput
             label="Нууц үг давтах"
             placeholder="********"
             type="password"
             size="medium"
-            name="newPassAgain"
-            value={formik.values.newPassAgain}
+            name="passAgain"
+            value={formik.values.passAgain}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={
-              formik.touched.newPassAgain && Boolean(formik.errors.newPassAgain)
-            }
-            helperText={
-              formik.touched.newPassAgain && formik.errors.newPassAgain
-            }
+            error={formik.touched.passAgain && Boolean(formik.errors.passAgain)}
+            helperText={formik.touched.passAgain && formik.errors.passAgain}
           />
         </Stack>
 
         <Button
           variant="contained"
           disableElevation
-          disabled={!formik.values.newPassword || !formik.values.newPassAgain}
+          disabled={!formik.values.password || !formik.values.passAgain}
           sx={{
             width: 384,
             fontSize: 13,
@@ -81,7 +81,7 @@ export const NewPass3 = () => {
             py: 1.3,
           }}
           onClick={() => {
-            router.push("login");
+            formik.handleSubmit();
           }}
         >
           Үргэлжлүүлэх

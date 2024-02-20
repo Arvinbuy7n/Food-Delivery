@@ -8,23 +8,27 @@ export const getAllFoods: RequestHandler = async (_req, res) => {
 };
 
 export const addFood: RequestHandler = async (req, res) => {
-  const { foodName, price, discount } = req.body;
+  const { foodName, foodCategory, ingredient, price, discount, foodImage } =
+    req.body;
 
   const findFood = await FoodModel.findOne({ foodName });
 
   if (findFood) {
     return res.status(401).json({
-      message: "invalid message",
+      message: "Food has already added",
     });
   }
 
   const food = await FoodModel.create({
     foodName,
+    foodCategory,
+    ingredient,
     price,
     discount,
+    foodImage,
   });
 
   return res.json({
-    message: "Food added",
+    message: "New food added",
   });
 };

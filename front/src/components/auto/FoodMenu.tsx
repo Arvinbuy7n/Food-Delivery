@@ -1,12 +1,12 @@
 "use client";
 
 import { Grid, Menu, Stack } from "@mui/material";
-import { MenuItem } from "../Menu";
+import { MenuItem } from "../customs/Menu";
 import { CardFood } from "..";
 
 export const FoodMenu = () => {
   return (
-    <Stack sx={{ px: { md: 60, lg: 40 } }} gap={6}>
+    <Stack sx={{ px: { xl: 60, lg: 40 } }} gap={6}>
       <Stack direction={"row"} justifyContent={"space-between"} py={4}>
         <MenuItem label={"Main course"} />
         <MenuItem label={"Appetizers"} />

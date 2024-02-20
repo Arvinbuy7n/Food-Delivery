@@ -1,2 +1,2 @@
-export * from "./CustomInput";
-export * from "./CardFood"
+export * from "./customs/CustomInput";
+export * from "./customs/CardFood";

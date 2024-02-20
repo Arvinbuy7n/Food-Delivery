@@ -9,7 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { OrderDetail } from "./auto/OrderDetail";
+import { OrderDetail } from "../auto/OrderDetail";
+import Image from "next/image";
 
 type CardFoodProps = {
   foodname: string;
@@ -31,9 +32,13 @@ export const CardFood = (props: CardFoodProps) => {
       sx={{ mb: 8 }}
       gap={2}
     >
-      <CardMedia sx={{ width: 288, height: 186 }}>
-        <img src="oreo.png" onClick={handleOpen} />
-      </CardMedia>
+      <Image
+        src="/oreo.png"
+        alt=""
+        onClick={handleOpen}
+        width={288}
+        height={186}
+      />
       <Modal open={open}>
         <Box>
           <OrderDetail handleClose={handleClose} add={5} />

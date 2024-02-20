@@ -10,8 +10,13 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
-export const MyOrder = () => {
+type handleProps = {
+  closeButton: () => void;
+};
+
+export const MyOrder = (props: handleProps) => {
   const [count, setCount] = useState(1);
+  const { closeButton } = props;
 
   const handleLeft = () => {
     setCount(count - 1);
@@ -34,7 +39,7 @@ export const MyOrder = () => {
         <Stack direction={"row"} gap={22} pb={2}>
           <InputAdornment position="start" sx={{ mt: 2 }}>
             <IconButton>
-              <ArrowBackIos />
+              <ArrowBackIos onClick={closeButton} />
             </IconButton>
           </InputAdornment>
           <Typography fontSize={20} fontWeight={900}>

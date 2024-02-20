@@ -3,7 +3,7 @@ import { addFood, getAllFoods } from "../controllers";
 
 const foodRouter = Router();
 
-foodRouter.get("/", getAllFoods);
-foodRouter.post("/", addFood);
+foodRouter.get("/all", getAllFoods);
+foodRouter.post("/new", addFood);
 
 export default foodRouter;

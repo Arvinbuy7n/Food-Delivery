@@ -8,13 +8,48 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { Upload } from "../upload/page";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useFood } from "../FoodProvider";
 
 type CreateFoodProps = {
   onClose: () => void;
 };
 
+const validationSchema = yup.object({
+  foodName: yup.string().required(),
+  foodCategory: yup.string().required(),
+  ingredient: yup.string().required(),
+  price: yup.string().required(),
+  discount: yup.string().required(),
+  foodImage: yup.string().required(),
+});
+
 export const CreateFood = (props: CreateFoodProps) => {
   const { onClose } = props;
+  const { addFood } = useFood();
+
+  const formik = useFormik({
+    initialValues: {
+      foodName: "",
+      foodCategory: "",
+      ingredient: "",
+      price: "",
+      discount: "",
+      foodImage: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      addFood(
+        values.foodName,
+        values.foodCategory,
+        values.ingredient,
+        values.price,
+        values.discount,
+        values.foodImage
+      );
+    },
+  });
 
   return (
     <Stack
@@ -55,6 +90,14 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="foodName"
+                value={formik.values.foodName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.foodName && Boolean(formik.errors.foodName)
+                }
+                helperText={formik.touched.foodName && formik.errors.foodName}
               ></TextField>
             </Stack>
 
@@ -64,6 +107,17 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="foodCategory"
+                value={formik.values.foodCategory}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.foodCategory &&
+                  Boolean(formik.errors.foodCategory)
+                }
+                helperText={
+                  formik.touched.foodCategory && formik.errors.foodCategory
+                }
               ></TextField>
             </Stack>
 
@@ -73,6 +127,16 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="ingredient"
+                value={formik.values.ingredient}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.ingredient && Boolean(formik.errors.ingredient)
+                }
+                helperText={
+                  formik.touched.ingredient && formik.errors.ingredient
+                }
               ></TextField>
             </Stack>
 
@@ -82,6 +146,12 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="price"
+                value={formik.values.price}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.price && Boolean(formik.errors.price)}
+                helperText={formik.touched.price && formik.errors.price}
               ></TextField>
             </Stack>
 
@@ -93,6 +163,14 @@ export const CreateFood = (props: CreateFoodProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="discount"
+                value={formik.values.discount}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.discount && Boolean(formik.errors.discount)
+                }
+                helperText={formik.touched.discount && formik.errors.discount}
               ></TextField>
             </Stack>
 
@@ -108,7 +186,12 @@ export const CreateFood = (props: CreateFoodProps) => {
               Clear
             </Typography>
 
-            <Button sx={{ bgcolor: "#393939", color: "#FFF" }}>Continue</Button>
+            <Button
+              sx={{ bgcolor: "#393939", color: "#FFF" }}
+              onClick={() => formik.handleSubmit()}
+            >
+              Continue
+            </Button>
           </Stack>
         </Stack>
       </Card>

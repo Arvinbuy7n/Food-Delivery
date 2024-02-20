@@ -6,12 +6,12 @@ import {
   ShoppingBasketOutlined,
 } from "@mui/icons-material";
 import { Box, Drawer, Modal, Stack, Typography } from "@mui/material";
-import { CustomInput } from "../CustomInput";
+import { CustomInput } from "../customs/CustomInput";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import { Newtreh } from "../auto/Newtreh";
-import { MyOrder } from "../MyOrder";
+import { MyOrder } from "../customs/MyOrder";
 
 export const Header = () => {
   const router = useRouter();
@@ -39,7 +39,7 @@ export const Header = () => {
   return (
     <Stack
       direction={"row"}
-      sx={{ justifyContent: "space-between", px: { md: 60, lg: 40 }, py: 1 }}
+      sx={{ justifyContent: "space-between", px: { xl: 60, lg: 40 }, py: 1 }}
     >
       <Stack direction={"row"} gap={1}>
         <Stack mt={0.3}>
@@ -130,9 +130,9 @@ export const Header = () => {
             Сагс
           </Typography>
 
-          <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
+          <Drawer anchor={"right"} open={isDrawerOpen}>
             <Box role="presentation" width={"630px"} px={4}>
-              <MyOrder />
+              <MyOrder closeButton={closeDrawer} />
             </Box>
           </Drawer>
         </Stack>
@@ -157,9 +157,9 @@ export const Header = () => {
           >
             Нэвтрэх
           </Typography>
-          <Modal open={isModalOpen} onClick={closeModal}>
+          <Modal open={isModalOpen}>
             <Box>
-              <Newtreh />
+              <Newtreh handleSign={closeModal} />
             </Box>
           </Modal>
         </Stack>

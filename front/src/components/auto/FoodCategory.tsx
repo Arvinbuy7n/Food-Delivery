@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Modal, Stack, Typography } from "@mui/material";
-import { MenuItem } from "../Menu";
+import { MenuItem } from "../customs/Menu";
 import { MoreVert } from "@mui/icons-material";
 import { CardFood } from "..";
 import React from "react";
@@ -10,6 +10,7 @@ type Open = {
   isOpen?: Boolean;
   closeModal?: Boolean;
 };
+
 export const FoodCategory = (props: Open) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [openFood, closeFood] = React.useState(false);
@@ -21,7 +22,7 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack sx={{ px: { md: 60, lg: 36 } }} direction={"row"}>
+    <Stack sx={{ px: { xl: 56, lg: 36 } }} direction={"row"}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu

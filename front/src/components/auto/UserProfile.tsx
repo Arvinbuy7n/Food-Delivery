@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import { UserInput } from "../UserInput";
+import { UserInput } from "../customs/UserInput";
 import {
   CallOutlined,
   EditOutlined,

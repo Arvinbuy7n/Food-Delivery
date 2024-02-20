@@ -1,6 +1,6 @@
 import { Card, Select, Stack, TextField, Typography } from "@mui/material";
-import { CustomRadio } from "../CustomRadio";
-import { Address } from "../Select";
+import { CustomRadio } from "../customs/CustomRadio";
+import { Address } from "../customs/Select";
 import { CheckBox, LocationOn } from "@mui/icons-material";
 
 export const AlhamNeg = () => {
