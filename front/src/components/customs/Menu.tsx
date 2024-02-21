@@ -1,28 +1,27 @@
 import { Box, Button, Card, IconButton, Stack } from "@mui/material";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { MoreVertEdit } from "../auto/MoreVert";
 
 type MenuProps = {
-  label?: String;
+  label?: string;
   endIcon?: ReactNode;
 };
 
 export const MenuItem = (props: MenuProps) => {
   const { label, endIcon } = props;
-  const [openEdit, closeEdit] = React.useState(false);
-
-  const handleOpen = () => closeEdit(true);
-  const handleClose = () => closeEdit(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   return (
-    <Card
+    <Stack
       sx={{
         justifyContent: "center",
         display: "flex",
-        borderRadius: "16px",
+        flexDirection: "row",
+        borderRadius: "12px",
         "&:hover": {
           backgroundColor: "#18BA51",
         },
+        border: 1,
       }}
     >
       <Button
@@ -35,13 +34,20 @@ export const MenuItem = (props: MenuProps) => {
           },
           width: 282,
         }}
-        onClick={handleClose}
       >
         {label}
       </Button>
-      <IconButton onClick={handleOpen}>{endIcon}</IconButton>
-
-      {openEdit ? <MoreVertEdit /> : null}
-    </Card>
+      <IconButton
+        onClick={() => {
+          setOpenEdit((prev) => !prev);
+        }}
+        sx={{ position: "relative" }}
+      >
+        {endIcon}
+        <Stack position={"absolute"} left={0} top={0}>
+          {openEdit && <MoreVertEdit />}
+        </Stack>
+      </IconButton>
+    </Stack>
   );
 };

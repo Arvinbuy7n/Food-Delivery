@@ -22,7 +22,7 @@ const validationSchema = yup.object({
   ingredient: yup.string().required(),
   price: yup.string().required(),
   discount: yup.string().required(),
-  foodImage: yup.string().required(),
+  // foodImage: yup.string().required(),
 });
 
 export const CreateFood = (props: CreateFoodProps) => {
@@ -40,15 +40,14 @@ export const CreateFood = (props: CreateFoodProps) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      // addFood(
-      //   values.foodName,
-      //   values.foodCategory,
-      //   values.ingredient,
-      //   values.price,
-      //   values.discount,
-      //   values.foodImage
-      // );
-      alert(values.foodImage);
+      addFood(
+        values.foodName,
+        values.foodCategory,
+        values.ingredient,
+        values.price,
+        values.discount,
+        values.foodImage
+      );
     },
   });
 

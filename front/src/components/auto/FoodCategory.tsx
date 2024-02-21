@@ -5,6 +5,7 @@ import { CardFood } from "..";
 import React from "react";
 import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
+import { useFood } from "../FoodProvider";
 
 type Open = {
   isOpen?: Boolean;
@@ -14,6 +15,8 @@ type Open = {
 export const FoodCategory = (props: Open) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [openFood, closeFood] = React.useState(false);
+  const { categoryList } = useFood();
+  const { recordList } = useFood();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -22,14 +25,16 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack sx={{ px: { md: 36, sm: 60 } }} direction={"row"}>
+    <Stack sx={{ px: { md: 56, sm: 60 } }} direction={"row"}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
         </Typography>
 
         <Stack gap={3}>
-          <MenuItem label={"Breakfast"} endIcon={<MoreVert />} />
+          {categoryList.map((item, index) => {
+            return <MenuItem label={item.category} endIcon={<MoreVert />} />;
+          })}
 
           <Button
             sx={{
@@ -79,13 +84,12 @@ export const FoodCategory = (props: Open) => {
 
         <Stack>
           <Grid container sx={{ justifyContent: "space-between" }}>
-            {new Array(6).fill(0).map((_, index) => (
+            {recordList.map((item, index) => (
               <Grid key={index} item md={4}>
                 <CardFood
-                  foodname="Өглөөний хоол"
-                  price="14,800"
-                  discount="-20"
-                  discountPrice="6,800"
+                  foodname={item.foodName}
+                  price={item.price}
+                  discount={item.discount}
                 ></CardFood>
               </Grid>
             ))}

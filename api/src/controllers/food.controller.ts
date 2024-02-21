@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { FoodModel } from "../models";
+import { CategoryModel } from "../models/category.model";
 
 export const getAllFoods: RequestHandler = async (_req, res) => {
   const foods = await FoodModel.find({});
@@ -33,10 +34,16 @@ export const addFood: RequestHandler = async (req, res) => {
   });
 };
 
+export const getFood: RequestHandler = async (req, res) => {
+  const foods = await FoodModel.find({});
+
+  return res.json(foods);
+};
+
 export const addCategory: RequestHandler = async (req, res) => {
   const { category } = req.body;
 
-  const findCategory = await FoodModel.findOne({ category });
+  const findCategory = await CategoryModel.findOne({ category });
 
   if (findCategory) {
     return res.status(401).json({
@@ -44,11 +51,17 @@ export const addCategory: RequestHandler = async (req, res) => {
     });
   }
 
-  const categories = await FoodModel.create({
+  const categories = await CategoryModel.create({
     category,
   });
 
   return res.json({
     message: "New category created",
   });
+};
+
+export const getCategory: RequestHandler = async (req, res) => {
+  const categories = await CategoryModel.find({});
+
+  return res.json(categories);
 };

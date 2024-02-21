@@ -1,10 +1,29 @@
 "use client";
 
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
 import { api } from "../common/axios";
+
+type Category = {
+  category: string;
+};
+
+type Record = {
+  foodName: string;
+  foodCategory: string;
+  ingredient: string;
+  price: string;
+  discount?: string;
+};
 
 const FoodContext = createContext<FoodContextType>({} as FoodContextType);
 
@@ -18,9 +37,18 @@ type FoodContextType = {
     foodImage?: string
   ) => void;
   addCategory: (category: string) => void;
+
+  categoryList: Category[];
+  setCategoryList: Dispatch<SetStateAction<Category[]>>;
+
+  recordList: Record[];
+  setRecordList: Dispatch<SetStateAction<Record[]>>;
 };
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
+  const [recordList, setRecordList] = useState<Record[]>([]);
+
   const addFood = async (
     foodName: string,
     foodCategory: string,
@@ -30,14 +58,22 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     foodImage?: string
   ) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/foods/new", {
-        foodName,
-        foodCategory,
-        ingredient,
-        price,
-        discount,
-        foodImage,
-      });
+      const { data } = await axios.post(
+        "http://localhost:8000/foods/new",
+        {
+          foodName,
+          foodCategory,
+          ingredient,
+          price,
+          discount,
+          foodImage,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       toast.success(data.message);
     } catch (error) {
@@ -51,11 +87,13 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getFood = async () => {
     try {
-      const { data } = await api.get("/food", {
+      const { data } = await api.get("/food/add", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       });
+
+      setRecordList(data);
     } catch (err) {
       console.log(err);
     }
@@ -87,21 +125,32 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getCategory = async () => {
     try {
-      const { data } = await api.get("/category", {
+      const { data } = await api.get("/foods/name", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       });
+
+      setCategoryList(data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    getCategory();
+    getFood();
+  }, []);
+  console.log(recordList);
   return (
     <FoodContext.Provider
       value={{
         addFood,
         addCategory,
+        categoryList,
+        setCategoryList,
+        recordList,
+        setRecordList,
       }}
     >
       {children}

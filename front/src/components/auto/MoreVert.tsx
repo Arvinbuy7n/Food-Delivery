@@ -3,7 +3,7 @@ import { Card, Stack, Typography } from "@mui/material";
 
 export const MoreVertEdit = () => {
   return (
-    <Stack py={20} position={"absolute"} top={"-1%"} left={"31%"} zIndex={10}>
+    <Stack py={20} zIndex={10}>
       <Card sx={{ width: 200, p: 1 }}>
         <Stack direction={"row"} p={1} gap={1}>
           <ModeEditOutlineOutlined sx={{ width: 24, height: 24 }} />

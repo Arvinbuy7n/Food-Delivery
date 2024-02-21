@@ -1,19 +1,30 @@
-import {
-  Button,
-  Card,
-  Stack,
-  Switch,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Card, Stack, TextField, Typography } from "@mui/material";
+import { useFormik } from "formik";
 import Image from "next/image";
+import * as yup from "yup";
+import { useFood } from "../FoodProvider";
 
 type CreateCategoryProps = {
   handleClose: () => void;
 };
 
+const validationSchema = yup.object({
+  category: yup.string(),
+});
+
 export const CreateCategory = (props: CreateCategoryProps) => {
   const { handleClose } = props;
+  const { addCategory, setCategoryList } = useFood();
+
+  const formik = useFormik({
+    initialValues: {
+      category: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (value) => {
+      addCategory(value.category);
+    },
+  });
 
   return (
     <Stack
@@ -52,6 +63,14 @@ export const CreateCategory = (props: CreateCategoryProps) => {
               <TextField
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
+                name="category"
+                value={formik.values.category}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.category && Boolean(formik.errors.category)
+                }
+                helperText={formik.touched.category && formik.errors.category}
               ></TextField>
             </Stack>
           </Stack>
@@ -61,7 +80,14 @@ export const CreateCategory = (props: CreateCategoryProps) => {
               Clear
             </Typography>
 
-            <Button sx={{ bgcolor: "#393939", color: "#FFF" }}>Continue</Button>
+            <Button
+              sx={{ bgcolor: "#393939", color: "#FFF" }}
+              onClick={() => {
+                formik.handleSubmit();
+              }}
+            >
+              Continue
+            </Button>
           </Stack>
         </Stack>
       </Card>
