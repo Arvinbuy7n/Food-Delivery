@@ -34,7 +34,7 @@ export const addFood: RequestHandler = async (req, res) => {
   });
 };
 
-export const getFood: RequestHandler = async (req, res) => {
+export const getFood: RequestHandler = async (_req, res) => {
   const foods = await FoodModel.find({});
 
   return res.json(foods);
@@ -60,7 +60,7 @@ export const addCategory: RequestHandler = async (req, res) => {
   });
 };
 
-export const getCategory: RequestHandler = async (req, res) => {
+export const getCategory: RequestHandler = async (_req, res) => {
   const categories = await CategoryModel.find({});
 
   return res.json(categories);

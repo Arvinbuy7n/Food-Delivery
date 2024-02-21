@@ -5,10 +5,14 @@ import React from "react";
 type OrderDetailProps = {
   handleClose: () => void;
   add: number;
+  foodName: string;
+  price: string;
+  ingredient: string;
+  foodImage: string;
 };
 
 export const OrderDetail = (props: OrderDetailProps) => {
-  const { handleClose } = props;
+  const { handleClose, foodName, foodImage, price, ingredient } = props;
   const [add, setAdd] = React.useState(1);
 
   const handleLeft = () => {
@@ -29,7 +33,7 @@ export const OrderDetail = (props: OrderDetailProps) => {
         zIndex: 10,
       }}
     >
-      <Stack width={950}>
+      <Stack width={950} justifyContent={"space-between"}>
         <Card sx={{ borderRadius: 4 }}>
           <Stack
             height={535}
@@ -38,11 +42,11 @@ export const OrderDetail = (props: OrderDetailProps) => {
             direction={"row"}
             sx={{ justifyContent: "space-between" }}
           >
-            <Stack>
-              <Image src="/pizza.png" alt="food" width={480} height={480} />
+            <Stack border={1} width={"52%"}>
+              <Image src={foodImage} alt="food" width={480} height={480} />
             </Stack>
 
-            <Stack gap={2}>
+            <Stack gap={2} width={"45%"}>
               <Stack sx={{ alignItems: "end" }}>
                 <Image
                   src="/close.png"
@@ -55,11 +59,24 @@ export const OrderDetail = (props: OrderDetailProps) => {
               <Stack gap={4}>
                 <Stack>
                   <Typography fontSize={28} fontWeight={700}>
-                    Main Pizza
+                    {foodName}
                   </Typography>
-                  <Typography fontSize={18} fontWeight={600} color={"#18BA51"}>
-                    34,800₮
-                  </Typography>
+                  <Stack direction={"row"}>
+                    <Typography
+                      fontSize={18}
+                      fontWeight={600}
+                      color={"#18BA51"}
+                    >
+                      {price}
+                    </Typography>
+                    <Typography
+                      color={"#18BA51"}
+                      fontSize={18}
+                      fontWeight={600}
+                    >
+                      ₮
+                    </Typography>
+                  </Stack>
                 </Stack>
 
                 <Stack>
@@ -68,8 +85,7 @@ export const OrderDetail = (props: OrderDetailProps) => {
                   </Typography>
                   <Card sx={{ bgcolor: "grey.200" }}>
                     <Typography p={1} fontSize={16}>
-                      Хулуу, төмс, лууван , сонгино, цөцгийн тос, <br></br>{" "}
-                      самрын үр
+                      {ingredient}
                     </Typography>
                   </Card>
                 </Stack>

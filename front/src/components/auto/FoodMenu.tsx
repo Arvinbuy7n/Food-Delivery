@@ -1,29 +1,31 @@
 "use client";
 
-import { Grid, Menu, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { MenuItem } from "../customs/Menu";
 import { CardFood } from "..";
+import { useFood } from "../FoodProvider";
 
 export const FoodMenu = () => {
+  const { categoryList, recordList } = useFood();
   return (
-    <Stack sx={{ px: { md: 60, sm: 60 } }} gap={6}>
-      <Stack direction={"row"} justifyContent={"space-between"} py={4}>
-        <MenuItem label={"Main course"} />
-        <MenuItem label={"Appetizers"} />
-        <MenuItem label={"Beverage"} />
-        <MenuItem label={"On sale"} />
+    <Stack sx={{ px: { md: 36, sm: 60 } }} gap={6}>
+      <Stack direction={"row"} py={4} gap={2}>
+        {categoryList.map((item, _index) => {
+          return <MenuItem label={item.category} />;
+        })}
       </Stack>
 
       <Stack>
-        <Grid container sx={{ justifyContent: "space-between" }}>
-          {new Array(12).fill(0).map((_, index) => (
-            <Grid key={index} item>
+        <Grid container gap={2}>
+          {recordList.map((item, index) => (
+            <Grid key={index}>
               <CardFood
-                foodname="Өглөөний хоол"
-                price="14,800"
-                discount="-20"
-                discountPrice="6,800"
-              />
+                foodname={item.foodName}
+                price={item.price}
+                ingredient={item.ingredient}
+                discount={item.discount}
+                foodImage=""
+              ></CardFood>
             </Grid>
           ))}
         </Grid>

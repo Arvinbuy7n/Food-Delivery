@@ -14,15 +14,16 @@ const validationSchema = yup.object({
 
 export const CreateCategory = (props: CreateCategoryProps) => {
   const { handleClose } = props;
-  const { addCategory, setCategoryList } = useFood();
+  const { addCategory } = useFood();
 
   const formik = useFormik({
     initialValues: {
       category: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (value) => {
-      addCategory(value.category);
+    onSubmit: async (value) => {
+      await addCategory(value.category);
+      handleClose();
     },
   });
 

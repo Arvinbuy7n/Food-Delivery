@@ -124,7 +124,7 @@ export const HomeHead = () => {
             </Stack>
           </Stack>
 
-          <Stack>
+          {/* <Stack>
             <Grid container justifyContent={"space-between"}>
               {new Array(4).fill(0).map((_, index) => (
                 <Grid key={index} item>
@@ -133,11 +133,12 @@ export const HomeHead = () => {
                     price="14,800"
                     discount="-20"
                     discountPrice="6,800"
+                    foodImage=""
                   />
                 </Grid>
               ))}
             </Grid>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Stack>
     </Stack>

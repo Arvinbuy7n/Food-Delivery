@@ -144,7 +144,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         otp,
       });
 
-      toast.success(data.message);
+      toast.success(data.message, {
+        position: "top-center",
+      });
 
       router.push("/login");
     } catch (error) {

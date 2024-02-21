@@ -17,12 +17,11 @@ type CreateFoodProps = {
 };
 
 const validationSchema = yup.object({
-  foodName: yup.string().required(),
-  foodCategory: yup.string().required(),
-  ingredient: yup.string().required(),
-  price: yup.string().required(),
-  discount: yup.string().required(),
-  // foodImage: yup.string().required(),
+  foodName: yup.string(),
+  foodCategory: yup.string(),
+  price: yup.string(),
+  discount: yup.string(),
+  foodImage: yup.string(),
 });
 
 export const CreateFood = (props: CreateFoodProps) => {
@@ -39,8 +38,8 @@ export const CreateFood = (props: CreateFoodProps) => {
       foodImage: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      addFood(
+    onSubmit: async (values) => {
+      await addFood(
         values.foodName,
         values.foodCategory,
         values.ingredient,
@@ -48,8 +47,11 @@ export const CreateFood = (props: CreateFoodProps) => {
         values.discount,
         values.foodImage
       );
+      onClose();
     },
   });
+
+  console.log(formik.errors);
 
   return (
     <Stack

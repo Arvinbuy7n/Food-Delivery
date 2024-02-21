@@ -23,6 +23,7 @@ type Record = {
   ingredient: string;
   price: string;
   discount?: string;
+  foodImage?: string;
 };
 
 const FoodContext = createContext<FoodContextType>({} as FoodContextType);
@@ -87,7 +88,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getFood = async () => {
     try {
-      const { data } = await api.get("/food/add", {
+      const { data } = await api.get("/foods/add", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -141,6 +142,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     getCategory();
     getFood();
   }, []);
+
   console.log(recordList);
   return (
     <FoodContext.Provider

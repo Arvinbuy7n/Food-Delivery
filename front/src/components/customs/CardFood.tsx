@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Button, Modal, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CardMedia,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { OrderDetail } from "../auto/OrderDetail";
 import Image from "next/image";
@@ -8,25 +15,23 @@ import Image from "next/image";
 type CardFoodProps = {
   foodname: string;
   price: string;
+  ingredient: string;
   discount?: string;
   discountPrice?: string;
+  foodImage: string;
 };
 
 export const CardFood = (props: CardFoodProps) => {
-  const { foodname, price, discount, discountPrice } = props;
+  const { foodname, price, discount, discountPrice, foodImage, ingredient } =
+    props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
-    <Stack
-      justifyContent={"center"}
-      alignItems={"center"}
-      sx={{ mb: 8 }}
-      gap={2}
-    >
+    <Stack gap={1} position={"relative"} mb={6}>
       <Image
-        src="/oreo.png"
+        src={foodImage}
         alt=""
         onClick={handleOpen}
         width={288}
@@ -34,7 +39,14 @@ export const CardFood = (props: CardFoodProps) => {
       />
       <Modal open={open}>
         <Box>
-          <OrderDetail handleClose={handleClose} add={5} />
+          <OrderDetail
+            handleClose={handleClose}
+            add={5}
+            foodName={foodname}
+            foodImage=""
+            price={price}
+            ingredient={ingredient}
+          />
         </Box>
       </Modal>
 
@@ -46,15 +58,15 @@ export const CardFood = (props: CardFoodProps) => {
           fontWeight: 600,
           borderRadius: 10,
           position: "absolute",
+          right: 28,
+          top: 10,
           py: 0,
-          mb: 23,
-          ml: 25,
         }}
       >
         {discount}
       </Button>
 
-      <Stack justifyContent={"end"} display={"flex"} mr={14}>
+      <Stack display={"flex"}>
         <Typography fontSize={20} fontWeight={600}>
           {foodname}
         </Typography>
@@ -70,9 +82,6 @@ export const CardFood = (props: CardFoodProps) => {
           <Stack direction={"row"}>
             <Typography fontSize={18} fontWeight={400}>
               {discountPrice}
-            </Typography>
-            <Typography fontSize={18} fontWeight={400}>
-              ₮
             </Typography>
           </Stack>
         </Stack>
