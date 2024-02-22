@@ -1,4 +1,12 @@
-import { Box, Card, IconButton, Modal, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  IconButton,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import { UserInput } from "../customs/UserInput";
 import {
@@ -13,8 +21,8 @@ import React, { useState } from "react";
 import { LogOut } from "./LogOut";
 
 import { useAuth } from "../provider/AuthProvider";
-import { Upload } from "../upload/page";
 import { UserPhoto } from "../upload/UserPro";
+
 type openModal = {
   open?: boolean;
   setClose?: boolean;
@@ -22,9 +30,9 @@ type openModal = {
 
 export const UserProfile = (props: openModal) => {
   const [open, setClose] = React.useState(false);
-  const { user, setUser } = useAuth();
   const [imagePro, setImagePro] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const { user, signOut } = useAuth();
 
   const handleClick = () => {
     setOpenModal(true);
@@ -42,8 +50,6 @@ export const UserProfile = (props: openModal) => {
     setClose(false);
   };
 
-  const { name, email, phone, userImage } = user;
-
   return (
     <Stack alignItems={"center"} justifyContent={"center"} gap={4} py={12}>
       <Stack
@@ -53,14 +59,14 @@ export const UserProfile = (props: openModal) => {
         position={"relative"}
       >
         <Card sx={{ borderRadius: 32 }}>
-          <Image src={userImage} alt="" width={120} height={120} />
+          <Image src={user?.userImage} alt="" width={120} height={120} />
         </Card>
 
         <IconButton
           sx={{
             position: "absolute",
-            bottom: 55,
-            right: 20,
+            bottom: 0,
+            right: 0,
             border: 1,
             bgcolor: "#FFF",
             color: "#18BA51",
@@ -75,29 +81,25 @@ export const UserProfile = (props: openModal) => {
             <UserPhoto imageUrl={imagePro} setImageUrl={setImagePro} />
           </Box>
         </Modal>
-
-        <Typography fontSize={28} fontWeight={700}>
-          {name}
-        </Typography>
       </Stack>
 
       <Stack gap={2}>
         <UserInput
           startIcon={<PersonOutlineOutlined />}
           title="Таны нэр"
-          label={name}
+          label={user?.name}
           endIcon={<EditOutlined />}
         />
         <UserInput
           startIcon={<CallOutlined />}
           title="Утасны дугаар"
           endIcon={<EditOutlined />}
-          label={phone}
+          label={user?.phone}
         />
         <UserInput
           startIcon={<MailLockOutlined />}
           title="Имэйл хаяг"
-          label={email}
+          label={user?.email}
           endIcon={<EditOutlined />}
         />
 
@@ -120,6 +122,10 @@ export const UserProfile = (props: openModal) => {
             Гарах
           </Typography>
         </Stack>
+
+        <Button sx={{ border: 1, bgcolor: "#18BA51", color: "#FFF" }}>
+          Хадгалах
+        </Button>
 
         <Modal open={open}>
           <Box>

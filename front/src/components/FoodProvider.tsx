@@ -44,11 +44,15 @@ type FoodContextType = {
 
   recordList: Record[];
   setRecordList: Dispatch<SetStateAction<Record[]>>;
+
+  // addSelect: string;
+  // setAddSelect: Dispatch<SetStateAction<Category?>;
 };
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
   const [recordList, setRecordList] = useState<Record[]>([]);
+  const [addSelect, setAddSelect] = useState("");
 
   const addFood = async (
     foodName: string,

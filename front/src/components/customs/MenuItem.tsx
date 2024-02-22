@@ -1,15 +1,18 @@
-import { Box, Button, Card, IconButton, Stack } from "@mui/material";
+import { Button, IconButton, Stack } from "@mui/material";
 import React, { ReactNode, useState } from "react";
 import { MoreVertEdit } from "../auto/MoreVert";
 
 type MenuProps = {
-  label?: string;
+  label: string;
   endIcon?: ReactNode;
+  filterCategory?: string;
+  setFilterCategory?: string;
 };
 
 export const MenuItem = (props: MenuProps) => {
   const { label, endIcon } = props;
   const [openEdit, setOpenEdit] = useState(false);
+  const [filterCategory, setFilterCategory] = useState([]);
 
   return (
     <Stack
@@ -34,6 +37,13 @@ export const MenuItem = (props: MenuProps) => {
           },
           width: 282,
         }}
+        // onClick={() => {
+        //   if (filterCategory.includes(label)) {
+        //     setFilterCategory((prev) => prev.filter((item) => item !== label));
+        //   } else {
+        //     setFilterCategory((prev) => ...prev, label);
+        //   }
+        // }}
       >
         {label}
       </Button>

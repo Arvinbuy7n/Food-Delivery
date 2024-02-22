@@ -33,17 +33,19 @@ type AuthContextType = {
     passAgain: string
   ) => void;
   login: (email: string, password: string) => void;
-  logout: () => void;
+  signOut: () => void;
   newPassword: (password: string, otp: string) => void;
   sendEmail: (email: string) => void;
   checkOtp: (otp: string) => void;
+
+  //user profile medeelel awah
 
   user: {
     name: string;
     phone: string;
     email: string;
     userImage: string;
-    _id: string;
+    _id?: string;
   };
   setUser: Dispatch<
     SetStateAction<{
@@ -123,6 +125,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const signOut = async () => {
+    localStorage.removeItem("token");
+
+    router.push("login");
+  };
+
   const sendEmail = async (email: string) => {
     try {
       const { data } = await axios.post("http://localhost:8000/email/send", {
@@ -193,6 +201,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  // newtersen hereglegchiin medeelel awah
   const getUser = async () => {
     try {
       const { data } = await api.get("auth/user", {
@@ -217,7 +226,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         isLogged,
         signUp,
         login,
-        logout: () => {},
+        signOut: () => {},
         newPassword,
         sendEmail,
         checkOtp,

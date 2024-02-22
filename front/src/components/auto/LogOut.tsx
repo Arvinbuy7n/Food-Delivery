@@ -1,5 +1,4 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 
 type handleClose = {
   handleClose: () => void;
@@ -7,7 +6,6 @@ type handleClose = {
 
 export const LogOut = (props: handleClose) => {
   const { handleClose } = props;
-  const router = useRouter();
 
   return (
     <Stack
@@ -35,9 +33,7 @@ export const LogOut = (props: handleClose) => {
               },
               px: 10,
             }}
-            onClick={() => {
-              router.push("/login");
-            }}
+            onClick={() => {}}
           >
             Тийм
           </Button>

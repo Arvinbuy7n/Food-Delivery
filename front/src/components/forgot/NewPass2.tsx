@@ -16,7 +16,7 @@ type checkProps = {
 };
 export const NewPass2 = (props: checkProps) => {
   const router = useRouter();
-  const { checkOtp } = useAuth();
+  const { checkOtp, user } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -42,7 +42,7 @@ export const NewPass2 = (props: checkProps) => {
 
         <Stack gap={4}>
           <Typography>
-            Таны хаяг руу сэргээх <br></br> код илгээх болно.{" "}
+            Таны хаяг "{user.email}" руу сэргээх <br></br> код илгээх болно.{" "}
           </Typography>
 
           <CustomInput

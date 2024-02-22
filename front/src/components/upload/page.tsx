@@ -38,13 +38,7 @@ export const Upload = (props: ImageUrlProps) => {
     }
   };
   return (
-    <Stack
-      position={"absolute"}
-      top={"33%"}
-      left={"50%"}
-      sx={{ transform: "translate(-50%, -50%)" }}
-      bgcolor={"#FFF"}
-    >
+    <Stack>
       <Container sx={{ border: 1, borderColor: "#D6D7DC" }}>
         <Stack py={2} alignItems="center">
           <Stack gap={3} width={400}>

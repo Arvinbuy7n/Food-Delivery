@@ -1,14 +1,14 @@
 "use client";
 
 import { Grid, Stack } from "@mui/material";
-import { MenuItem } from "../customs/Menu";
+import { MenuItem } from "../customs/MenuItem";
 import { CardFood } from "..";
 import { useFood } from "../FoodProvider";
 
 export const FoodMenu = () => {
   const { categoryList, recordList } = useFood();
   return (
-    <Stack sx={{ px: { md: 60, sm: 60 } }} gap={6}>
+    <Stack sx={{ px: { md: 36 } }} gap={6}>
       <Stack direction={"row"} py={4} gap={2}>
         {categoryList.map((item, _index) => {
           return <MenuItem label={item.category} />;
