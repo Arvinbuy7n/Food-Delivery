@@ -23,7 +23,7 @@ type Record = {
   ingredient: string;
   price: string;
   discount?: string;
-  foodImage?: string;
+  foodImage?: any;
 };
 
 const FoodContext = createContext<FoodContextType>({} as FoodContextType);
@@ -76,7 +76,9 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
         }
       );
 
-      toast.success(data.message);
+      toast.success(data.message, {
+        position: "top-center",
+      });
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {

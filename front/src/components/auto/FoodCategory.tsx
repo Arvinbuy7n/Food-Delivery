@@ -24,7 +24,7 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack sx={{ px: { md: 32, sm: 60 } }} direction={"row"}>
+    <Stack sx={{ px: { md: 60, sm: 60 } }} direction={"row"}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
@@ -82,15 +82,15 @@ export const FoodCategory = (props: Open) => {
         </Modal>
 
         <Stack>
-          <Grid container>
+          <Grid container gap={2}>
             {recordList.map((item, index) => (
-              <Grid key={index} md={4}>
+              <Grid key={index}>
                 <CardFood
                   foodname={item.foodName}
                   price={item.price}
                   discount={item.discount}
                   ingredient={item.ingredient}
-                  foodImage=""
+                  foodImage={item.foodImage}
                 ></CardFood>
               </Grid>
             ))}

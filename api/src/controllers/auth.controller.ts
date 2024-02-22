@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { UserModel } from "../models";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const login: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
@@ -87,8 +87,22 @@ export const newPassword: RequestHandler = async (req, res) => {
   });
 };
 
+// return one user
+
 export const getUser: RequestHandler = async (req, res) => {
-  const users = await UserModel.find({});
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  const payload = jwt.verify(authorization, "secret-key");
+
+  const { id } = payload as JwtPayload;
+
+  const users = await UserModel.findOne({ _id: id });
 
   res.json(users);
 };

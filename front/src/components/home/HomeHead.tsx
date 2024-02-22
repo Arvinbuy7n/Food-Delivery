@@ -19,8 +19,11 @@ import {
 } from "@mui/icons-material";
 import { CardFood } from "../customs/CardFood";
 import Image from "next/image";
+import { useFood } from "../FoodProvider";
 
 export const HomeHead = () => {
+  const { recordList } = useFood();
+
   return (
     <Stack>
       <Stack
@@ -29,7 +32,7 @@ export const HomeHead = () => {
           backgroundImage: "url(back.png)",
           width: "auto",
           justifyContent: "space-between",
-          px: { md: 40, sm: 60 },
+          px: { md: 60, sm: 60 },
         }}
         height="788px"
         direction={"row"}
@@ -70,7 +73,7 @@ export const HomeHead = () => {
 
       <Stack
         sx={{
-          px: { md: 40, sm: 60 },
+          px: { md: 60 },
         }}
       >
         <Stack
@@ -124,21 +127,21 @@ export const HomeHead = () => {
             </Stack>
           </Stack>
 
-          {/* <Stack>
-            <Grid container justifyContent={"space-between"}>
-              {new Array(4).fill(0).map((_, index) => (
+          <Stack>
+            <Grid container>
+              {recordList.map((item, index) => (
                 <Grid key={index} item>
                   <CardFood
-                    foodname="Өглөөний хоол"
-                    price="14,800"
-                    discount="-20"
-                    discountPrice="6,800"
-                    foodImage=""
+                    foodname={item.foodName}
+                    price={item.price}
+                    ingredient={item.ingredient}
+                    discount={item.discount}
+                    foodImage={item.foodImage}
                   />
                 </Grid>
               ))}
             </Grid>
-          </Stack> */}
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

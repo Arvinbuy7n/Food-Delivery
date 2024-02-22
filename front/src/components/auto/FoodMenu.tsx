@@ -8,7 +8,7 @@ import { useFood } from "../FoodProvider";
 export const FoodMenu = () => {
   const { categoryList, recordList } = useFood();
   return (
-    <Stack sx={{ px: { md: 36, sm: 60 } }} gap={6}>
+    <Stack sx={{ px: { md: 60, sm: 60 } }} gap={6}>
       <Stack direction={"row"} py={4} gap={2}>
         {categoryList.map((item, _index) => {
           return <MenuItem label={item.category} />;
@@ -24,7 +24,7 @@ export const FoodMenu = () => {
                 price={item.price}
                 ingredient={item.ingredient}
                 discount={item.discount}
-                foodImage=""
+                foodImage={item.foodImage}
               ></CardFood>
             </Grid>
           ))}

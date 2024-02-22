@@ -30,20 +30,22 @@ export const CardFood = (props: CardFoodProps) => {
 
   return (
     <Stack gap={1} position={"relative"} mb={6}>
-      <Image
-        src={foodImage}
-        alt=""
-        onClick={handleOpen}
-        width={288}
-        height={186}
-      />
+      <Stack borderRadius={8} overflow={"hidden"}>
+        <Image
+          src={foodImage}
+          alt=""
+          onClick={handleOpen}
+          width={288}
+          height={186}
+        />
+      </Stack>
       <Modal open={open}>
         <Box>
           <OrderDetail
             handleClose={handleClose}
             add={5}
             foodName={foodname}
-            foodImage=""
+            foodImage={foodImage}
             price={price}
             ingredient={ingredient}
           />
@@ -58,7 +60,7 @@ export const CardFood = (props: CardFoodProps) => {
           fontWeight: 600,
           borderRadius: 10,
           position: "absolute",
-          right: 28,
+          right: 10,
           top: 10,
           py: 0,
         }}

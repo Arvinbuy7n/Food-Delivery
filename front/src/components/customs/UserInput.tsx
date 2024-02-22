@@ -4,26 +4,29 @@ import {
   Stack,
   TextField,
   TextFieldProps,
+  Typography,
 } from "@mui/material";
 import { ReactNode } from "react";
 
 type UserInputProps = {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
+  label: string;
+  title: string;
 } & TextFieldProps;
 
 export const UserInput = (props: UserInputProps) => {
-  const { type = "text", startIcon, endIcon, ...rest } = props;
+  const { type = "text", startIcon, endIcon, label, title } = props;
 
   return (
     <Stack>
       <TextField
         type="text"
-        {...rest}
         sx={{
           width: 392,
           height: 56,
           bgcolor: "#F6F6F6",
+          position: "relative",
         }}
         InputProps={{
           endAdornment: type === "text" && (
@@ -41,6 +44,27 @@ export const UserInput = (props: UserInputProps) => {
         }}
         variant="outlined"
       />
+      <Typography
+        position={"absolute"}
+        ml={8}
+        mt={0.8}
+        fontSize={12}
+        fontWeight={400}
+        color={"#888A99"}
+      >
+        {title}
+      </Typography>
+
+      <Typography
+        position={"absolute"}
+        ml={8}
+        mt={2.8}
+        fontSize={16}
+        fontWeight={400}
+        color={"#0D1118"}
+      >
+        {label}
+      </Typography>
     </Stack>
   );
 };

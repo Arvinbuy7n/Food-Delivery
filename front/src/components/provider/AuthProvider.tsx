@@ -1,14 +1,25 @@
 "use client";
 
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { api } from "@/src/common/axios";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 type User = {
-  email: String;
+  name: string;
+  phone: string;
+  email: string;
   _id: string;
 };
 
@@ -26,10 +37,34 @@ type AuthContextType = {
   newPassword: (password: string, otp: string) => void;
   sendEmail: (email: string) => void;
   checkOtp: (otp: string) => void;
+
+  user: {
+    name: string;
+    phone: string;
+    email: string;
+    userImage: string;
+    _id: string;
+  };
+  setUser: Dispatch<
+    SetStateAction<{
+      name: string;
+      phone: string;
+      email: string;
+      userImage: string;
+      _id: string;
+    }>
+  >;
 };
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    userImage: "",
+    _id: "",
+  });
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
@@ -158,6 +193,24 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const getUser = async () => {
+    try {
+      const { data } = await api.get("auth/user", {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+
+      setUser(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  });
+
   return (
     <AuthContext.Provider
       value={{
@@ -168,6 +221,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         newPassword,
         sendEmail,
         checkOtp,
+        setUser,
+        user,
       }}
     >
       {children}

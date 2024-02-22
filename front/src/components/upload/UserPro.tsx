@@ -8,7 +8,7 @@ type ImageUrlProps = {
   setImageUrl: Dispatch<SetStateAction<string>>;
 };
 
-export const Upload = (props: ImageUrlProps) => {
+export const UserPhoto = (props: ImageUrlProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { imageUrl, setImageUrl } = props;
 
@@ -40,14 +40,25 @@ export const Upload = (props: ImageUrlProps) => {
   return (
     <Stack
       position={"absolute"}
-      top={"33%"}
+      top={"40%"}
       left={"50%"}
       sx={{ transform: "translate(-50%, -50%)" }}
-      bgcolor={"#FFF"}
     >
-      <Container sx={{ border: 1, borderColor: "#D6D7DC" }}>
+      <Container
+        sx={{
+          border: 1,
+          borderColor: "#D6D7DC",
+          bgcolor: "#FFF",
+          borderRadius: 4,
+        }}
+      >
         <Stack py={2} alignItems="center">
           <Stack gap={3} width={400}>
+            {imageUrl && (
+              <Stack position="relative" border={1}>
+                <img src={imageUrl} alt="Uploaded" />
+              </Stack>
+            )}
             <TextField
               type="file"
               onChange={handleImageChange}
@@ -56,11 +67,6 @@ export const Upload = (props: ImageUrlProps) => {
             <Button onClick={handleImageUpload} variant="contained">
               Upload
             </Button>
-            {imageUrl && (
-              <Stack position="relative">
-                <img src={imageUrl} alt="Uploaded" />
-              </Stack>
-            )}
           </Stack>
         </Stack>
       </Container>

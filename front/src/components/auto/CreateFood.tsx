@@ -11,6 +11,7 @@ import { Upload } from "../upload/page";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useFood } from "../FoodProvider";
+import { useState } from "react";
 
 type CreateFoodProps = {
   onClose: () => void;
@@ -21,12 +22,12 @@ const validationSchema = yup.object({
   foodCategory: yup.string(),
   price: yup.string(),
   discount: yup.string(),
-  foodImage: yup.string(),
 });
 
 export const CreateFood = (props: CreateFoodProps) => {
   const { onClose } = props;
   const { addFood } = useFood();
+  const [imageUrl, setImageUrl] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -45,7 +46,7 @@ export const CreateFood = (props: CreateFoodProps) => {
         values.ingredient,
         values.price,
         values.discount,
-        values.foodImage
+        imageUrl
       );
       onClose();
     },
@@ -184,7 +185,7 @@ export const CreateFood = (props: CreateFoodProps) => {
             <Stack>
               <Typography fontWeight={500}>Хоолны зураг</Typography>
 
-              <Upload />
+              <Upload imageUrl={imageUrl} setImageUrl={setImageUrl} />
             </Stack>
           </Stack>
 

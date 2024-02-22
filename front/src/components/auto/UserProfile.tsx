@@ -1,13 +1,4 @@
-import {
-  Box,
-  Card,
-  CardMedia,
-  IconButton,
-  InputAdornment,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Card, IconButton, Modal, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { UserInput } from "../customs/UserInput";
 import {
@@ -21,6 +12,9 @@ import {
 import React, { useState } from "react";
 import { LogOut } from "./LogOut";
 
+import { useAuth } from "../provider/AuthProvider";
+import { Upload } from "../upload/page";
+import { UserPhoto } from "../upload/UserPro";
 type openModal = {
   open?: boolean;
   setClose?: boolean;
@@ -28,6 +22,17 @@ type openModal = {
 
 export const UserProfile = (props: openModal) => {
   const [open, setClose] = React.useState(false);
+  const { user, setUser } = useAuth();
+  const [imagePro, setImagePro] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleClick = () => {
+    setOpenModal(true);
+  };
+
+  const handle = () => {
+    setOpenModal(false);
+  };
 
   const handleOpen = () => {
     setClose(true);
@@ -37,32 +42,62 @@ export const UserProfile = (props: openModal) => {
     setClose(false);
   };
 
+  const { name, email, phone, userImage } = user;
+
   return (
     <Stack alignItems={"center"} justifyContent={"center"} gap={4} py={12}>
-      <Stack alignItems={"center"} justifyContent={"space-between"} gap={4}>
-        <Card sx={{ borderRadius: "60%" }}>
-          <Image src={"/pro.jpeg"} alt="" width={120} height={120} />
+      <Stack
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        gap={4}
+        position={"relative"}
+      >
+        <Card sx={{ borderRadius: 32 }}>
+          <Image src={userImage} alt="" width={120} height={120} />
         </Card>
 
+        <IconButton
+          sx={{
+            position: "absolute",
+            bottom: 55,
+            right: 20,
+            border: 1,
+            bgcolor: "#FFF",
+            color: "#18BA51",
+          }}
+          onClick={handleClick}
+        >
+          {<EditOutlined />}
+        </IconButton>
+
+        <Modal open={openModal} onClose={handle}>
+          <Box>
+            <UserPhoto imageUrl={imagePro} setImageUrl={setImagePro} />
+          </Box>
+        </Modal>
+
         <Typography fontSize={28} fontWeight={700}>
-          Chekist
+          {name}
         </Typography>
       </Stack>
 
       <Stack gap={2}>
         <UserInput
           startIcon={<PersonOutlineOutlined />}
-          placeholder="Таны нэр"
+          title="Таны нэр"
+          label={name}
           endIcon={<EditOutlined />}
         />
         <UserInput
           startIcon={<CallOutlined />}
+          title="Утасны дугаар"
           endIcon={<EditOutlined />}
-          placeholder="Утасны дугаар"
+          label={phone}
         />
         <UserInput
           startIcon={<MailLockOutlined />}
-          placeholder="Имэйл хаяг"
+          title="Имэйл хаяг"
+          label={email}
           endIcon={<EditOutlined />}
         />
 

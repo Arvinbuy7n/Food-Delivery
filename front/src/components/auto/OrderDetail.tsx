@@ -33,20 +33,14 @@ export const OrderDetail = (props: OrderDetailProps) => {
         zIndex: 10,
       }}
     >
-      <Stack width={950} justifyContent={"space-between"}>
+      <Stack width={950}>
         <Card sx={{ borderRadius: 4 }}>
-          <Stack
-            height={535}
-            p={4}
-            bgcolor={"#FFF"}
-            direction={"row"}
-            sx={{ justifyContent: "space-between" }}
-          >
-            <Stack border={1} width={"52%"}>
-              <Image src={foodImage} alt="food" width={480} height={480} />
+          <Stack height={535} p={2} bgcolor={"#FFF"} direction={"row"} gap={2}>
+            <Stack width={490} mt={2.5}>
+              <Image src={foodImage} alt="food" width={500} height={500} />
             </Stack>
 
-            <Stack gap={2} width={"45%"}>
+            <Stack gap={2} width={440} mt={3}>
               <Stack sx={{ alignItems: "end" }}>
                 <Image
                   src="/close.png"
