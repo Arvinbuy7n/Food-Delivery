@@ -1,4 +1,5 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
+import { useAuth } from "../provider/AuthProvider";
 
 type handleClose = {
   handleClose: () => void;
@@ -6,6 +7,7 @@ type handleClose = {
 
 export const LogOut = (props: handleClose) => {
   const { handleClose } = props;
+  const { signOut } = useAuth();
 
   return (
     <Stack
@@ -33,7 +35,9 @@ export const LogOut = (props: handleClose) => {
               },
               px: 10,
             }}
-            onClick={() => {}}
+            onClick={() => {
+              signOut();
+            }}
           >
             Тийм
           </Button>

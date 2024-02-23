@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  CardMedia,
-  Container,
-  Grid,
-  IconButton,
-  ImageListItem,
-  InputAdornment,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Container, ImageListItem, Stack, Typography } from "@mui/material";
 import { CardMenu } from "../customs/CardMenu";
 import {
   AccessTime,
@@ -17,12 +8,11 @@ import {
   ImportContacts,
   LunchDiningOutlined,
 } from "@mui/icons-material";
-import { CardFood } from "../customs/CardFood";
-import Image from "next/image";
 import { useFood } from "../FoodProvider";
+import { FoodSection } from "../auto/FoodSection";
 
 export const HomeHead = () => {
-  const { recordList } = useFood();
+  const { categoryList } = useFood();
 
   return (
     <Stack>
@@ -32,11 +22,11 @@ export const HomeHead = () => {
           backgroundImage: "url(back.png)",
           width: "auto",
           justifyContent: "space-between",
-          px: { md: 40 },
         }}
-        height="788px"
+        height={788}
         direction={"row"}
         justifyContent={"center"}
+        px={68}
       >
         <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
           <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
@@ -71,11 +61,7 @@ export const HomeHead = () => {
         </Stack>
       </Stack>
 
-      <Stack
-        sx={{
-          px: { md: 40 },
-        }}
-      >
+      <Container>
         <Stack
           direction={"row"}
           py={12}
@@ -103,47 +89,10 @@ export const HomeHead = () => {
           />
         </Stack>
 
-        <Stack gap={4}>
-          <Stack sx={{ justifyContent: "space-between" }} direction={"row"}>
-            <Stack direction={"row"} gap={0.5}>
-              <CardMedia sx={{ mt: 0.6 }}>
-                <Image src="/star.png" alt="" width={22} height={22} />
-              </CardMedia>
-              <Typography fontSize={22} fontWeight={700}>
-                 Хямдралтай
-              </Typography>
-            </Stack>
-
-            <Stack direction={"row"}>
-              <Typography fontSize={14} color={"#18BA51"}>
-                Бүгдийг харах
-              </Typography>
-
-              <InputAdornment position="end">
-                <IconButton sx={{ mt: 2.5, color: "#18BA51" }}>
-                  <ArrowForwardIos sx={{ width: 15 }} />
-                </IconButton>
-              </InputAdornment>
-            </Stack>
-          </Stack>
-
-          <Stack>
-            <Grid container>
-              {recordList.map((item, index) => (
-                <Grid key={index} item>
-                  <CardFood
-                    foodname={item.foodName}
-                    price={item.price}
-                    ingredient={item.ingredient}
-                    discount={item.discount}
-                    foodImage={item.foodImage}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Stack>
-        </Stack>
-      </Stack>
+        {categoryList.map((item, _index) => {
+          return <FoodSection category={item.category} />;
+        })}
+      </Container>
     </Stack>
   );
 };

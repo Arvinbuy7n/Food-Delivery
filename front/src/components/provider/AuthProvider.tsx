@@ -20,7 +20,6 @@ type User = {
   name: string;
   phone: string;
   email: string;
-  _id: string;
 };
 
 type AuthContextType = {
@@ -44,18 +43,19 @@ type AuthContextType = {
     name: string;
     phone: string;
     email: string;
+    address: string;
     userImage: string;
-    _id?: string;
   };
   setUser: Dispatch<
     SetStateAction<{
       name: string;
       phone: string;
       email: string;
+      address: string;
       userImage: string;
-      _id: string;
     }>
   >;
+  refreshF: () => void;
 };
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
@@ -63,11 +63,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState({
     name: "",
     phone: "",
+    address: "",
     email: "",
     userImage: "",
-    _id: "",
   });
+  const [refresh, setRefresh] = useState(0);
   const router = useRouter();
+
+  const refreshF = () => {
+    setRefresh((prev) => prev + 1);
+  };
 
   const login = async (email: string, password: string) => {
     try {
@@ -128,7 +133,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const signOut = async () => {
     localStorage.removeItem("token");
 
-    router.push("login");
+    router.push("/login");
   };
 
   const sendEmail = async (email: string) => {
@@ -209,7 +214,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           Authorization: localStorage.getItem("token"),
         },
       });
-
+      await refreshF();
       setUser(data);
     } catch (err) {
       console.log(err);
@@ -218,20 +223,21 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getUser();
-  });
-
+  }, [refresh]);
+  // console.log(user);
   return (
     <AuthContext.Provider
       value={{
         isLogged,
         signUp,
         login,
-        signOut: () => {},
+        signOut,
         newPassword,
         sendEmail,
         checkOtp,
         setUser,
         user,
+        refreshF,
       }}
     >
       {children}

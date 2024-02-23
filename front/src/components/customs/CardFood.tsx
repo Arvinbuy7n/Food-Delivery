@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { OrderDetail } from "../auto/OrderDetail";
 import Image from "next/image";
 
@@ -19,11 +19,20 @@ type CardFoodProps = {
   discount?: string;
   discountPrice?: string;
   foodImage: string;
+
+  setCategoryName?: Dispatch<SetStateAction<string>>;
 };
 
 export const CardFood = (props: CardFoodProps) => {
-  const { foodname, price, discount, discountPrice, foodImage, ingredient } =
-    props;
+  const {
+    foodname,
+    price,
+    discount,
+    discountPrice,
+    foodImage,
+    ingredient,
+    setCategoryName,
+  } = props;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

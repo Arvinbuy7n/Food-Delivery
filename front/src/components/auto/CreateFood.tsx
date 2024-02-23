@@ -17,6 +17,8 @@ import { useFood } from "../FoodProvider";
 import { Dispatch, SetStateAction, useState } from "react";
 import { MenuItem } from "../customs/MenuItem";
 import { ArrowDropDown } from "@mui/icons-material";
+import { CustomInput } from "..";
+import { it } from "node:test";
 
 type CreateFoodProps = {
   onClose: () => void;
@@ -120,7 +122,7 @@ export const CreateFood = (props: CreateFoodProps) => {
 
             <Stack>
               <Typography>Хоолны ангилал</Typography>
-              <Stack
+              {/* <Stack
                 border={1}
                 height={60}
                 borderRadius={2}
@@ -152,7 +154,7 @@ export const CreateFood = (props: CreateFoodProps) => {
                     return <MenuItem label={item.category} />;
                   })}
                 </Stack>
-              ) : null}
+              ) : null} */}
               {/* <Select
                 placeholder="placeholder"
                 sx={{ bgcolor: "#F4F4F4" }}
@@ -161,9 +163,26 @@ export const CreateFood = (props: CreateFoodProps) => {
                 value={formik.values.foodCategory}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-              > */}
-
-              {/* </Select> */}
+              ></Select> */}
+              <CustomInput
+                select
+                SelectProps={{ native: true }}
+                name="foodCategory"
+                value={formik.values.foodCategory}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              >
+                <option disabled selected value={""}>
+                  Choose category
+                </option>
+                {categoryList.map((item, index) => {
+                  return (
+                    <option key={index} value={item.category}>
+                      {item.category}
+                    </option>
+                  );
+                })}
+              </CustomInput>
             </Stack>
 
             <Stack>

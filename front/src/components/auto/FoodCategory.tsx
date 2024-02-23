@@ -1,10 +1,18 @@
 "use client";
 
-import { Box, Button, Grid, Modal, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { MenuItem } from "../customs/MenuItem";
 import { MoreVert } from "@mui/icons-material";
 import { CardFood } from "..";
-import React from "react";
+import React, { useState } from "react";
 import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
 import { useFood } from "../FoodProvider";
@@ -12,12 +20,16 @@ import { useFood } from "../FoodProvider";
 type Open = {
   isOpen?: Boolean;
   closeModal?: Boolean;
+  filterCategory?: string;
+  setFilterCategory?: string;
 };
 
 export const FoodCategory = (props: Open) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [openFood, closeFood] = React.useState(false);
-  const { categoryList, recordList } = useFood();
+  const [categoryName, setCategoryName] = useState("");
+  const [filterCategory, setFilterCategory] = useState([]);
+  const { categoryList, recordList, setCategoryList } = useFood();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -26,15 +38,34 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack sx={{ px: { md: 32, sm: 60 } }} direction={"row"}>
+    <Stack direction={"row"} px={60}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
         </Typography>
 
         <Stack gap={3}>
+          {/* <Button
+            sx={{
+              fontSize: 18,
+              fontFamily: "sans-serif",
+              color: "#000",
+              border: 1,
+              borderRadius: 2,
+              textAlign: "center",
+            }}
+            onClick={() => setCategoryList([])}
+          >
+            All foods
+          </Button> */}
           {categoryList.map((item, _index) => {
-            return <MenuItem label={item.category} endIcon={<MoreVert />} />;
+            return (
+              <MenuItem
+                label={item.category}
+                endIcon={<MoreVert />}
+                setCategoryName={setCategoryName}
+              />
+            );
           })}
 
           <Button
@@ -66,7 +97,7 @@ export const FoodCategory = (props: Open) => {
       >
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography fontSize={22} fontWeight={700}>
-            Breakfast
+            {categoryName}
           </Typography>
 
           <Button
@@ -85,17 +116,19 @@ export const FoodCategory = (props: Open) => {
 
         <Stack>
           <Grid container gap={2}>
-            {recordList.map((item, index) => (
-              <Grid key={index}>
-                <CardFood
-                  foodname={item.foodName}
-                  price={item.price}
-                  discount={item.discount}
-                  ingredient={item.ingredient}
-                  foodImage={item.foodImage}
-                ></CardFood>
-              </Grid>
-            ))}
+            {recordList
+              .filter((item) => item.foodCategory.includes(categoryName))
+              .map((item, index) => (
+                <Grid key={index}>
+                  <CardFood
+                    foodname={item.foodName}
+                    price={item.price}
+                    discount={item.discount}
+                    ingredient={item.ingredient}
+                    foodImage={item.foodImage}
+                  ></CardFood>
+                </Grid>
+              ))}
           </Grid>
         </Stack>
       </Stack>

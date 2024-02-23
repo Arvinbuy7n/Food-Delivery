@@ -35,12 +35,12 @@ export const OrderDetail = (props: OrderDetailProps) => {
     >
       <Stack width={950}>
         <Card sx={{ borderRadius: 4 }}>
-          <Stack height={535} p={2} bgcolor={"#FFF"} direction={"row"} gap={2}>
-            <Stack width={490} mt={2.5}>
+          <Stack height={535} p={4} bgcolor={"#FFF"} direction={"row"} gap={4}>
+            <Card sx={{ borderRadius: 2, width: 490 }}>
               <Image src={foodImage} alt="food" width={500} height={500} />
-            </Stack>
+            </Card>
 
-            <Stack gap={2} width={440} mt={3}>
+            <Stack gap={2} width={440}>
               <Stack sx={{ alignItems: "end" }}>
                 <Image
                   src="/close.png"

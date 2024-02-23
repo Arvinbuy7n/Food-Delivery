@@ -1,18 +1,17 @@
 import { Button, IconButton, Stack } from "@mui/material";
-import React, { ReactNode, useState } from "react";
+import React, { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { MoreVertEdit } from "../auto/MoreVert";
 
 type MenuProps = {
   label: string;
   endIcon?: ReactNode;
-  filterCategory?: string;
-  setFilterCategory?: string;
+
+  setCategoryName: Dispatch<SetStateAction<string>>;
 };
 
 export const MenuItem = (props: MenuProps) => {
-  const { label, endIcon } = props;
+  const { label, endIcon, setCategoryName } = props;
   const [openEdit, setOpenEdit] = useState(false);
-  const [filterCategory, setFilterCategory] = useState([]);
 
   return (
     <Stack
@@ -28,6 +27,9 @@ export const MenuItem = (props: MenuProps) => {
       }}
     >
       <Button
+        onClick={() => {
+          setCategoryName(label);
+        }}
         sx={{
           fontSize: 18,
           fontFamily: "sans-serif",
@@ -35,15 +37,8 @@ export const MenuItem = (props: MenuProps) => {
           "&:hover": {
             color: "#FFF",
           },
-          width: 282,
+          width: 258,
         }}
-        // onClick={() => {
-        //   if (filterCategory.includes(label)) {
-        //     setFilterCategory((prev) => prev.filter((item) => item !== label));
-        //   } else {
-        //     setFilterCategory((prev) => ...prev, label);
-        //   }
-        // }}
       >
         {label}
       </Button>
