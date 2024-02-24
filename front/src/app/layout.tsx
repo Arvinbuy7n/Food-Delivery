@@ -26,14 +26,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
-            <Box sx={{ minHeight: "100vh" }} m={"auto"}>
-              <Header />
-              <AuthProvider>
+            <AuthProvider>
+              <Box sx={{ minHeight: "100vh" }} m={"auto"}>
+                <Header />
                 <FoodProvider>{children}</FoodProvider>
-              </AuthProvider>
-              <Footer />
-              <ToastContainer />
-            </Box>
+                <Footer />
+                <ToastContainer />
+              </Box>
+            </AuthProvider>
           </ThemeProvider>
           <CssBaseline />
         </AppRouterCacheProvider>

@@ -2,16 +2,17 @@
 
 import { FacebookRounded, Instagram, Twitter } from "@mui/icons-material";
 import {
-  Box,
   Container,
-  Divider,
   IconButton,
   ImageListItem,
   Stack,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export const Footer = () => {
+  const router = useRouter();
+
   return (
     <Stack
       height={"600px"}
@@ -40,6 +41,9 @@ export const Footer = () => {
             fontWeight={600}
             fontSize={16}
             sx={{ borderBottom: 1 }}
+            onClick={() => {
+              router.push("/home");
+            }}
           >
             Нүүр
           </Typography>
@@ -58,6 +62,9 @@ export const Footer = () => {
             fontWeight={600}
             fontSize={16}
             sx={{ borderBottom: 1 }}
+            onClick={() => {
+              router.push("/foodmenu");
+            }}
           >
             Хоолны цэс
           </Typography>
@@ -67,6 +74,7 @@ export const Footer = () => {
             fontWeight={600}
             fontSize={16}
             sx={{ borderBottom: 1 }}
+            onClick={() => [router.push("/service")]}
           >
             Үйлчилгээний нөхцөл
           </Typography>

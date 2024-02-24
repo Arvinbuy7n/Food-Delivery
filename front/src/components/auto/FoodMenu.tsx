@@ -19,18 +19,20 @@ export const FoodMenu = (props: Props) => {
     <Container>
       <Stack gap={6}>
         <Stack direction={"row"} py={4} gap={2}>
-          {categoryList.map((item, _index) => {
-            return (
-              <MenuItem
-                label={item.category}
-                setCategoryName={setCategoryName}
-              />
-            );
-          })}
+          <Grid container justifyContent={"space-between"}>
+            {categoryList.map((item, _index) => {
+              return (
+                <MenuItem
+                  label={item.category}
+                  setCategoryName={setCategoryName}
+                />
+              );
+            })}
+          </Grid>
         </Stack>
 
         <Stack>
-          <Grid container>
+          <Grid container justifyContent={"space-between"}>
             {recordList
               .filter((name) => name.foodCategory.includes(categoryName))
               .map((item, index) => (

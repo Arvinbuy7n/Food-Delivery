@@ -149,7 +149,6 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     getFood();
   }, []);
 
-  console.log(recordList);
   return (
     <FoodContext.Provider
       value={{

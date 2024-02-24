@@ -51,7 +51,7 @@ export const Upload = (props: ImageUrlProps) => {
               Upload
             </Button>
             {imageUrl && (
-              <Stack position="relative">
+              <Stack position="relative" width={"100px"}>
                 <img src={imageUrl} alt="Uploaded" />
               </Stack>
             )}

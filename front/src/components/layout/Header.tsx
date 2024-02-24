@@ -43,23 +43,15 @@ export const Header = () => {
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
-  console.log(user?.name);
+
+  const { name } = user;
+
   return (
     <Container>
       <Stack direction={"row"} sx={{ justifyContent: "space-between", py: 1 }}>
         <Stack direction={"row"} gap={1}>
           <Stack mt={0.3}>
-            <Image
-              src="/code.webp"
-              alt="logo"
-              width={35}
-              height={36}
-              onClick={() => {
-                // router.push("/login");
-
-                console.log(user.name);
-              }}
-            />
+            <Image src="/code.webp" alt="logo" width={35} height={36} />
           </Stack>
           <Stack direction={"row"}>
             <Typography
@@ -176,7 +168,7 @@ export const Header = () => {
                 }
               }}
             >
-              {isLogged ? user.name : "Нэвтрэх"}
+              {name}
             </Typography>
             <Modal open={isModalOpen}>
               <Box>

@@ -39,12 +39,12 @@ export const CardFood = (props: CardFoodProps) => {
 
   return (
     <Stack gap={1} position={"relative"} mb={6}>
-      <Stack borderRadius={8} overflow={"hidden"}>
+      <Stack borderRadius={4} overflow={"hidden"}>
         <Image
           src={foodImage}
           alt=""
           onClick={handleOpen}
-          width={288}
+          width={275}
           height={186}
         />
       </Stack>

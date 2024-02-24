@@ -10,58 +10,65 @@ import {
 } from "@mui/icons-material";
 import { useFood } from "../FoodProvider";
 import { FoodSection } from "../auto/FoodSection";
+import Image from "next/image";
 
 export const HomeHead = () => {
   const { categoryList } = useFood();
 
   return (
     <Stack>
-      <Stack
-        sx={{
-          backgroundColor: "#18BA51",
-          backgroundImage: "url(back.png)",
-          width: "auto",
-          justifyContent: "space-between",
-        }}
-        height={788}
-        direction={"row"}
-        justifyContent={"center"}
-        px={68}
-      >
-        <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
-          <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
-            Pinecone <br></br> Food delivery
-          </Typography>
-
-          <Container
-            sx={{ borderBottom: 1, borderColor: "#FFF", width: 350, mr: 25 }}
-          />
-
-          <Typography fontSize={22} color={"#FFF"} fontWeight={700} mr={30}>
-            Horem ipsum dolor sit amet, <br></br> consectetur adipiscing elit.
-          </Typography>
-        </Stack>
-
-        <Stack justifyContent={"center"} alignItems={"center"} pr={20}>
-          <ImageListItem sx={{ width: 440, height: 430 }}>
-            <img src="photo.png" />
-          </ImageListItem>
-
-          <ImageListItem
+      <Stack bgcolor={"#18BA51"}>
+        <Container sx={{ border: 1 }}>
+          <Stack
             sx={{
-              width: 300,
-              height: 300,
-              position: "absolute",
-              ml: 48,
-              mt: 10,
+              backgroundImage: "url(back.png)",
+              width: "auto",
+              justifyContent: "space-between",
             }}
+            height={788}
+            direction={"row"}
+            justifyContent={"center"}
           >
-            <img src="hool.png" />
-          </ImageListItem>
-        </Stack>
+            <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
+              <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
+                Pinecone Food delivery
+              </Typography>
+
+              <Container
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "#FFF",
+                  width: 360,
+                  mr: 25,
+                }}
+              />
+
+              <Typography fontSize={22} color={"#FFF"} fontWeight={700} mr={30}>
+                Horem ipsum dolor sit amet, <br></br> consectetur adipiscing
+                elit.
+              </Typography>
+            </Stack>
+
+            <Stack justifyContent={"center"} alignItems={"center"} pr={20}>
+              <Image src={"/photo.png"} alt="" width={440} height={430}></Image>
+
+              <ImageListItem
+                sx={{
+                  width: 300,
+                  height: 300,
+                  position: "absolute",
+                  ml: 48,
+                  mt: 13,
+                }}
+              >
+                <img src="hool.png" />
+              </ImageListItem>
+            </Stack>
+          </Stack>
+        </Container>
       </Stack>
 
-      <Container>
+      <Container sx={{ border: 1 }}>
         <Stack
           direction={"row"}
           py={12}

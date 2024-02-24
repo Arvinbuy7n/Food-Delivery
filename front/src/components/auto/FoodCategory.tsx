@@ -38,7 +38,7 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   return (
-    <Stack direction={"row"} px={60}>
+    <Stack direction={"row"} px={36}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
@@ -87,14 +87,7 @@ export const FoodCategory = (props: Open) => {
         </Modal>
       </Stack>
 
-      <Stack
-        width={"75%"}
-        px={3}
-        py={4}
-        gap={4}
-        bgcolor={"#F4F4F4"}
-        height={"100vh"}
-      >
+      <Stack width={"75%"} px={3} pt={4} pb={8} gap={4} bgcolor={"#F4F4F4"}>
         <Stack direction={"row"} justifyContent={"space-between"}>
           <Typography fontSize={22} fontWeight={700}>
             {categoryName}
