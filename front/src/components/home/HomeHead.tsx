@@ -8,7 +8,7 @@ import {
   ImportContacts,
   LunchDiningOutlined,
 } from "@mui/icons-material";
-import { useFood } from "../FoodProvider";
+import { useFood } from "../providers/FoodProvider";
 import { FoodSection } from "../auto/FoodSection";
 import Image from "next/image";
 

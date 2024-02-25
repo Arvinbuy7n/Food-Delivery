@@ -1,21 +1,13 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Modal, Stack, Typography } from "@mui/material";
 import { MenuItem } from "../customs/MenuItem";
 import { MoreVert } from "@mui/icons-material";
 import { CardFood } from "..";
 import React, { useState } from "react";
 import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
-import { useFood } from "../FoodProvider";
+import { useFood } from "../providers/FoodProvider";
 
 type Open = {
   isOpen?: Boolean;
@@ -28,8 +20,7 @@ export const FoodCategory = (props: Open) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [openFood, closeFood] = React.useState(false);
   const [categoryName, setCategoryName] = useState("");
-  const [filterCategory, setFilterCategory] = useState([]);
-  const { categoryList, recordList, setCategoryList } = useFood();
+  const { categoryList, recordList } = useFood();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);

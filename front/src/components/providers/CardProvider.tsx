@@ -1,5 +1,7 @@
 "use client";
 
+import { api } from "@/src/common/axios";
+import axios, { AxiosError } from "axios";
 import {
   Dispatch,
   PropsWithChildren,
@@ -9,13 +11,9 @@ import {
   useEffect,
   useState,
 } from "react";
-import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { api } from "../common/axios";
 
-type Category = {
-  category: string;
-};
+const CardContext = createContext<CardContextType>({} as CardContextType);
 
 type Record = {
   foodName: string;
@@ -26,9 +24,7 @@ type Record = {
   foodImage?: any;
 };
 
-const FoodContext = createContext<FoodContextType>({} as FoodContextType);
-
-type FoodContextType = {
+type CardContextType = {
   addFood: (
     foodName: string,
     foodCategory: string,
@@ -37,22 +33,13 @@ type FoodContextType = {
     discount?: string,
     foodImage?: string
   ) => void;
-  addCategory: (category: string) => void;
-
-  categoryList: Category[];
-  setCategoryList: Dispatch<SetStateAction<Category[]>>;
 
   recordList: Record[];
   setRecordList: Dispatch<SetStateAction<Record[]>>;
-
-  // addSelect: string;
-  // setAddSelect: Dispatch<SetStateAction<Category?>;
 };
 
-export const FoodProvider = ({ children }: PropsWithChildren) => {
-  const [categoryList, setCategoryList] = useState<Category[]>([]);
+export const CardProvider = ({ children }: PropsWithChildren) => {
   const [recordList, setRecordList] = useState<Record[]>([]);
-  const [addSelect, setAddSelect] = useState("");
 
   const addFood = async (
     foodName: string,
@@ -106,63 +93,20 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const addCategory = async (category: string) => {
-    try {
-      const { data } = await axios.post(
-        "http://localhost:8000/foods/title",
-        {
-          category,
-        },
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
-
-      toast.success(data.message);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message ?? error.message, {
-          hideProgressBar: true,
-        });
-      }
-    }
-  };
-
-  const getCategory = async () => {
-    try {
-      const { data } = await api.get("/foods/name", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
-
-      setCategoryList(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    getCategory();
     getFood();
   }, []);
-
   return (
-    <FoodContext.Provider
+    <CardContext.Provider
       value={{
         addFood,
-        addCategory,
-        categoryList,
-        setCategoryList,
         recordList,
         setRecordList,
       }}
     >
       {children}
-    </FoodContext.Provider>
+    </CardContext.Provider>
   );
 };
 
-export const useFood = () => useContext(FoodContext);
+export const useCard = () => useContext(CardContext);

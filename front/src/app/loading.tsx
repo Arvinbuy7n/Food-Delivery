@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
 
 export default function Loading() {
   return (
@@ -8,8 +8,13 @@ export default function Loading() {
       justifyContent={"center"}
       alignItems={"center"}
       bgcolor={"#FFF"}
+      gap={3}
     >
-      <Typography>Түр хүлээнэ үү...</Typography>
+      <CircularProgress color="primary" />
+      <Typography fontSize={18} fontWeight={700}>
+        {" "}
+        Түр хүлээнэ үү...
+      </Typography>
     </Stack>
   );
 }

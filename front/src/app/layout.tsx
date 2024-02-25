@@ -8,10 +8,11 @@ import { Box, CssBaseline, Stack, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { theme } from "../theme";
 import { Footer } from "../components/layout/Footer";
-import { AuthProvider } from "../components/provider/AuthProvider";
+import { AuthProvider } from "../components/providers/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { FoodProvider } from "../components/FoodProvider";
+import { FoodProvider } from "../components/providers/FoodProvider";
+import { CardProvider } from "../components/providers/CardProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <AuthProvider>
               <Box sx={{ minHeight: "100vh" }} m={"auto"}>
                 <Header />
-                <FoodProvider>{children}</FoodProvider>
+                <FoodProvider>
+                  <CardProvider>{children}</CardProvider>
+                </FoodProvider>
                 <Footer />
                 <ToastContainer />
               </Box>

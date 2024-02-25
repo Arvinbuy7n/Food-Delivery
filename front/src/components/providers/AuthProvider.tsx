@@ -20,6 +20,8 @@ type User = {
   name: string;
   phone: string;
   email: string;
+  address: string;
+  userImage: string;
 };
 
 type AuthContextType = {
@@ -36,36 +38,25 @@ type AuthContextType = {
   newPassword: (password: string, otp: string) => void;
   sendEmail: (email: string) => void;
   checkOtp: (otp: string) => void;
+  changeUser: (userImage: string, name: string, phone: string) => void;
 
   //user profile medeelel awah
-
-  user: {
-    name: string;
-    phone: string;
-    email: string;
-    address: string;
-    userImage: string;
-  };
-  setUser: Dispatch<
-    SetStateAction<{
-      name: string;
-      phone: string;
-      email: string;
-      address: string;
-      userImage: string;
-    }>
-  >;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
 };
+
+// const [foods]
+
+// [{
+// food: {},
+// quantity:1
+// }, {
+
+// }]
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    email: "",
-    userImage: "",
-  });
+  const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
@@ -130,6 +121,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     router.push("/login");
   };
 
+  // gmail-ruu  otp ywuulah
+
   const sendEmail = async (email: string) => {
     try {
       const { data } = await axios.post("http://localhost:8000/email/send", {
@@ -149,6 +142,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
     }
   };
+  // otp shalgah
 
   const checkOtp = async (otp: string) => {
     const email = localStorage.getItem("email");
@@ -174,6 +168,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
     }
   };
+
+  //newtersen user-iin password solih
 
   const newPassword = async (password: string) => {
     const email = localStorage.getItem("email");
@@ -201,6 +197,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   // newtersen hereglegchiin medeelel awah
+
   const getUser = async () => {
     try {
       const { data } = await api.get("auth/user", {
@@ -211,6 +208,32 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setUser(data);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  // newtersen user-iin medeelel shinechleh
+
+  const changeUser = async (
+    userImage: string,
+    name: string,
+    phoneNumber: string
+  ) => {
+    try {
+      const { data } = await axios.post("http://localhost:8000/auth/change", {
+        userImage,
+        name,
+        phoneNumber,
+      });
+
+      toast.success(data.message, {
+        position: "top-center",
+      });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          hideProgressBar: true,
+        });
+      }
     }
   };
 
@@ -228,6 +251,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         sendEmail,
         checkOtp,
         setUser,
+        changeUser,
         user,
       }}
     >

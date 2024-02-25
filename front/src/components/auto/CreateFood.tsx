@@ -1,9 +1,6 @@
 import {
   Button,
   Card,
-  IconButton,
-  InputLabel,
-  Select,
   Stack,
   Switch,
   TextField,
@@ -13,12 +10,9 @@ import Image from "next/image";
 import { Upload } from "../upload/page";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useFood } from "../FoodProvider";
-import { Dispatch, SetStateAction, useState } from "react";
-import { MenuItem } from "../customs/MenuItem";
-import { ArrowDropDown } from "@mui/icons-material";
+import { useFood } from "../providers/FoodProvider";
+import { useState } from "react";
 import { CustomInput } from "..";
-import { it } from "node:test";
 
 type CreateFoodProps = {
   onClose: () => void;
@@ -35,16 +29,6 @@ export const CreateFood = (props: CreateFoodProps) => {
   const { onClose } = props;
   const { addFood, categoryList } = useFood();
   const [imageUrl, setImageUrl] = useState("");
-  const [text, setText] = useState("hello");
-  const [openCategory, setOpenCategory] = useState(false);
-
-  const handleClick = () => {
-    setOpenCategory(true);
-  };
-
-  const handleClose = () => {
-    setOpenCategory(false);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -122,48 +106,7 @@ export const CreateFood = (props: CreateFoodProps) => {
 
             <Stack>
               <Typography>Хоолны ангилал</Typography>
-              {/* <Stack
-                border={1}
-                height={60}
-                borderRadius={2}
-                bgcolor={"#F4F4F4"}
-                position={"relative"}
-                onClick={handleClose}
-              >
-                <Typography mt={2} ml={2}>
-                  {text}
-                </Typography>
-              </Stack>
 
-              <IconButton
-                sx={{ position: "absolute", right: 40, mt: 4 }}
-                onClick={handleClick}
-              >
-                {<ArrowDropDown />}
-              </IconButton>
-
-              {openCategory ? (
-                <Stack
-                  position={"absolute"}
-                  bgcolor={"#FFF"}
-                  zIndex={1}
-                  mt={11}
-                  gap={1}
-                >
-                  {categoryList.map((item, _index) => {
-                    return <MenuItem label={item.category} />;
-                  })}
-                </Stack>
-              ) : null} */}
-              {/* <Select
-                placeholder="placeholder"
-                sx={{ bgcolor: "#F4F4F4" }}
-                type="text"
-                name="foodCategory"
-                value={formik.values.foodCategory}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              ></Select> */}
               <CustomInput
                 select
                 SelectProps={{ native: true }}

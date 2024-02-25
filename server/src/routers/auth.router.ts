@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  changeUser,
   checkOtp,
   getUser,
   login,
@@ -14,6 +15,7 @@ authRouter
   .post("/sign", signUp)
   .post("/new", newPassword)
   .post("/code", checkOtp)
-  .get("/user", getUser);
+  .get("/user", getUser)
+  .post("/change", changeUser);
 
 export default authRouter;

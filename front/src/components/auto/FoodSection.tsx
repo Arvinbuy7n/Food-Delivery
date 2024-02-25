@@ -1,15 +1,13 @@
-import { ArrowForwardIos, Category, Star } from "@mui/icons-material";
+import { ArrowForwardIos, Star } from "@mui/icons-material";
 import {
-  CardMedia,
   Grid,
   IconButton,
   InputAdornment,
   Stack,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { CardFood } from "..";
-import { useFood } from "../FoodProvider";
+import { useFood } from "../providers/FoodProvider";
 
 type Props = {
   category: string;
@@ -48,6 +46,7 @@ export const FoodSection = (props: Props) => {
         <Grid container gap={2}>
           {recordList
             .filter((name) => name.foodCategory.includes(category))
+            // .filter((list) => list.discount?.includes(discount))
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood

@@ -1,12 +1,14 @@
-import { Stack } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import { AlhamNeg } from "./AlhamNeg";
 import { AlhamTwo } from "./AlhamTwo";
 
 export const Step = () => {
   return (
-    <Stack direction={"row"} px={48} justifyContent={"space-between"}>
-      <AlhamNeg />
-      <AlhamTwo />
-    </Stack>
+    <Container>
+      <Stack direction={"row"} justifyContent={"center"} gap={16}>
+        <AlhamNeg />
+        <AlhamTwo />
+      </Stack>
+    </Container>
   );
 };

@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { WbCloudyOutlined } from "@mui/icons-material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const validationSchema = yup.object({
   name: yup.string().required(),

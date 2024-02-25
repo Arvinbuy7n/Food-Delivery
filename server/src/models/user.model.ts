@@ -34,6 +34,10 @@ const UserSchema = new Schema({
     type: String,
     require: false,
   },
+  phone: {
+    type: String,
+    require: false,
+  },
 });
 
 export const UserModel = model("user", UserSchema);

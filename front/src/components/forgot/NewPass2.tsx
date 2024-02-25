@@ -5,7 +5,7 @@ import { CustomInput } from "..";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const validationSchema = yup.object({
   code: yup.string().required(),
@@ -14,6 +14,7 @@ const validationSchema = yup.object({
 type checkProps = {
   checkOtp: () => void;
 };
+
 export const NewPass2 = (props: checkProps) => {
   const router = useRouter();
   const { checkOtp, user } = useAuth();
@@ -42,7 +43,7 @@ export const NewPass2 = (props: checkProps) => {
 
         <Stack gap={4}>
           <Typography>
-            Таны хаяг "{user.email}" руу сэргээх <br></br> код илгээх болно.{" "}
+            Таны хаяг "{user?.email}" руу сэргээх <br></br> код илгээх болно.{" "}
           </Typography>
 
           <CustomInput

@@ -9,6 +9,7 @@ import {
   Box,
   Container,
   Drawer,
+  Grid,
   Modal,
   Stack,
   Typography,
@@ -19,13 +20,15 @@ import Image from "next/image";
 import { useState } from "react";
 import { Newtreh } from "../auto/Newtreh";
 import { MyOrder } from "../customs/MyOrder";
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
+import { useFood } from "../providers/FoodProvider";
 
 export const Header = () => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { isLogged, user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { recordList } = useFood();
   const pathname = usePathname();
 
   const closeModal = () => {
@@ -43,8 +46,6 @@ export const Header = () => {
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
-
-  const { name } = user;
 
   return (
     <Container>
@@ -145,13 +146,23 @@ export const Header = () => {
 
             <Drawer anchor={"right"} open={isDrawerOpen}>
               <Box role="presentation" width={"630px"} px={4}>
-                <MyOrder closeButton={closeDrawer} />
+                <MyOrder
+                  closeButton={closeDrawer}
+                  foodName=""
+                  price=""
+                  ingredients=""
+                  foodImage=""
+                />
               </Box>
             </Drawer>
           </Stack>
 
           <Stack direction={"row"} gap={1} sx={{ py: 1, px: 2 }}>
-            <PersonOutlineOutlined />
+            <PersonOutlineOutlined
+              onClick={() => {
+                router.push("/profile");
+              }}
+            />
             <Typography
               sx={{
                 "&:hover": {
@@ -168,8 +179,9 @@ export const Header = () => {
                 }
               }}
             >
-              {name}
+              {user ? user.name : "Нэвтрэх"}
             </Typography>
+
             <Modal open={isModalOpen}>
               <Box>
                 <Newtreh handleSign={closeModal} />

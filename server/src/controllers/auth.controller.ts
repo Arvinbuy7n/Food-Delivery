@@ -106,3 +106,20 @@ export const getUser: RequestHandler = async (req, res) => {
 
   res.json(users);
 };
+
+export const changeUser: RequestHandler = async (req, res) => {
+  const { userImage, name } = req.body;
+
+  await UserModel.updateOne(
+    {
+      userImage,
+    },
+    {
+      name,
+    }
+  );
+
+  return res.json({
+    message: "Мэдээлэл амжилттай хадгалагдлаа",
+  });
+};

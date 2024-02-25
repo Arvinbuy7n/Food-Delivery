@@ -1,5 +1,5 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 type handleClose = {
   handleClose: () => void;

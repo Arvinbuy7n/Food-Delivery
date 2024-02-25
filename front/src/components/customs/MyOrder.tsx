@@ -9,14 +9,20 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { useCard } from "../providers/CardProvider";
 
 type handleProps = {
   closeButton: () => void;
+  foodName: string;
+  price: string;
+  ingredients: string;
+  foodImage: string;
 };
 
 export const MyOrder = (props: handleProps) => {
   const [count, setCount] = useState(1);
   const { closeButton } = props;
+  const { addFood } = useCard();
 
   const handleLeft = () => {
     setCount(count - 1);
@@ -47,68 +53,99 @@ export const MyOrder = (props: handleProps) => {
           </Typography>
         </Stack>
       </Stack>
-      <Stack borderBottom={1} borderTop={1} borderColor={"grey.500"}>
-        <Stack direction={"row"} px={2} py={5} gap={2}>
-          <CardMedia>
-            <Image
-              src="/order.png"
-              alt="pizza"
-              width={240}
-              height={150}
-            ></Image>
-          </CardMedia>
 
-          <Stack justifyContent={"space-between"}>
-            <Stack direction={"row"} justifyContent={"space-between"}>
-              <Stack>
-                <Typography fontSize={18} fontWeight={600}>
-                  Main Pizza
-                </Typography>
-                <Typography color={"#18BA51"} fontWeight={600} fontSize={18}>
-                  34,800₮
-                </Typography>
+      <Stack gap={66}>
+        <Stack borderBottom={1} borderTop={1} borderColor={"grey.500"}>
+          <Stack direction={"row"} px={2} py={5} gap={2}>
+            <CardMedia>
+              <Image
+                src="/order.png"
+                alt="pizza"
+                width={240}
+                height={150}
+              ></Image>
+            </CardMedia>
+
+            <Stack justifyContent={"space-between"}>
+              <Stack direction={"row"} justifyContent={"space-between"}>
+                <Stack>
+                  <Typography fontSize={18} fontWeight={600}>
+                    {}
+                  </Typography>
+                  <Typography color={"#18BA51"} fontWeight={600} fontSize={18}>
+                    34,800₮
+                  </Typography>
+                </Stack>
+
+                <Image
+                  src="/close.png"
+                  alt="pizza"
+                  width={20}
+                  height={20}
+                ></Image>
               </Stack>
 
-              <Image
-                src="/close.png"
-                alt="pizza"
-                width={20}
-                height={20}
-              ></Image>
-            </Stack>
-
-            <Typography fontSize={16} color={"#767676"} fontWeight={400}>
-              Хулуу, төмс, лууван , сонгино, цөцгийн тос, самрын үр{" "}
-            </Typography>
-
-            <Stack direction={"row"} gap={4}>
-              <Button
-                onClick={handleLeft}
-                sx={{
-                  bgcolor: "#18BA51",
-                  color: "#FFF",
-                  fontSize: 28,
-                  height: 45,
-                }}
-              >
-                -
-              </Button>
-              <Typography fontSize={20} fontWeight={500} mt={1}>
-                {count}
+              <Typography fontSize={16} color={"#767676"} fontWeight={400}>
+                Хулуу, төмс, лууван , сонгино, цөцгийн тос, самрын үр{" "}
               </Typography>
-              <Button
-                onClick={handleRight}
-                sx={{
-                  bgcolor: "#18BA51",
-                  color: "#FFF",
-                  fontSize: 28,
-                  height: 45,
-                }}
-              >
-                +
-              </Button>
+
+              <Stack direction={"row"} gap={4}>
+                <Button
+                  onClick={handleLeft}
+                  sx={{
+                    bgcolor: "#18BA51",
+                    color: "#FFF",
+                    fontSize: 28,
+                    height: 45,
+                  }}
+                >
+                  -
+                </Button>
+                <Typography fontSize={20} fontWeight={500} mt={1}>
+                  {count}
+                </Typography>
+                <Button
+                  onClick={handleRight}
+                  sx={{
+                    bgcolor: "#18BA51",
+                    color: "#FFF",
+                    fontSize: 28,
+                    height: 45,
+                  }}
+                >
+                  +
+                </Button>
+              </Stack>
             </Stack>
           </Stack>
+        </Stack>
+
+        <Stack
+          direction={"row"}
+          justifyContent={"space-between"}
+          px={2}
+          py={4}
+          borderTop={1}
+        >
+          <Stack width={"50%"}>
+            <Typography fontSize={18} fontWeight={400}>
+              Нийт төлөх дүн
+            </Typography>
+            <Typography fontSize={18} fontWeight={700}>
+              11
+            </Typography>
+          </Stack>
+
+          <Button
+            sx={{
+              width: "50%",
+              textAlign: "center",
+              bgcolor: "#18BA51",
+              color: "#FFF",
+            }}
+          >
+            Захиалах
+          </Button>
         </Stack>
       </Stack>
     </Stack>

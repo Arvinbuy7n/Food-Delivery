@@ -3,7 +3,7 @@
 import { Container, Grid, Stack } from "@mui/material";
 import { MenuItem } from "../customs/MenuItem";
 import { CardFood } from "..";
-import { useFood } from "../FoodProvider";
+import { useFood } from "../providers/FoodProvider";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
@@ -19,7 +19,7 @@ export const FoodMenu = (props: Props) => {
     <Container>
       <Stack gap={6}>
         <Stack direction={"row"} py={4} gap={2}>
-          <Grid container justifyContent={"space-between"}>
+          <Grid container justifyContent={"space-between"} gap={2}>
             {categoryList.map((item, _index) => {
               return (
                 <MenuItem

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Button,
@@ -20,8 +22,9 @@ import {
 import React, { useState } from "react";
 import { LogOut } from "./LogOut";
 
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 import { UserPhoto } from "../upload/UserPro";
+import { useFormik } from "formik";
 
 type openModal = {
   open?: boolean;
@@ -32,20 +35,17 @@ export const UserProfile = (props: openModal) => {
   const [open, setClose] = React.useState(false);
   const [imagePro, setImagePro] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, changeUser } = useAuth();
 
   const handleClick = () => {
     setOpenModal(true);
   };
-
   const handle = () => {
     setOpenModal(false);
   };
-
   const handleOpen = () => {
     setClose(true);
   };
-
   const handleClose = () => {
     setClose(false);
   };

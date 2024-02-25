@@ -5,7 +5,7 @@ import { CustomInput } from "../customs/CustomInput";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useAuth } from "../provider/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const validationSchema = yup.object({
   email: yup.string().email().required(),

@@ -2,7 +2,7 @@ import { Button, Card, Stack, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import Image from "next/image";
 import * as yup from "yup";
-import { useFood } from "../FoodProvider";
+import { useFood } from "../providers/FoodProvider";
 
 type CreateCategoryProps = {
   handleClose: () => void;

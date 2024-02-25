@@ -2,6 +2,8 @@ import { Card, Select, Stack, TextField, Typography } from "@mui/material";
 import { CustomRadio } from "../customs/CustomRadio";
 import { Address } from "../customs/Select";
 import { CheckBox, LocationOn } from "@mui/icons-material";
+import { Khoroo } from "../customs/Khoroo";
+import { Location } from "../customs/Location";
 
 export const AlhamNeg = () => {
   return (
@@ -28,8 +30,8 @@ export const AlhamNeg = () => {
             <Typography>Хаяг аа оруулна уу</Typography>
 
             <Address label="Дүүрэг сонгоно уу" startIcon={<LocationOn />} />
-            <Address label="Хороо сонгоно уу" startIcon={<LocationOn />} />
-            <Address
+            <Khoroo label="Хороо сонгоно уу" startIcon={<LocationOn />} />
+            <Location
               label="Байр, гудамж сонгоно уу"
               startIcon={<LocationOn />}
             />
@@ -51,18 +53,18 @@ export const AlhamNeg = () => {
             <TextField placeholder="Phone number"></TextField>
           </Stack>
 
-          <Stack>
+          <Stack gap={1}>
             <Typography>Төлбөр төлөх</Typography>
 
             <Stack direction={"row"} gap={10}>
-              <Stack direction={"row"} gap={2}>
+              <Stack direction={"row"} gap={1}>
                 <CheckBox></CheckBox>
                 <Typography>Бэлнээр</Typography>
               </Stack>
 
-              <Stack direction={"row"} gap={2}>
+              <Stack direction={"row"} gap={1}>
                 <CheckBox></CheckBox>
-                <Typography>Бэлнээр</Typography>
+                <Typography>Дансаар</Typography>
               </Stack>
             </Stack>
           </Stack>
