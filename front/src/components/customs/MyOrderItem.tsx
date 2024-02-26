@@ -1,0 +1,80 @@
+import { Button, CardMedia, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import { useState } from "react";
+
+type OrderProps = {
+  image: string;
+  name: string;
+  price: string;
+  ingredient: string;
+};
+
+export const MyOrderItem = (props: OrderProps) => {
+  const { image, name, price, ingredient } = props;
+  const [count, setCount] = useState(1);
+
+  const handleLeft = () => {
+    setCount(count - 1);
+  };
+
+  const handleRight = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <Stack borderBottom={1} borderTop={1} borderColor={"grey.500"}>
+      <Stack direction={"row"} px={2} py={5} gap={2}>
+        <CardMedia>
+          <Image src={image} alt="pizza" width={240} height={150}></Image>
+        </CardMedia>
+
+        <Stack justifyContent={"space-between"}>
+          <Stack direction={"row"} justifyContent={"space-between"}>
+            <Stack>
+              <Typography fontSize={18} fontWeight={600}>
+                {name}
+              </Typography>
+              <Typography color={"#18BA51"} fontWeight={600} fontSize={18}>
+                {price}
+              </Typography>
+            </Stack>
+
+            <Image src="/close.png" alt="pizza" width={20} height={20}></Image>
+          </Stack>
+
+          <Typography fontSize={16} color={"#767676"} fontWeight={400}>
+            {ingredient}
+          </Typography>
+
+          <Stack direction={"row"} gap={4}>
+            <Button
+              onClick={handleLeft}
+              sx={{
+                bgcolor: "#18BA51",
+                color: "#FFF",
+                fontSize: 28,
+                height: 45,
+              }}
+            >
+              -
+            </Button>
+            <Typography fontSize={20} fontWeight={500} mt={1}>
+              {count}
+            </Typography>
+            <Button
+              onClick={handleRight}
+              sx={{
+                bgcolor: "#18BA51",
+                color: "#FFF",
+                fontSize: 28,
+                height: 45,
+              }}
+            >
+              +
+            </Button>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Stack>
+  );
+};

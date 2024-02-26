@@ -32,11 +32,11 @@ export const FoodMenu = (props: Props) => {
         </Stack>
 
         <Stack>
-          <Grid container justifyContent={"space-between"}>
+          <Grid container spacing={2}>
             {recordList
               .filter((name) => name.foodCategory.includes(categoryName))
               .map((item, index) => (
-                <Grid key={index}>
+                <Grid item key={index}>
                   <CardFood
                     foodname={item.foodName}
                     price={item.price}

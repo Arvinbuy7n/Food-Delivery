@@ -1,6 +1,9 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { useCard } from "../providers/CartProvider";
+import { FoodCategory } from "./FoodCategory";
+import { useAuth } from "../providers/AuthProvider";
 
 type OrderDetailProps = {
   handleClose: () => void;
@@ -14,6 +17,8 @@ type OrderDetailProps = {
 export const OrderDetail = (props: OrderDetailProps) => {
   const { handleClose, foodName, foodImage, price, ingredient } = props;
   const [add, setAdd] = React.useState(1);
+  const { addFood } = useCard();
+  const { isLogged } = useAuth();
 
   const handleLeft = () => {
     setAdd(add - 1);
@@ -21,6 +26,15 @@ export const OrderDetail = (props: OrderDetailProps) => {
 
   const handleRight = () => {
     setAdd(add + 1);
+  };
+
+  const basketClick = () => {
+    if (isLogged === true) {
+      return addFood({
+        food,
+        quantity: 1,
+      });
+    }
   };
 
   return (
