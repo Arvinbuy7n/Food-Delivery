@@ -30,6 +30,13 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const addFood = async ({ food, quantity }: CartFood) => {
     setRecordList((prev) => {
+      const current = prev.findIndex((item) => item.food._id === food._id);
+
+      if (current !== -1) {
+        prev[current].quantity += quantity;
+        return prev;
+      }
+
       return [...prev, { food, quantity }];
     });
   };
