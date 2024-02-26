@@ -1,6 +1,7 @@
 import { Button, CardMedia, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import { useCard } from "../providers/CartProvider";
 
 type OrderProps = {
   image: string;
@@ -12,6 +13,7 @@ type OrderProps = {
 export const MyOrderItem = (props: OrderProps) => {
   const { image, name, price, ingredient } = props;
   const [count, setCount] = useState(1);
+  // const { removeFood } = useCard();
 
   const handleLeft = () => {
     setCount(count - 1);
@@ -22,13 +24,13 @@ export const MyOrderItem = (props: OrderProps) => {
   };
 
   return (
-    <Stack borderBottom={1} borderTop={1} borderColor={"grey.500"}>
-      <Stack direction={"row"} px={2} py={5} gap={2}>
+    <Stack borderTop={1} borderColor={"grey.500"}>
+      <Stack direction={"row"} p={4} justifyContent={"space-between"}>
         <CardMedia>
-          <Image src={image} alt="pizza" width={240} height={150}></Image>
+          <Image src={image} alt="pizza" width={245} height={150}></Image>
         </CardMedia>
 
-        <Stack justifyContent={"space-between"}>
+        <Stack gap={2.8} width={"45%"}>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <Stack>
               <Typography fontSize={18} fontWeight={600}>
@@ -39,39 +41,53 @@ export const MyOrderItem = (props: OrderProps) => {
               </Typography>
             </Stack>
 
-            <Image src="/close.png" alt="pizza" width={20} height={20}></Image>
+            <Stack mt={1}>
+              <Image
+                src="/close.png"
+                alt="pizza"
+                width={26}
+                height={26}
+                // onClick={() => {
+                //   removeFood();
+                // }}
+              />
+            </Stack>
           </Stack>
 
-          <Typography fontSize={16} color={"#767676"} fontWeight={400}>
+          <Typography
+            fontSize={16}
+            color={"#767676"}
+            fontWeight={400}
+            border={1}
+            borderRadius={1}
+          >
             {ingredient}
           </Typography>
 
           <Stack direction={"row"} gap={4}>
-            <Button
+            <Typography
               onClick={handleLeft}
               sx={{
                 bgcolor: "#18BA51",
                 color: "#FFF",
-                fontSize: 28,
-                height: 45,
+                px: 2,
               }}
             >
               -
-            </Button>
-            <Typography fontSize={20} fontWeight={500} mt={1}>
+            </Typography>
+            <Typography fontSize={16} fontWeight={500}>
               {count}
             </Typography>
-            <Button
+            <Typography
               onClick={handleRight}
               sx={{
                 bgcolor: "#18BA51",
                 color: "#FFF",
-                fontSize: 28,
-                height: 45,
+                px: 2,
               }}
             >
               +
-            </Button>
+            </Typography>
           </Stack>
         </Stack>
       </Stack>

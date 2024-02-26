@@ -38,11 +38,7 @@ export const FoodMenu = (props: Props) => {
               .map((item, index) => (
                 <Grid item key={index}>
                   <CardFood
-                    foodname={item.foodName}
-                    price={item.price}
-                    ingredient={item.ingredient}
-                    discount={item.discount}
-                    foodImage={item.foodImage}
+                    {...item}
                     setCategoryName={setCategoryName}
                   ></CardFood>
                 </Grid>

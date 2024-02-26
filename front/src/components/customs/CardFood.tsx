@@ -14,22 +14,15 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SuccessToast } from "./SuccessToast";
 import { EditButton } from "./EditButton";
+import { Record } from "../providers/FoodProvider";
 
 type CardFoodProps = {
-  foodname: string;
-  price: string;
-  ingredient: string;
-  discount?: string;
-  discountPrice?: string;
-  foodImage: string;
-
   setCategoryName?: Dispatch<SetStateAction<string>>;
-};
+} & Record;
 
-export const CardFood = (props: CardFoodProps) => {
-  const { foodname, price, discount, discountPrice, foodImage, ingredient } =
-    props;
-  const [open, setOpen] = React.useState(false);
+export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
+  const { foodName, price, discount, foodImage, ingredient } = props;
+  const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -78,20 +71,13 @@ export const CardFood = (props: CardFoodProps) => {
 
       <Modal open={open}>
         <Box>
-          <OrderDetail
-            handleClose={handleClose}
-            add={5}
-            foodName={foodname}
-            foodImage={foodImage}
-            price={price}
-            ingredient={ingredient}
-          />
+          <OrderDetail handleClose={handleClose} add={5} {...props} />
         </Box>
       </Modal>
 
       <Stack display={"flex"}>
         <Typography fontSize={20} fontWeight={600} onClick={handleClick}>
-          {foodname}
+          {foodName}
         </Typography>
         <Stack direction={"row"} gap={2}>
           <Stack direction={"row"}>
@@ -100,11 +86,6 @@ export const CardFood = (props: CardFoodProps) => {
             </Typography>
             <Typography color={"#18BA51"} fontSize={18} fontWeight={600}>
               ₮
-            </Typography>
-          </Stack>
-          <Stack direction={"row"}>
-            <Typography fontSize={18} fontWeight={400}>
-              {discountPrice}
             </Typography>
           </Stack>
         </Stack>

@@ -17,7 +17,8 @@ type Category = {
   category: string;
 };
 
-type Record = {
+export type Record = {
+  _id: string;
   foodName: string;
   foodCategory: string;
   ingredient: string;

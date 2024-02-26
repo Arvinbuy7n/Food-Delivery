@@ -2,23 +2,21 @@ import { Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { useCard } from "../providers/CartProvider";
-import { FoodCategory } from "./FoodCategory";
-import { useAuth } from "../providers/AuthProvider";
+import { Record } from "../providers/FoodProvider";
 
 type OrderDetailProps = {
   handleClose: () => void;
   add: number;
-  foodName: string;
-  price: string;
-  ingredient: string;
-  foodImage: string;
-};
+} & Record;
 
-export const OrderDetail = (props: OrderDetailProps) => {
-  const { handleClose, foodName, foodImage, price, ingredient } = props;
+export const OrderDetail = ({
+  handleClose,
+  add: propsAdd,
+  ...props
+}: OrderDetailProps) => {
+  const { foodName, foodImage, price, ingredient } = props;
   const [add, setAdd] = React.useState(1);
   const { addFood } = useCard();
-  const { isLogged } = useAuth();
 
   const handleLeft = () => {
     setAdd(add - 1);
@@ -29,12 +27,11 @@ export const OrderDetail = (props: OrderDetailProps) => {
   };
 
   const basketClick = () => {
-    if (isLogged === true) {
-      return addFood({
-        food,
-        quantity: 1,
-      });
-    }
+    addFood({
+      food: props,
+      quantity: 1,
+    });
+    handleClose();
   };
 
   return (
@@ -132,6 +129,9 @@ export const OrderDetail = (props: OrderDetailProps) => {
 
                 <Button
                   sx={{ bgcolor: "#18BA51", color: "#fff", fontSize: 12 }}
+                  onClick={() => {
+                    basketClick();
+                  }}
                 >
                   Сагслах
                 </Button>

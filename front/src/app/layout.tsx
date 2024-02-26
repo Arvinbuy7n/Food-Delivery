@@ -29,11 +29,14 @@ export default function RootLayout({ children }: PropsWithChildren) {
           <ThemeProvider theme={theme}>
             <AuthProvider>
               <Box sx={{ minHeight: "100vh" }} m={"auto"}>
-                <Header />
                 <FoodProvider>
-                  <CardProvider>{children}</CardProvider>
+                  <CardProvider>
+                    <Header />
+                    {children}
+                    <Footer />
+                  </CardProvider>
                 </FoodProvider>
-                <Footer />
+
                 <ToastContainer />
               </Box>
             </AuthProvider>

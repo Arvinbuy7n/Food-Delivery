@@ -1,13 +1,19 @@
 "use client";
 
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const CardContext = createContext<CardContextType>({} as CardContextType);
 
 type Record = {
-  _id: string;
+  _id?: string;
   foodName: string;
-  foodCategory: string;
+  foodCategory?: string;
   ingredient: string;
   price: string;
   discount?: string;
@@ -22,30 +28,52 @@ type CartFood = {
 type CardContextType = {
   // removeFood: (record: CartFood) => void;
   addFood: (record: CartFood) => void;
-  recordList: CartFood[];
+  addBasket: CartFood[];
 };
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
-  const [recordList, setRecordList] = useState<CartFood[]>([]);
+  const [addBasket, setAddBasket] = useState<CartFood[]>([]);
+  const [isRender, setIsRender] = useState(true);
 
   const addFood = async ({ food, quantity }: CartFood) => {
-    setRecordList((prev) => {
+    setAddBasket((prev) => {
       const current = prev.findIndex((item) => item.food._id === food._id);
 
       if (current !== -1) {
-        prev[current].quantity += quantity;
-        return prev;
+        const arr = [...prev];
+        arr[current].quantity += quantity;
+        return arr;
       }
 
       return [...prev, { food, quantity }];
     });
   };
 
+  // const removeFood = async ({ children }: PropsWithChildren) => {
+  //   localStorage.removeItem("secret");
+  // };
+
+  useEffect(() => {
+    const basket = localStorage.getItem("secret");
+
+    if (basket) {
+      setAddBasket(JSON.parse(basket));
+    }
+    setIsRender(false);
+  }, []);
+
+  useEffect(() => {
+    if (isRender) return;
+
+    localStorage.setItem("secret", JSON.stringify(addBasket));
+  }, [addBasket]);
+
   return (
     <CardContext.Provider
       value={{
         addFood,
-        recordList,
+        // removeFood,
+        addBasket,
       }}
     >
       {children}

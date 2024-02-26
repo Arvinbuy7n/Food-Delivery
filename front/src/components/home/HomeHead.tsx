@@ -4,13 +4,13 @@ import { Container, ImageListItem, Stack, Typography } from "@mui/material";
 import { CardMenu } from "../customs/CardMenu";
 import {
   AccessTime,
-  ArrowForwardIos,
   ImportContacts,
   LunchDiningOutlined,
 } from "@mui/icons-material";
 import { useFood } from "../providers/FoodProvider";
 import { FoodSection } from "../auto/FoodSection";
 import Image from "next/image";
+import { Discount } from "../customs/Discount";
 
 export const HomeHead = () => {
   const { categoryList } = useFood();
@@ -95,6 +95,8 @@ export const HomeHead = () => {
             label="Захиалга бэлтгэлийн явцыг хянах"
           />
         </Stack>
+
+        <Discount />
 
         {categoryList.map((item, _index) => {
           return <FoodSection category={item.category} />;

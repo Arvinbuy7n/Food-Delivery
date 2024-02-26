@@ -6,16 +6,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { CardFood } from "..";
 import { useFood } from "../providers/FoodProvider";
+import { CardFood } from "..";
+import Image from "next/image";
 
-type Props = {
-  category: string;
-};
-
-export const FoodSection = (props: Props) => {
+export const Discount = () => {
   const { recordList } = useFood();
-  const { category } = props;
 
   return (
     <Stack gap={4}>
@@ -25,7 +21,7 @@ export const FoodSection = (props: Props) => {
             {<Star />}
           </IconButton>
           <Typography fontSize={22} fontWeight={700}>
-            {category}
+            Хямдралтай
           </Typography>
         </Stack>
 
@@ -45,8 +41,7 @@ export const FoodSection = (props: Props) => {
       <Stack>
         <Grid container gap={2}>
           {recordList
-            .filter((name) => name.foodCategory.includes(category))
-            // .filter((list) => list.discount?.includes(discount))
+            .filter((name) => name.discount)
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood
