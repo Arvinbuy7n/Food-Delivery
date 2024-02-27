@@ -24,7 +24,6 @@ import { LogOut } from "./LogOut";
 
 import { useAuth } from "../providers/AuthProvider";
 import { UserPhoto } from "../upload/UserPro";
-import { useFormik } from "formik";
 
 type openModal = {
   open?: boolean;
@@ -102,6 +101,7 @@ export const UserProfile = (props: openModal) => {
           label={user?.email}
           endIcon={<EditOutlined />}
         />
+        <Stack></Stack>
 
         <Stack direction={"row"} gap={1.5} px={2} py={1}>
           <IconButton sx={{ bgcolor: "#FFF", border: 1, color: "#000" }}>

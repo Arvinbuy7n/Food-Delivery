@@ -21,14 +21,12 @@ import { useState } from "react";
 import { Newtreh } from "../auto/Newtreh";
 import { MyOrder } from "../customs/MyOrder";
 import { useAuth } from "../providers/AuthProvider";
-import { useFood } from "../providers/FoodProvider";
 
 export const Header = () => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { isLogged, user } = useAuth();
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { recordList } = useFood();
   const pathname = usePathname();
 
   const closeModal = () => {
@@ -144,7 +142,7 @@ export const Header = () => {
               Сагс
             </Typography>
 
-            <Drawer anchor={"right"} open={isDrawerOpen}>
+            <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
               <Box role="presentation" width={"630px"} px={4}>
                 <MyOrder
                   closeButton={closeDrawer}
@@ -182,7 +180,7 @@ export const Header = () => {
               {user ? user.name : "Нэвтрэх"}
             </Typography>
 
-            <Modal open={isModalOpen}>
+            <Modal open={isModalOpen} onClose={closeModal}>
               <Box>
                 <Newtreh handleSign={closeModal} />
               </Box>

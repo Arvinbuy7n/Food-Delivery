@@ -49,12 +49,12 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     });
   };
 
-  // const removeFood = async ({ children }: PropsWithChildren) => {
-  //   localStorage.removeItem("secret");
-  // };
+  const removeFood = async ({ children }: PropsWithChildren) => {
+    localStorage.removeItem("secret-key");
+  };
 
   useEffect(() => {
-    const basket = localStorage.getItem("secret");
+    const basket = localStorage.getItem("secret-key");
 
     if (basket) {
       setAddBasket(JSON.parse(basket));
@@ -65,7 +65,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (isRender) return;
 
-    localStorage.setItem("secret", JSON.stringify(addBasket));
+    localStorage.setItem("secret-key", JSON.stringify(addBasket));
   }, [addBasket]);
 
   return (

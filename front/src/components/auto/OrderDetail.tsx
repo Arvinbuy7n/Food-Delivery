@@ -1,6 +1,6 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { useCard } from "../providers/CartProvider";
 import { Record } from "../providers/FoodProvider";
 
@@ -15,7 +15,7 @@ export const OrderDetail = ({
   ...props
 }: OrderDetailProps) => {
   const { foodName, foodImage, price, ingredient } = props;
-  const [add, setAdd] = React.useState(1);
+  const [add, setAdd] = useState(1);
   const { addFood } = useCard();
 
   const handleLeft = () => {
@@ -111,7 +111,12 @@ export const OrderDetail = ({
                   >
                     -
                   </Button>
-                  <Typography fontSize={16} fontWeight={500} mt={1}>
+                  <Typography
+                    fontSize={16}
+                    fontWeight={500}
+                    mt={1}
+                    onClick={() => {}}
+                  >
                     {add}
                   </Typography>
                   <Button

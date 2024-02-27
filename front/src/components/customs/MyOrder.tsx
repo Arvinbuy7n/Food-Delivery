@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useCard } from "../providers/CartProvider";
 import { MyOrderItem } from "./MyOrderItem";
+import { useRouter } from "next/navigation";
 
 type handleProps = {
   closeButton: () => void;
@@ -21,6 +22,7 @@ type handleProps = {
 export const MyOrder = (props: handleProps) => {
   const { closeButton } = props;
   const { addBasket } = useCard();
+  const router = useRouter();
 
   return (
     <Stack>
@@ -43,17 +45,19 @@ export const MyOrder = (props: handleProps) => {
         </Stack>
       </Stack>
 
-      <Stack>
-        {addBasket?.map((item, _index) => {
-          return (
-            <MyOrderItem
-              image={item.food.foodImage}
-              name={item.food.foodName}
-              price={item.food.price}
-              ingredient={item.food.ingredient}
-            />
-          );
-        })}
+      <Stack justifyContent={"space-between"}>
+        <Stack>
+          {addBasket.map((item, _index) => {
+            return (
+              <MyOrderItem
+                image={item.food.foodImage}
+                name={item.food.foodName}
+                price={item.food.price}
+                ingredient={item.food.ingredient}
+              />
+            );
+          })}
+        </Stack>
 
         <Card>
           <Stack
@@ -67,7 +71,11 @@ export const MyOrder = (props: handleProps) => {
                 Нийт төлөх дүн
               </Typography>
               <Typography fontSize={18} fontWeight={700}>
-                11
+                {addBasket.reduce(
+                  (total, currentValue) =>
+                    total + Number(currentValue.food.price),
+                  0
+                )}
               </Typography>
             </Stack>
 
@@ -77,6 +85,9 @@ export const MyOrder = (props: handleProps) => {
                 textAlign: "center",
                 bgcolor: "#18BA51",
                 color: "#FFF",
+              }}
+              onClick={() => {
+                router.push("/step");
               }}
             >
               Захиалах
