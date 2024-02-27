@@ -46,7 +46,6 @@ export const FoodSection = (props: Props) => {
         <Grid container gap={2}>
           {recordList
             .filter((name) => name.foodCategory.includes(category))
-            // .filter((list) => list.discount?.includes(discount))
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood

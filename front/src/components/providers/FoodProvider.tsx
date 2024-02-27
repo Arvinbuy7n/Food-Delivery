@@ -50,6 +50,7 @@ type FoodContextType = {
 export const FoodProvider = ({ children }: PropsWithChildren) => {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
   const [recordList, setRecordList] = useState<Record[]>([]);
+  const [refresh, setRefresh] = useState(1);
 
   //add new food
 
@@ -82,6 +83,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
       toast.success(data.message, {
         position: "top-center",
       });
+
+      setRefresh(refresh + 1);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -122,6 +125,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
       );
 
       toast.success(data.message);
+
+      setRefresh(refresh + 1);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -148,7 +153,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     getCategory();
     getFood();
-  }, []);
+  }, [refresh]);
 
   return (
     <FoodContext.Provider

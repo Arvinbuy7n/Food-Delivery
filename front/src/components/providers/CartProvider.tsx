@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  Dispatch,
   PropsWithChildren,
+  SetStateAction,
   createContext,
   useContext,
   useEffect,
@@ -26,9 +28,9 @@ type CartFood = {
 };
 
 type CardContextType = {
-  // removeFood: (record: CartFood) => void;
   addFood: (record: CartFood) => void;
   addBasket: CartFood[];
+  setAddBasket: Dispatch<SetStateAction<CartFood[]>>;
 };
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
@@ -47,10 +49,6 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
       return [...prev, { food, quantity }];
     });
-  };
-
-  const removeFood = async ({ children }: PropsWithChildren) => {
-    localStorage.removeItem("secret-key");
   };
 
   useEffect(() => {
@@ -72,8 +70,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     <CardContext.Provider
       value={{
         addFood,
-        // removeFood,
         addBasket,
+        setAddBasket,
       }}
     >
       {children}

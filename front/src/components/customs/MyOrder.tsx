@@ -25,27 +25,27 @@ export const MyOrder = (props: handleProps) => {
   const router = useRouter();
 
   return (
-    <Stack>
-      <Stack
-        sx={{
-          bgcolor: "#FFF",
-          py: 3,
-          px: 2,
-        }}
-      >
-        <Stack direction={"row"} gap={22} pb={2}>
-          <InputAdornment position="start" sx={{ mt: 2 }}>
-            <IconButton>
-              <ArrowBackIos onClick={closeButton} />
-            </IconButton>
-          </InputAdornment>
-          <Typography fontSize={20} fontWeight={900}>
-            Таны сагс
-          </Typography>
+    <Stack justifyContent={"space-between"} height={"100vh"}>
+      <Stack>
+        <Stack
+          sx={{
+            bgcolor: "#FFF",
+            py: 3,
+            px: 2,
+          }}
+        >
+          <Stack direction={"row"} gap={22} pb={2}>
+            <InputAdornment position="start" sx={{ mt: 2 }}>
+              <IconButton>
+                <ArrowBackIos onClick={closeButton} />
+              </IconButton>
+            </InputAdornment>
+            <Typography fontSize={20} fontWeight={900}>
+              Таны сагс
+            </Typography>
+          </Stack>
         </Stack>
-      </Stack>
 
-      <Stack justifyContent={"space-between"}>
         <Stack>
           {addBasket.map((item, _index) => {
             return (
@@ -58,43 +58,38 @@ export const MyOrder = (props: handleProps) => {
             );
           })}
         </Stack>
-
-        <Card>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            px={2}
-            py={4}
-          >
-            <Stack width={"50%"}>
-              <Typography fontSize={18} fontWeight={400}>
-                Нийт төлөх дүн
-              </Typography>
-              <Typography fontSize={18} fontWeight={700}>
-                {addBasket.reduce(
-                  (total, currentValue) =>
-                    total + Number(currentValue.food.price),
-                  0
-                )}
-              </Typography>
-            </Stack>
-
-            <Button
-              sx={{
-                width: "50%",
-                textAlign: "center",
-                bgcolor: "#18BA51",
-                color: "#FFF",
-              }}
-              onClick={() => {
-                router.push("/step");
-              }}
-            >
-              Захиалах
-            </Button>
-          </Stack>
-        </Card>
       </Stack>
+
+      <Card>
+        <Stack direction={"row"} justifyContent={"space-between"} px={2} py={4}>
+          <Stack width={"50%"}>
+            <Typography fontSize={18} fontWeight={400}>
+              Нийт төлөх дүн
+            </Typography>
+            <Typography fontSize={18} fontWeight={700}>
+              {addBasket.reduce(
+                (total, currentValue) =>
+                  total + Number(currentValue.food.price),
+                0
+              )}
+            </Typography>
+          </Stack>
+
+          <Button
+            sx={{
+              width: "50%",
+              textAlign: "center",
+              bgcolor: "#18BA51",
+              color: "#FFF",
+            }}
+            onClick={() => {
+              router.push("/step");
+            }}
+          >
+            Захиалах
+          </Button>
+        </Stack>
+      </Card>
     </Stack>
   );
 };

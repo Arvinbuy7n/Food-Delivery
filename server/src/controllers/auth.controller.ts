@@ -17,8 +17,9 @@ export const login: RequestHandler = async (req, res) => {
   }
 
   const id = user._id;
+  const role = user.role;
 
-  const token = jwt.sign({ id }, "secret-key");
+  const token = jwt.sign({ id, role }, "secret-key");
 
   res.json({
     token,
@@ -43,6 +44,7 @@ export const signUp: RequestHandler = async (req, res) => {
     address,
     updatedAt: new Date(),
     createdAt: new Date(),
+    role: "user",
   });
 
   return res.json({
@@ -108,14 +110,16 @@ export const getUser: RequestHandler = async (req, res) => {
 };
 
 export const changeUser: RequestHandler = async (req, res) => {
-  const { userImage, name } = req.body;
+  const { name, userImage, email, phone } = req.body;
 
-  await UserModel.updateOne(
+  await UserModel.findOneAndUpdate(
     {
-      userImage,
+      email,
     },
     {
+      userImage,
       name,
+      phone,
     }
   );
 

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   IconButton,
   InputAdornment,
@@ -6,17 +8,23 @@ import {
   TextFieldProps,
   Typography,
 } from "@mui/material";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 type UserInputProps = {
   startIcon?: ReactNode;
   endIcon?: ReactNode;
-  label: string;
-  title: string;
+  label?: string;
+  title?: string;
 } & TextFieldProps;
 
 export const UserInput = (props: UserInputProps) => {
-  const { type = "text", startIcon, endIcon, label, title } = props;
+  const [isEditing, setIsEditing] = useState(true);
+
+  const handleClick = () => {
+    setIsEditing(false);
+  };
+
+  const { type = "text", startIcon, endIcon, label, title, ...rest } = props;
 
   return (
     <Stack>
@@ -31,7 +39,12 @@ export const UserInput = (props: UserInputProps) => {
         InputProps={{
           endAdornment: type === "text" && (
             <InputAdornment position="end">
-              <IconButton sx={{ bgcolor: "#FFFFFF" }}>{endIcon}</IconButton>
+              <IconButton
+                sx={{ bgcolor: "#FFF", color: "#18BA51" }}
+                onClick={handleClick}
+              >
+                {endIcon}
+              </IconButton>
             </InputAdornment>
           ),
           startAdornment: startIcon && (
@@ -43,7 +56,13 @@ export const UserInput = (props: UserInputProps) => {
           ),
         }}
         variant="outlined"
-      />
+        disabled={isEditing}
+        value={label}
+        {...rest}
+      >
+        {label}
+      </TextField>
+
       <Typography
         position={"absolute"}
         ml={8}
@@ -53,17 +72,6 @@ export const UserInput = (props: UserInputProps) => {
         color={"#888A99"}
       >
         {title}
-      </Typography>
-
-      <Typography
-        position={"absolute"}
-        ml={8}
-        mt={2.8}
-        fontSize={16}
-        fontWeight={400}
-        color={"#0D1118"}
-      >
-        {label}
       </Typography>
     </Stack>
   );

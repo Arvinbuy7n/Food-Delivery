@@ -18,7 +18,7 @@ export const HomeHead = () => {
   return (
     <Stack>
       <Stack bgcolor={"#18BA51"}>
-        <Container sx={{ border: 1 }}>
+        <Container>
           <Stack
             sx={{
               backgroundImage: "url(back.png)",
@@ -68,7 +68,7 @@ export const HomeHead = () => {
         </Container>
       </Stack>
 
-      <Container sx={{ border: 1 }}>
+      <Container sx={{ border: 1, borderColor: "#E0E0E0" }}>
         <Stack
           direction={"row"}
           py={12}

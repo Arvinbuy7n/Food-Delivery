@@ -38,26 +38,25 @@ type AuthContextType = {
   newPassword: (password: string, otp: string) => void;
   sendEmail: (email: string) => void;
   checkOtp: (otp: string) => void;
-  changeUser: (userImage: string, name: string, phone: string) => void;
+  changeUser: (
+    userImage: string,
+    name: string,
+    phone: string,
+    email: string
+  ) => void;
 
   //user profile medeelel awah
   user: User | null;
   setUser: Dispatch<SetStateAction<User | null>>;
+
+  admin: boolean;
 };
-
-// const [foods]
-
-// [{
-// food: {},
-// quantity:1
-// }, {
-
-// }]
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
+  const [admin, setAdmin] = useState(false);
 
   const login = async (email: string, password: string) => {
     try {
@@ -117,6 +116,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signOut = async () => {
     localStorage.removeItem("token");
+
+    setAdmin(false);
 
     router.push("/login");
   };
@@ -205,6 +206,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           Authorization: localStorage.getItem("token"),
         },
       });
+
+      const { role } = data;
+
+      if (role == "admin") {
+        setAdmin(true);
+      }
+
       setUser(data);
     } catch (err) {
       console.log(err);
@@ -216,13 +224,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const changeUser = async (
     userImage: string,
     name: string,
-    phoneNumber: string
+    phoneNumber: string,
+    email: string
   ) => {
     try {
       const { data } = await axios.post("http://localhost:8000/auth/change", {
         userImage,
         name,
         phoneNumber,
+        email,
       });
 
       toast.success(data.message, {
@@ -236,6 +246,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
     }
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLogged(true);
+    }
+  });
 
   useEffect(() => {
     getUser();
@@ -253,6 +268,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         setUser,
         changeUser,
         user,
+        admin,
       }}
     >
       {children}

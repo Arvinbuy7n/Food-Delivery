@@ -8,6 +8,8 @@ import React, { useState } from "react";
 import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
 import { useFood } from "../providers/FoodProvider";
+import { useAuth } from "../providers/AuthProvider";
+import { useRouter } from "next/navigation";
 
 type Open = {
   isOpen?: Boolean;
@@ -21,6 +23,8 @@ export const FoodCategory = (props: Open) => {
   const [openFood, closeFood] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const { categoryList, recordList } = useFood();
+  const { admin } = useAuth();
+  const router = useRouter();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -28,6 +32,9 @@ export const FoodCategory = (props: Open) => {
   const handleOpen = () => closeFood(true);
   const handleClose = () => closeFood(false);
 
+  if (!admin) {
+    router.push("/home");
+  }
   return (
     <Stack direction={"row"} px={36}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
