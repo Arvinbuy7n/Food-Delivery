@@ -1,18 +1,13 @@
-import {
-  Button,
-  Card,
-  CardMedia,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+"use client";
+
+import { Button, Card, Stack, Typography } from "@mui/material";
 import { CustomRadio } from "../customs/CustomRadio";
-import { Address } from "../customs/Select";
-import { CheckBox, LocationOn } from "@mui/icons-material";
-import Image from "next/image";
+import { useCard } from "../providers/CartProvider";
+import { MyOrderItem } from "../customs/MyOrderItem";
 
 export const AlhamTwo = () => {
+  const { addBasket } = useCard();
+
   return (
     <Stack py={8} gap={6}>
       <Stack direction={"row"}>
@@ -36,38 +31,24 @@ export const AlhamTwo = () => {
           width: 432,
         }}
       >
-        <Stack py={2} px={3} justifyContent={"space-between"} height={580}>
-          <Stack
-            direction={"row"}
-            py={2}
-            gap={2}
-            borderBottom={1}
-            borderTop={1}
-            borderColor={"grey.500"}
-          >
-            <Image
-              src="/order.png"
-              alt="pizza"
-              width={184}
-              height={121}
-            ></Image>
-
-            <Stack justifyContent={"space-between"}>
-              <Stack direction={"row"} justifyContent={"space-between"}>
-                <Stack>
-                  <Typography fontSize={18} fontWeight={600}>
-                    Main Pizza
-                  </Typography>
-                  <Typography color={"#18BA51"} fontWeight={600} fontSize={18}>
-                    34,800₮
-                  </Typography>
-                </Stack>
-              </Stack>
-
-              <Typography fontSize={16} color={"#767676"} fontWeight={400}>
-                Хулуу, төмс, лууван , сонгино, цөцгийн тос, самрын үр{" "}
-              </Typography>
-            </Stack>
+        <Stack
+          py={2}
+          px={3}
+          justifyContent={"space-between"}
+          height={580}
+          overflow={"scroll"}
+        >
+          <Stack>
+            {addBasket.map((item, _index) => {
+              return (
+                <MyOrderItem
+                  image={item.food.foodImage}
+                  name={item.food.foodName}
+                  price={item.food.price}
+                  ingredient={item.food.ingredient}
+                />
+              );
+            })}
           </Stack>
 
           <Stack direction={"row"} justifyContent={"space-between"}>
@@ -76,7 +57,11 @@ export const AlhamTwo = () => {
                 Нийт төлөх дүн
               </Typography>
               <Typography fontSize={18} fontWeight={700}>
-                34,800₮
+                {addBasket.reduce(
+                  (total, currentValue) =>
+                    total + Number(currentValue.food.price),
+                  0
+                )}
               </Typography>
             </Stack>
 

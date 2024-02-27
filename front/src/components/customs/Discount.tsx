@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import { useFood } from "../providers/FoodProvider";
 import { CardFood } from "..";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export const Discount = () => {
   const { recordList } = useFood();
+  const router = useRouter();
 
   return (
     <Stack gap={4}>
@@ -25,7 +26,12 @@ export const Discount = () => {
           </Typography>
         </Stack>
 
-        <Stack direction={"row"}>
+        <Stack
+          direction={"row"}
+          onClick={() => {
+            router.push("/foodmenu");
+          }}
+        >
           <Typography fontSize={14} color={"#18BA51"}>
             Бүгдийг харах
           </Typography>

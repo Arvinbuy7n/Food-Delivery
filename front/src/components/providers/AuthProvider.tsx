@@ -246,6 +246,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
     }
   };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLogged(true);

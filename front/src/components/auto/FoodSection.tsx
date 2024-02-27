@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { CardFood } from "..";
 import { useFood } from "../providers/FoodProvider";
+import { useRouter } from "next/navigation";
 
 type Props = {
   category: string;
@@ -16,6 +17,7 @@ type Props = {
 export const FoodSection = (props: Props) => {
   const { recordList } = useFood();
   const { category } = props;
+  const router = useRouter();
 
   return (
     <Stack gap={4}>
@@ -29,7 +31,12 @@ export const FoodSection = (props: Props) => {
           </Typography>
         </Stack>
 
-        <Stack direction={"row"}>
+        <Stack
+          direction={"row"}
+          onClick={() => {
+            router.push("/foodmenu");
+          }}
+        >
           <Typography fontSize={14} color={"#18BA51"}>
             Бүгдийг харах
           </Typography>

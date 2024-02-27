@@ -25,7 +25,11 @@ export const MyOrder = (props: handleProps) => {
   const router = useRouter();
 
   return (
-    <Stack justifyContent={"space-between"} height={"100vh"}>
+    <Stack
+      justifyContent={"space-between"}
+      overflow={"scroll"}
+      height={"fit-content"}
+    >
       <Stack>
         <Stack
           sx={{

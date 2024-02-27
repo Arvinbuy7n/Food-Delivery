@@ -21,7 +21,6 @@ import { useState } from "react";
 import { Newtreh } from "../auto/Newtreh";
 import { MyOrder } from "../customs/MyOrder";
 import { useAuth } from "../providers/AuthProvider";
-import { useFood } from "../providers/FoodProvider";
 import { useCard } from "../providers/CartProvider";
 
 export const Header = () => {
@@ -30,7 +29,6 @@ export const Header = () => {
   const { user, isLogged, admin } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
-
   const { addBasket } = useCard();
 
   const closeModal = () => {
@@ -109,12 +107,13 @@ export const Header = () => {
                 sx={{
                   px: 2,
                   py: 1,
+                  color: "#18BA51",
                 }}
                 onClick={() => {
                   router.push("admin");
                 }}
               >
-                Admin
+                ADMIN
               </Typography>
             )}
           </Stack>
@@ -144,7 +143,7 @@ export const Header = () => {
               fontSize={16}
               fontWeight={700}
               onClick={() => {
-                if (pathname == "/foodmenu") {
+                if (pathname == "/foodmenu" || pathname == "/home") {
                   openDrawer();
                 }
                 return false;
