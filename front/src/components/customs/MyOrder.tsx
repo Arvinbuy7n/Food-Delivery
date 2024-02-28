@@ -23,6 +23,9 @@ export const MyOrder = (props: handleProps) => {
   const { closeButton } = props;
   const { addBasket } = useCard();
   const router = useRouter();
+  const sumBasket = addBasket.reduce((sum, currentValue) => {
+    return sum + currentValue.food.price * currentValue.quantity;
+  }, 0);
 
   return (
     <Stack

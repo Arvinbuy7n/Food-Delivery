@@ -11,9 +11,17 @@ import { useFood } from "../providers/FoodProvider";
 import { FoodSection } from "../auto/FoodSection";
 import Image from "next/image";
 import { Discount } from "../customs/Discount";
+import { useState } from "react";
 
 export const HomeHead = () => {
   const { categoryList } = useFood();
+  const [all, setAll] = useState(4);
+
+  const handleSeeAll = () => {
+    if (all === 4) {
+      setAll(40);
+    } else setAll(4);
+  };
 
   return (
     <Stack>
@@ -96,10 +104,16 @@ export const HomeHead = () => {
           />
         </Stack>
 
-        <Discount />
+        <Discount handle={handleSeeAll} />
 
         {categoryList.map((item, _index) => {
-          return <FoodSection category={item.category} />;
+          return (
+            <FoodSection
+              category={item.category}
+              handleSeeAll={handleSeeAll}
+              all={all}
+            />
+          );
         })}
       </Container>
     </Stack>

@@ -12,11 +12,13 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   category: string;
+  handleSeeAll: () => void;
+  all: number;
 };
 
 export const FoodSection = (props: Props) => {
   const { recordList } = useFood();
-  const { category } = props;
+  const { category, handleSeeAll, all } = props;
   const router = useRouter();
 
   return (
@@ -31,13 +33,8 @@ export const FoodSection = (props: Props) => {
           </Typography>
         </Stack>
 
-        <Stack
-          direction={"row"}
-          onClick={() => {
-            router.push("/foodmenu");
-          }}
-        >
-          <Typography fontSize={14} color={"#18BA51"}>
+        <Stack direction={"row"}>
+          <Typography fontSize={14} color={"#18BA51"} onClick={handleSeeAll}>
             Бүгдийг харах
           </Typography>
 
@@ -53,6 +50,7 @@ export const FoodSection = (props: Props) => {
         <Grid container gap={2}>
           {recordList
             .filter((name) => name.foodCategory.includes(category))
+            .filter((name, index) => index < all)
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood
