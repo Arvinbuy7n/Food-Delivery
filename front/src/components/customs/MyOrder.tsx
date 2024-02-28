@@ -58,6 +58,7 @@ export const MyOrder = (props: handleProps) => {
                 name={item.food.foodName}
                 price={item.food.price}
                 ingredient={item.food.ingredient}
+                quantity={item.quantity}
               />
             );
           })}
@@ -88,6 +89,7 @@ export const MyOrder = (props: handleProps) => {
             }}
             onClick={() => {
               router.push("/step");
+              closeButton();
             }}
           >
             Захиалах

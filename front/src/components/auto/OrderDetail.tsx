@@ -1,12 +1,13 @@
 import { Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useCard } from "../providers/CartProvider";
 import { Record } from "../providers/FoodProvider";
 
 type OrderDetailProps = {
   handleClose: () => void;
   add: number;
+  setAdd: Dispatch<SetStateAction<number>>;
 } & Record;
 
 export const OrderDetail = ({
@@ -15,23 +16,21 @@ export const OrderDetail = ({
   ...props
 }: OrderDetailProps) => {
   const { foodName, foodImage, price, ingredient } = props;
-  const [add, setAdd] = useState(1);
-  const { addFood } = useCard();
-
-  const handleLeft = () => {
-    setAdd(add - 1);
-  };
-
-  const handleRight = () => {
-    setAdd(add + 1);
-  };
+  const { addFood, add, setAdd } = useCard();
 
   const basketClick = () => {
     addFood({
       food: props,
-      quantity: 1,
+      quantity: add,
     });
     handleClose();
+  };
+
+  const changeCount = (change: number) => {
+    setAdd((prev) => {
+      if (change < 0 && prev == 1) return prev;
+      return prev + change;
+    });
   };
 
   return (
@@ -107,7 +106,9 @@ export const OrderDetail = ({
                       fontSize: 14,
                       fontWeight: 700,
                     }}
-                    onClick={handleLeft}
+                    onClick={() => {
+                      changeCount(-1);
+                    }}
                   >
                     -
                   </Button>
@@ -126,7 +127,9 @@ export const OrderDetail = ({
                       fontSize: 14,
                       fontWeight: 700,
                     }}
-                    onClick={handleRight}
+                    onClick={() => {
+                      changeCount(1);
+                    }}
                   >
                     +
                   </Button>

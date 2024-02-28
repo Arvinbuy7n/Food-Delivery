@@ -116,6 +116,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const signOut = async () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("secret-key");
 
     setAdmin(false);
 

@@ -31,24 +31,26 @@ type CardContextType = {
   addFood: (record: CartFood) => void;
   addBasket: CartFood[];
   setAddBasket: Dispatch<SetStateAction<CartFood[]>>;
+  add: number;
+  setAdd: Dispatch<SetStateAction<number>>;
 };
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
   const [addBasket, setAddBasket] = useState<CartFood[]>([]);
   const [isRender, setIsRender] = useState(true);
+  const [add, setAdd] = useState(1);
 
   const addFood = async ({ food, quantity }: CartFood) => {
-    setAddBasket((prev) => {
-      const current = prev.findIndex((item) => item.food._id === food._id);
+    const clone = [...addBasket];
 
-      if (current !== -1) {
-        const arr = [...prev];
-        arr[current].quantity += quantity;
-        return arr;
-      }
+    const current = clone.findIndex((item) => item.food._id === food._id);
 
-      return [...prev, { food, quantity }];
-    });
+    if (current !== -1) {
+      clone[current].quantity += quantity;
+      setAddBasket(clone);
+    } else {
+      setAddBasket([...clone, { food, quantity }]);
+    }
   };
 
   useEffect(() => {
@@ -72,6 +74,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         addFood,
         addBasket,
         setAddBasket,
+        add,
+        setAdd,
       }}
     >
       {children}
