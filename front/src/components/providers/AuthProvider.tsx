@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { api } from "@/src/common/axios";
+import { headers } from "next/headers";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -57,6 +58,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   const [admin, setAdmin] = useState(false);
+  const [refresh, setRefresh] = useState(1);
 
   const login = async (email: string, password: string) => {
     try {
@@ -229,16 +231,25 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     email: string
   ) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/change", {
-        userImage,
-        name,
-        phoneNumber,
-        email,
-      });
+      const { data } = await axios.post(
+        "http://localhost:8000/auth/change",
+        {
+          userImage,
+          name,
+          phoneNumber,
+          email,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       toast.success(data.message, {
         position: "top-center",
       });
+      setRefresh(refresh + 1);
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -256,7 +267,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [refresh]);
   return (
     <AuthContext.Provider
       value={{

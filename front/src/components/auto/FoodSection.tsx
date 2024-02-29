@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { CardFood } from "..";
 import { useFood } from "../providers/FoodProvider";
-import { useRouter } from "next/navigation";
 
 type Props = {
   category: string;
@@ -17,9 +16,8 @@ type Props = {
 };
 
 export const FoodSection = (props: Props) => {
-  const { recordList } = useFood();
   const { category, handleSeeAll, all } = props;
-  const router = useRouter();
+  const { recordList, searchValue } = useFood();
 
   return (
     <Stack gap={4}>
@@ -49,8 +47,9 @@ export const FoodSection = (props: Props) => {
       <Stack>
         <Grid container gap={2}>
           {recordList
+            .filter((item) => item.foodName.includes(searchValue))
             .filter((name) => name.foodCategory.includes(category))
-            .filter((name, index) => index < all)
+            .filter((_name, index) => index < all)
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood

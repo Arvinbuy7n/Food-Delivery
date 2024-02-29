@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ReactNode, useState } from "react";
+import { useFood } from "../providers/FoodProvider";
 
 type CustomInputProps = {
   startIcon?: ReactNode;
@@ -19,6 +20,13 @@ export const CustomInput = (props: CustomInputProps) => {
   const { label, type = "text", size, startIcon, ...rest } = props;
 
   const [showPassword, setShowPassword] = useState(false);
+  const { recordList } = useFood();
+
+  let searchValue = "";
+
+  const setSearchValue = (value: string) => {
+    searchValue = value;
+  };
 
   const handleShowPassword = () => {
     setShowPassword((p) => !p);

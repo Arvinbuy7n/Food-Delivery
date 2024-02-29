@@ -112,12 +112,7 @@ export const OrderDetail = ({
                   >
                     -
                   </Button>
-                  <Typography
-                    fontSize={16}
-                    fontWeight={500}
-                    mt={1}
-                    onClick={() => {}}
-                  >
+                  <Typography fontSize={16} fontWeight={500} mt={1}>
                     {add}
                   </Typography>
                   <Button

@@ -22,7 +22,7 @@ export const FoodCategory = (props: Open) => {
   const [isOpen, setIsOpen] = useState(false);
   const [openFood, closeFood] = useState(false);
   const [categoryName, setCategoryName] = useState("");
-  const { categoryList, recordList } = useFood();
+  const { categoryList, recordList, searchValue } = useFood();
   const { admin } = useAuth();
   const router = useRouter();
 
@@ -109,6 +109,7 @@ export const FoodCategory = (props: Open) => {
           <Grid container gap={2}>
             {recordList
               .filter((item) => item.foodCategory.includes(categoryName))
+              .filter((name) => name.foodName.includes(searchValue))
               .map((item, index) => (
                 <Grid key={index}>
                   <CardFood

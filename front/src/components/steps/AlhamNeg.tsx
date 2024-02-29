@@ -1,9 +1,25 @@
-import { Card, Select, Stack, TextField, Typography } from "@mui/material";
+import {
+  Card,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { CustomRadio } from "../customs/CustomRadio";
-import { Address } from "../customs/Select";
 import { CheckBox, LocationOn } from "@mui/icons-material";
 import { Khoroo } from "../customs/Khoroo";
 import { Location } from "../customs/Location";
+
+const district = [
+  "Баянзүрх дүүрэг",
+  "Хан-Уул дүүрэг",
+  "Баянгол дүүрэг",
+  "Сонгинохайрхан дүүрэг",
+  "Чингэлтэй дүүрэг",
+];
 
 export const AlhamNeg = () => {
   return (
@@ -29,7 +45,27 @@ export const AlhamNeg = () => {
           <Stack gap={2}>
             <Typography>Хаяг аа оруулна уу</Typography>
 
-            <Address label="Дүүрэг сонгоно уу" startIcon={<LocationOn />} />
+            <FormControl sx={{ width: 384 }}>
+              <Select>
+                <Stack sx={{ flexDirection: "column" }}>
+                  {district.map((item, index) => {
+                    return <MenuItem key={index}>{item}</MenuItem>;
+                  })}
+                </Stack>
+              </Select>
+            </FormControl>
+
+            <Typography>Хороо сонгоно уу</Typography>
+
+            <FormControl sx={{ width: 384 }}>
+              <Select>
+                <Stack sx={{ flexDirection: "column" }}>
+                  {district.map((item, index) => {
+                    return <MenuItem key={index}>{item}</MenuItem>;
+                  })}
+                </Stack>
+              </Select>
+            </FormControl>
             <Khoroo label="Хороо сонгоно уу" startIcon={<LocationOn />} />
             <Location
               label="Байр, гудамж сонгоно уу"

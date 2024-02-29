@@ -17,8 +17,8 @@ type Record = {
   foodName: string;
   foodCategory?: string;
   ingredient: string;
-  price: string;
-  discount?: string;
+  price: number;
+  discount?: number;
   foodImage?: any;
 };
 
@@ -51,6 +51,10 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     } else {
       setAddBasket([...clone, { food, quantity }]);
     }
+
+    const sumBasket = addBasket.reduce((sum, currentValue) => {
+      return sum + currentValue.food.price * currentValue.quantity;
+    }, 0);
   };
 
   useEffect(() => {

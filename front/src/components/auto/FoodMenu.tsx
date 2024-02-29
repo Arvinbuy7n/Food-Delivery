@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const FoodMenu = (props: Props) => {
-  const { categoryList, recordList } = useFood();
+  const { categoryList, recordList, searchValue } = useFood();
   const [categoryName, setCategoryName] = useState("");
 
   return (
@@ -35,6 +35,7 @@ export const FoodMenu = (props: Props) => {
           <Grid container spacing={2}>
             {recordList
               .filter((name) => name.foodCategory.includes(categoryName))
+              .filter((item) => item.foodName.includes(searchValue))
               .map((item, index) => (
                 <Grid item key={index}>
                   <CardFood

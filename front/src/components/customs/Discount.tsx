@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const Discount = (props: Props) => {
-  const { recordList } = useFood();
+  const { recordList, searchValue } = useFood();
   const { handle } = props;
 
   return (
@@ -46,6 +46,7 @@ export const Discount = (props: Props) => {
         <Grid container gap={2}>
           {recordList
             .filter((name) => name.discount)
+            .filter((item) => item.foodName.includes(searchValue))
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood

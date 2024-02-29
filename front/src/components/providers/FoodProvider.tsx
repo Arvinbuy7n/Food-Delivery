@@ -34,7 +34,7 @@ type FoodContextType = {
     foodName: string,
     foodCategory: string,
     ingredient: string,
-    price: string,
+    price: number,
     discount?: string,
     foodImage?: string
   ) => void;
@@ -45,12 +45,16 @@ type FoodContextType = {
 
   recordList: Record[];
   setRecordList: Dispatch<SetStateAction<Record[]>>;
+
+  searchValue: string;
+  setSearchValue: Dispatch<SetStateAction<string>>;
 };
 
 export const FoodProvider = ({ children }: PropsWithChildren) => {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
   const [recordList, setRecordList] = useState<Record[]>([]);
   const [refresh, setRefresh] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
 
   //add new food
 
@@ -58,7 +62,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     foodName: string,
     foodCategory: string,
     ingredient: string,
-    price: string,
+    price: number,
     discount?: string,
     foodImage?: string
   ) => {
@@ -164,6 +168,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
         setCategoryList,
         recordList,
         setRecordList,
+        searchValue,
+        setSearchValue,
       }}
     >
       {children}

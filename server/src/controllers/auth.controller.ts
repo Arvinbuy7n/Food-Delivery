@@ -112,14 +112,27 @@ export const getUser: RequestHandler = async (req, res) => {
 export const changeUser: RequestHandler = async (req, res) => {
   const { name, userImage, email, phone } = req.body;
 
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).json({
+      messsage: "Invalid",
+    });
+  }
+
+  const payload = jwt.verify(authorization, "secret-key") as JwtPayload;
+
+  const id = payload.id;
+
   await UserModel.findOneAndUpdate(
     {
-      email,
+      _id: id,
     },
     {
       userImage,
       name,
       phone,
+      email,
     }
   );
 

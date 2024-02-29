@@ -9,7 +9,6 @@ import {
   Box,
   Container,
   Drawer,
-  Grid,
   Modal,
   Stack,
   Typography,
@@ -22,14 +21,16 @@ import { Newtreh } from "../auto/Newtreh";
 import { MyOrder } from "../customs/MyOrder";
 import { useAuth } from "../providers/AuthProvider";
 import { useCard } from "../providers/CartProvider";
+import { useFood } from "../providers/FoodProvider";
 
 export const Header = () => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const { user, isLogged, admin } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
+  const { user, isLogged, admin } = useAuth();
   const { addBasket } = useCard();
+  const { setSearchValue } = useFood();
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -120,12 +121,17 @@ export const Header = () => {
         </Stack>
 
         <Stack direction={"row"} gap={3}>
-          <CustomInput
-            placeholder="Хайх"
-            type="text"
-            size="small"
-            startIcon={<Search />}
-          ></CustomInput>
+          <Stack>
+            <CustomInput
+              placeholder="Хайх"
+              type="text"
+              size="small"
+              startIcon={<Search />}
+              onChange={(event) => {
+                setSearchValue(event.target.value);
+              }}
+            ></CustomInput>
+          </Stack>
 
           <Stack
             direction={"row"}
@@ -165,11 +171,11 @@ export const Header = () => {
             </Stack>
 
             <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
-              <Box role="presentation" width={"630px"} px={4}>
+              <Box role="presentation" width={"600px"} px={4}>
                 <MyOrder
                   closeButton={closeDrawer}
                   foodName=""
-                  price=""
+                  price={0}
                   ingredients=""
                   foodImage=""
                 />

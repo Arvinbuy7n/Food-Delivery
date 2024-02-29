@@ -20,7 +20,6 @@ import {
 } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { LogOut } from "./LogOut";
-
 import { useAuth } from "../providers/AuthProvider";
 import { UserPhoto } from "../upload/UserPro";
 import { useFormik } from "formik";
@@ -38,23 +37,15 @@ const validationSchema = yup.object({
 });
 
 export const UserProfile = (props: openModal) => {
-  const [open, setClose] = React.useState(false);
-  const [imagePro, setImagePro] = useState("");
-  const [openModal, setOpenModal] = useState(false);
   const { user, changeUser } = useAuth();
+
+  const [open, setClose] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [imagePro, setImagePro] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleClick = () => {
-    setOpenModal(true);
-  };
-  const handle = () => {
-    setOpenModal(false);
-  };
-  const handleOpen = () => {
-    setClose(true);
-  };
   const handleClose = () => {
     setClose(false);
   };
@@ -101,12 +92,12 @@ export const UserProfile = (props: openModal) => {
             bgcolor: "#FFF",
             color: "#18BA51",
           }}
-          onClick={handleClick}
+          onClick={() => setOpenModal(true)}
         >
           {<EditOutlined />}
         </IconButton>
 
-        <Modal open={openModal} onClose={handle}>
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
           <Box>
             <UserPhoto imageUrl={imagePro} setImageUrl={setImagePro} />
           </Box>
@@ -163,7 +154,13 @@ export const UserProfile = (props: openModal) => {
           </Typography>
         </Stack>
 
-        <Stack direction={"row"} gap={1.5} px={2} py={1} onClick={handleOpen}>
+        <Stack
+          direction={"row"}
+          gap={1.5}
+          px={2}
+          py={1}
+          onClick={() => setClose(true)}
+        >
           <IconButton sx={{ bgcolor: "#FFF", border: 1, color: "#000" }}>
             {<Logout />}
           </IconButton>

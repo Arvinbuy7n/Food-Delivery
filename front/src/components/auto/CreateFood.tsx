@@ -21,8 +21,8 @@ type CreateFoodProps = {
 const validationSchema = yup.object({
   foodName: yup.string(),
   foodCategory: yup.string(),
-  price: yup.string(),
-  discount: yup.string(),
+  price: yup.number(),
+  discount: yup.number(),
 });
 
 export const CreateFood = (props: CreateFoodProps) => {
@@ -35,7 +35,7 @@ export const CreateFood = (props: CreateFoodProps) => {
       foodName: "",
       foodCategory: "",
       ingredient: "",
-      price: "",
+      price: 0,
       discount: "",
       foodImage: "",
     },
