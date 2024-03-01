@@ -12,7 +12,7 @@ import { MyOrderItem } from "./MyOrderItem";
 import { usePathname, useRouter } from "next/navigation";
 
 type handleProps = {
-  closeButton: () => void;
+  closeButton?: () => void;
   foodName: string;
   price: number;
   ingredients: string;
@@ -89,7 +89,7 @@ export const MyOrder = (props: handleProps) => {
             }}
             onClick={() => {
               router.push("/step");
-              closeButton();
+              if (closeButton) closeButton();
             }}
           >
             Захиалах

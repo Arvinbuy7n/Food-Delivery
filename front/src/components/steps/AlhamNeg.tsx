@@ -1,17 +1,30 @@
-import {
-  Card,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Card, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { CustomRadio } from "../customs/CustomRadio";
 import { CheckBox, LocationOn } from "@mui/icons-material";
-import { Khoroo } from "../customs/Khoroo";
-import { Location } from "../customs/Location";
+import { OrderSelect } from "./OrderSelect";
+import { useFormik } from "formik";
+import { useCard } from "../providers/CartProvider";
+import * as yup from "yup";
+import { Dispatch, SetStateAction } from "react";
+
+type CustomProps = {
+  districts: string;
+  setDistricts: Dispatch<SetStateAction<string>>;
+
+  khoroos: string;
+  setKhoroos: Dispatch<SetStateAction<string>>;
+
+  aparts: string;
+  setAparts: Dispatch<SetStateAction<string>>;
+};
+
+const validationSchema = yup.object({
+  district: yup.string().required(),
+  khoroo: yup.string().required(),
+  apart: yup.string().required(),
+  addition: yup.string().required(),
+  phone: yup.number().required(),
+});
 
 const district = [
   "Баянзүрх дүүрэг",
@@ -21,7 +34,48 @@ const district = [
   "Чингэлтэй дүүрэг",
 ];
 
-export const AlhamNeg = () => {
+const khoroo = [
+  "1-р хороо",
+  "2-р хороо",
+  "3-р хороо",
+  "4-р хороо",
+  "5-р хороо",
+  "6-р хороо",
+];
+
+const apart = [
+  "Нархан хотхон",
+  "26-р байр",
+  "Хоймор хотхон",
+  "45-р байр",
+  "Зайсан хотхон",
+];
+
+export const AlhamNeg = (props: CustomProps) => {
+  const { postOrder, addBasket } = useCard();
+  const { districts, setDistricts, khoroos, setKhoroos, aparts, setAparts } =
+    props;
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     district: "",
+  //     khoroo: "",
+  //     apart: "",
+  //     addition: "",
+  //     phone: [],
+  //   },
+  //   validationSchema: validationSchema,
+  //   onSubmit: (values) => {
+  //     postOrder(   {
+  //      values.district,
+  //       va
+  //       apart: string;
+  //       addition: string;
+  //       phone: number;
+  //       paymentMethod: boolean;
+  //     }, { addBasket });
+  //   },
+  // });
   return (
     <Stack py={8} gap={6}>
       <Stack direction={"row"}>
@@ -45,32 +99,59 @@ export const AlhamNeg = () => {
           <Stack gap={2}>
             <Typography>Хаяг аа оруулна уу</Typography>
 
-            <FormControl sx={{ width: 384 }}>
-              <Select>
-                <Stack sx={{ flexDirection: "column" }}>
-                  {district.map((item, index) => {
-                    return <MenuItem key={index}>{item}</MenuItem>;
-                  })}
-                </Stack>
-              </Select>
-            </FormControl>
+            <Stack>
+              <OrderSelect
+                label=""
+                type=""
+                onChange={(event) => {
+                  setDistricts(event?.target.value);
+                }}
+              >
+                {district.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </OrderSelect>
+            </Stack>
 
-            <Typography>Хороо сонгоно уу</Typography>
+            <Stack>
+              <OrderSelect
+                label="ss"
+                type=""
+                onChange={(event) => {
+                  setKhoroos(event?.target.value);
+                }}
+              >
+                {khoroo.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </OrderSelect>
+            </Stack>
 
-            <FormControl sx={{ width: 384 }}>
-              <Select>
-                <Stack sx={{ flexDirection: "column" }}>
-                  {district.map((item, index) => {
-                    return <MenuItem key={index}>{item}</MenuItem>;
-                  })}
-                </Stack>
-              </Select>
-            </FormControl>
-            <Khoroo label="Хороо сонгоно уу" startIcon={<LocationOn />} />
-            <Location
-              label="Байр, гудамж сонгоно уу"
-              startIcon={<LocationOn />}
-            />
+            <Stack>
+              <OrderSelect
+                label=""
+                type=""
+                onChange={(event) => {
+                  setAparts(event?.target.value);
+                }}
+              >
+                {apart.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+              </OrderSelect>
+            </Stack>
           </Stack>
 
           <Stack>

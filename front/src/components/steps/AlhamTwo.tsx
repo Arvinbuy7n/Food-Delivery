@@ -6,11 +6,9 @@ import { useCard } from "../providers/CartProvider";
 import { MyOrderItem } from "../customs/MyOrderItem";
 import { usePathname } from "next/navigation";
 import { MyOrder } from "../customs/MyOrder";
+import { CloseButton } from "react-toastify";
 
 export const AlhamTwo = () => {
-  const { addBasket } = useCard();
-  const pathname = usePathname();
-
   return (
     <Stack py={8} gap={6}>
       <Stack direction={"row"}>
@@ -36,13 +34,7 @@ export const AlhamTwo = () => {
       >
         <Stack py={2} px={1} justifyContent={"space-between"} height={580}>
           <Stack overflow={"scroll"}>
-            <MyOrder
-              closeButton={close}
-              foodName=""
-              price={0}
-              ingredients=""
-              foodImage=""
-            />
+            <MyOrder foodName="" price={0} ingredients="" foodImage="" />
           </Stack>
         </Stack>
       </Card>

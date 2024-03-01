@@ -13,7 +13,7 @@ type OrderProps = {
 };
 
 export const MyOrderItem = (props: OrderProps) => {
-  const { image, name, price, ingredient, quantity, sumBasket } = props;
+  const { image, name, ingredient, quantity, sumBasket } = props;
   const { addBasket, setAddBasket, setAdd } = useCard();
 
   const changeCount = (change: number) => {
@@ -40,21 +40,18 @@ export const MyOrderItem = (props: OrderProps) => {
                 {sumBasket}
               </Typography>
             </Stack>
+            <Stack
+              mt={1}
+              onClick={() => {
+                const basket = addBasket.filter(
+                  (element) => element.food.foodName != name
+                );
 
-            {pathname != "/step" && (
-              <Stack
-                mt={1}
-                onClick={() => {
-                  const basket = addBasket.filter(
-                    (element) => element.food.foodName != name
-                  );
-
-                  setAddBasket(basket);
-                }}
-              >
-                <Image src="/close.png" alt="" width={26} height={26} />
-              </Stack>
-            )}
+                setAddBasket(basket);
+              }}
+            >
+              <Image src="/close.png" alt="" width={26} height={26} />
+            </Stack>
           </Stack>
 
           <Typography fontSize={16} color={"#767676"} fontWeight={400}>
