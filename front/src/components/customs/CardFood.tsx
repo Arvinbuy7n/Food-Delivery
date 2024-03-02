@@ -63,8 +63,8 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
             {...props}
             foodCategory=""
             foodImage={foodImage}
-            price=""
-            ingredient=""
+            price={price}
+            ingredient={ingredient}
           />
         </Box>
       </Modal>

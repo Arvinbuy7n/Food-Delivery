@@ -26,6 +26,12 @@ type CustomProps = {
 
   aparts: string;
   setAparts: Dispatch<SetStateAction<string>>;
+
+  addition: string;
+  setAddition: Dispatch<SetStateAction<string>>;
+
+  phone: string;
+  setPhone: Dispatch<SetStateAction<string>>;
 };
 
 const validationSchema = yup.object({
@@ -63,7 +69,7 @@ const apart = [
 
 export const AlhamNeg = (props: CustomProps) => {
   const { postOrder, addBasket } = useCard();
-  const { districts, setDistricts, khoroos, setKhoroos, aparts, setAparts } =
+  const { districts, setDistricts, khoroos, setKhoroos, aparts, setAparts, addition, setAddition, phone, setPhone } =
     props;
 
   // const formik = useFormik({
@@ -115,7 +121,7 @@ export const AlhamNeg = (props: CustomProps) => {
                 label=""
                 type=""
                 onChange={(event) => {
-                  setDistricts(event?.target.value);
+                  setDistricts(event.target.value);
                 }}
               >
                 {district.map((item, index) => {
@@ -170,15 +176,19 @@ export const AlhamNeg = (props: CustomProps) => {
               Нэмэлт мэдээлэл
             </Typography>
 
-            <TextField placeholder="Орц, давхар, орцны код ..."></TextField>
+            <TextField placeholder="Орц, давхар, орцны код ..." onChange={(e) => {
+              setAddition(e.target.value)
+            }}></TextField>
           </Stack>
 
           <Stack>
-            <Typography fontSize={14} fontWeight={400}>
+            <Typography fontSize={14} fontWeight={400} >
               Утасны дугаар*
             </Typography>
 
-            <TextField placeholder="Phone number"></TextField>
+            <TextField placeholder="Phone number" onChange={(event) => {
+              setPhone(event.target.value)
+            }}></TextField>
           </Stack>
 
           <Stack gap={1}>

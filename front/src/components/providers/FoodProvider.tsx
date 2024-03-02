@@ -22,8 +22,8 @@ export type Record = {
   foodName: string;
   foodCategory: string;
   ingredient: string;
-  price: string;
-  discount?: string;
+  price: number;
+  discount?: number;
   foodImage?: any;
 };
 

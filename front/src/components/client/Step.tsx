@@ -14,12 +14,20 @@ type Props = {
 
   apart: string;
   setApart: Dispatch<SetStateAction<string>>;
+
+  addition: string;
+  setAddition: Dispatch<SetStateAction<string>>;
+
+  phone: string;
+  setPhone: Dispatch<SetStateAction<string>>;
 };
 
 export const Step = () => {
   const [district, setDistrict] = useState("");
   const [khoroo, setKhoroo] = useState("");
   const [apart, setApart] = useState("");
+  const [addition, setAddition] = useState("")
+  const [phone, setPhone] = useState("")
 
   return (
     <Container>
@@ -31,6 +39,10 @@ export const Step = () => {
           setKhoroos={setKhoroo}
           aparts={apart}
           setAparts={setApart}
+          phone={phone}
+          setPhone={setPhone}
+          addition={addition}
+          setAddition={setAddition}
         />
         <AlhamTwo />
       </Stack>

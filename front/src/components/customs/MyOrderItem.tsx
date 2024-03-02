@@ -2,6 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import { useCard } from "../providers/CartProvider";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 type OrderProps = {
   image: string;
@@ -9,19 +10,14 @@ type OrderProps = {
   price: number;
   ingredient: string;
   quantity: number;
-  sumBasket: number;
 };
 
 export const MyOrderItem = (props: OrderProps) => {
-  const { image, name, ingredient, quantity, sumBasket } = props;
-  const { addBasket, setAddBasket, setAdd } = useCard();
+  const { image, name, ingredient, quantity, price, } = props;
+  const { addBasket, setAddBasket } = useCard();
+  const [foodCount, setFoodCount] = useState(1)
 
-  const changeCount = (change: number) => {
-    setAdd((prev) => {
-      if (change < 0 && prev == 1) return prev;
-      return prev + change;
-    });
-  };
+
 
   const pathname = usePathname();
 
@@ -37,7 +33,7 @@ export const MyOrderItem = (props: OrderProps) => {
                 {name}
               </Typography>
               <Typography color={"#18BA51"} fontWeight={600} fontSize={18}>
-                {sumBasket}
+                {Number(price) * Number(quantity)}
               </Typography>
             </Stack>
             <Stack
@@ -69,9 +65,6 @@ export const MyOrderItem = (props: OrderProps) => {
                   borderRadius: 2,
                   fontSize: 20,
                 }}
-                onClick={() => {
-                  changeCount(-1);
-                }}
               >
                 -
               </Typography>
@@ -87,9 +80,6 @@ export const MyOrderItem = (props: OrderProps) => {
                   borderRadius: 2,
                   fontSize: 20,
                 }}
-                onClick={() => {
-                  changeCount(1);
-                }}
               >
                 +
               </Typography>
@@ -100,3 +90,26 @@ export const MyOrderItem = (props: OrderProps) => {
     </Stack>
   );
 };
+
+
+// const [a, setA] = useState([
+//   {
+//     _id: "1",
+//     quantity: 2
+//   },
+//   {
+//     _id: "2",
+//     quantity: 1
+//   }
+// ])
+
+// const increase = (_id: string) => {
+//   const newA = a.map(item => {
+//     if (item._id === _id) {
+//       return { ...item, quantity: item.quantity + 1 }
+//     }
+//     return { ...item }
+//   })
+
+//   setA(newA)
+// }

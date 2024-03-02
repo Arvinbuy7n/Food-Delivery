@@ -56,6 +56,7 @@ type CardContextType = {
   setAdd: Dispatch<SetStateAction<number>>;
 
   postOrder: (deliveryAddress: DeliveryAddress, order: Record[]) => void;
+
 };
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
@@ -75,9 +76,6 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
       setAddBasket([...clone, { food, quantity }]);
     }
 
-    const sumBasket = addBasket.reduce((sum, currentValue) => {
-      return sum + currentValue.food.price * currentValue.quantity;
-    }, 0);
   };
 
   const postOrder = async (

@@ -7,7 +7,6 @@ import { Record } from "../providers/FoodProvider";
 type OrderDetailProps = {
   handleClose: () => void;
   add?: number;
-  setAdd?: Dispatch<SetStateAction<number>>;
 } & Record;
 
 export const OrderDetail = ({
@@ -17,6 +16,7 @@ export const OrderDetail = ({
 }: OrderDetailProps) => {
   const { foodName, foodImage, price, ingredient } = props;
   const { addFood, add, setAdd } = useCard();
+
 
   const basketClick = () => {
     addFood({

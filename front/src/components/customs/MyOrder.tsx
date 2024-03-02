@@ -59,10 +59,9 @@ export const MyOrder = (props: handleProps) => {
               <MyOrderItem
                 image={item.food.foodImage}
                 name={item.food.foodName}
-                price={item.food.price}
                 ingredient={item.food.ingredient}
                 quantity={item.quantity}
-                sumBasket={sumBasket}
+                price={item.food.price}
               />
             );
           })}
