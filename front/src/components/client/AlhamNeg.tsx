@@ -1,11 +1,21 @@
-import { Card, MenuItem, Stack, TextField, Typography } from "@mui/material";
-import { CustomRadio } from "../customs/CustomRadio";
-import { CheckBox, LocationOn } from "@mui/icons-material";
+import {
+  Card,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
 import { OrderSelect } from "./OrderSelect";
-import { useFormik } from "formik";
 import { useCard } from "../providers/CartProvider";
 import * as yup from "yup";
 import { Dispatch, SetStateAction } from "react";
+import Image from "next/image";
 
 type CustomProps = {
   districts: string;
@@ -78,9 +88,10 @@ export const AlhamNeg = (props: CustomProps) => {
   // });
   return (
     <Stack py={8} gap={6}>
-      <Stack direction={"row"}>
-        <CustomRadio />
-
+      <Stack direction={"row"} gap={2}>
+        <Stack mt={2} ml={2}>
+          <Image src={"/State.png"} alt="" width={48} height={48} />
+        </Stack>
         <Stack>
           <Typography fontSize={14} fontWeight={400} color={"#8B8E95"}>
             Алхам 1

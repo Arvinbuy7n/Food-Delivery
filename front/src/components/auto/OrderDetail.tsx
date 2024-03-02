@@ -6,8 +6,8 @@ import { Record } from "../providers/FoodProvider";
 
 type OrderDetailProps = {
   handleClose: () => void;
-  add: number;
-  setAdd: Dispatch<SetStateAction<number>>;
+  add?: number;
+  setAdd?: Dispatch<SetStateAction<number>>;
 } & Record;
 
 export const OrderDetail = ({

@@ -43,19 +43,6 @@ export const FoodCategory = (props: Open) => {
         </Typography>
 
         <Stack gap={3}>
-          {/* <Button
-            sx={{
-              fontSize: 18,
-              fontFamily: "sans-serif",
-              color: "#000",
-              border: 1,
-              borderRadius: 2,
-              textAlign: "center",
-            }}
-            onClick={() => setCategoryList([])}
-          >
-            All foods
-          </Button> */}
           {categoryList.map((item, _index) => {
             return (
               <MenuItem

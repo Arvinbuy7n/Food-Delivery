@@ -20,7 +20,6 @@ export const CustomInput = (props: CustomInputProps) => {
   const { label, type = "text", size, startIcon, ...rest } = props;
 
   const [showPassword, setShowPassword] = useState(false);
-  const { recordList } = useFood();
 
   let searchValue = "";
 

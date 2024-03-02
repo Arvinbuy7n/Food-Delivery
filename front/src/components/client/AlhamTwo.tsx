@@ -1,18 +1,16 @@
 "use client";
 
-import { Button, Card, Stack, Typography } from "@mui/material";
-import { CustomRadio } from "../customs/CustomRadio";
-import { useCard } from "../providers/CartProvider";
-import { MyOrderItem } from "../customs/MyOrderItem";
-import { usePathname } from "next/navigation";
+import { Card, Stack, Typography } from "@mui/material";
 import { MyOrder } from "../customs/MyOrder";
-import { CloseButton } from "react-toastify";
+import Image from "next/image";
 
 export const AlhamTwo = () => {
   return (
     <Stack py={8} gap={6}>
-      <Stack direction={"row"}>
-        <CustomRadio />
+      <Stack direction={"row"} gap={2}>
+        <Stack mt={2} ml={3}>
+          <Image src={"/State.png"} alt="" width={48} height={48} />
+        </Stack>
 
         <Stack>
           <Typography fontSize={14} fontWeight={400} color={"#8B8E95"}>

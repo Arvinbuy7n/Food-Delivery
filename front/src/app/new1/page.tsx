@@ -1,4 +1,4 @@
-import {  NewPass1 } from "@/src/components/forgot/NewPass1";
+import { NewPass1 } from "@/src/components/res/NewPass1";
 
 export default function Page() {
   return <NewPass1 />;

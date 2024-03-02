@@ -1,4 +1,4 @@
-import { Step } from "@/src/components/steps/Step";
+import { Step } from "@/src/components/client/Step";
 
 export default function () {
   return <Step />;

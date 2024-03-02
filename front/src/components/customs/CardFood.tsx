@@ -1,19 +1,10 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  CardMedia,
-  Modal,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Modal, Stack, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { OrderDetail } from "../auto/OrderDetail";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SuccessToast } from "./SuccessToast";
-import { EditButton } from "./EditButton";
 import { Record } from "../providers/FoodProvider";
 
 type CardFoodProps = {
@@ -46,11 +37,6 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
           width={275}
           height={186}
         />
-        <Modal open={edit}>
-          <Box>
-            <EditButton />
-          </Box>
-        </Modal>
       </Stack>
 
       <Button
@@ -71,7 +57,15 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
 
       <Modal open={open}>
         <Box>
-          <OrderDetail handleClose={handleClose} add={5} {...props} />
+          <OrderDetail
+            handleClose={handleClose}
+            add={5}
+            {...props}
+            foodCategory=""
+            foodImage={foodImage}
+            price=""
+            ingredient=""
+          />
         </Box>
       </Modal>
 
@@ -82,10 +76,7 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
         <Stack direction={"row"} gap={2}>
           <Stack direction={"row"}>
             <Typography color={"#18BA51"} fontSize={18} fontWeight={600}>
-              {price}
-            </Typography>
-            <Typography color={"#18BA51"} fontSize={18} fontWeight={600}>
-              ₮
+              {price}₮
             </Typography>
           </Stack>
         </Stack>
