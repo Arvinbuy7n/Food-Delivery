@@ -1,5 +1,6 @@
 "use client";
 
+import { api } from "@/src/common/axios";
 import axios, { AxiosError } from "axios";
 import {
   Dispatch,
@@ -19,8 +20,7 @@ type DeliveryAddress = {
   khoroo: string;
   apart: string;
   addition: string;
-  phone: number;
-  paymentMethod: boolean;
+  phone: string;
 };
 
 type Order = {
@@ -40,7 +40,7 @@ type Record = {
   ingredient: string;
   price: number;
   discount?: number;
-  foodImage?: any;
+  foodImage?: string;
 };
 
 type CartFood = {
@@ -56,13 +56,16 @@ type CardContextType = {
   setAdd: Dispatch<SetStateAction<number>>;
 
   postOrder: (deliveryAddress: DeliveryAddress, order: Record[]) => void;
+  getOrder: () => void;
 
+  orderList: Order[];
 };
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
   const [addBasket, setAddBasket] = useState<CartFood[]>([]);
   const [isRender, setIsRender] = useState(true);
   const [add, setAdd] = useState(1);
+  const [orderList, setOrderList] = useState<Order[]>([]);
 
   const addFood = async ({ food, quantity }: CartFood) => {
     const clone = [...addBasket];
@@ -75,7 +78,6 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     } else {
       setAddBasket([...clone, { food, quantity }]);
     }
-
   };
 
   const postOrder = async (
@@ -107,6 +109,24 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const getOrder = async () => {
+    try {
+      const { data } = await api.get("order/wait", {
+        headers: {
+          Authorization: localStorage.getItem("item"),
+        },
+      });
+
+      setOrderList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOrder();
+  }, []);
+
   useEffect(() => {
     const basket = localStorage.getItem("secret-key");
 
@@ -131,6 +151,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         add,
         setAdd,
         postOrder,
+        getOrder,
+        orderList,
       }}
     >
       {children}

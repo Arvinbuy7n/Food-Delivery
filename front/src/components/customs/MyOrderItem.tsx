@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type OrderProps = {
-  image: string;
+  image: any;
   name: string;
   price: number;
   ingredient: string;
@@ -13,11 +13,8 @@ type OrderProps = {
 };
 
 export const MyOrderItem = (props: OrderProps) => {
-  const { image, name, ingredient, quantity, price, } = props;
+  const { image, name, ingredient, quantity, price } = props;
   const { addBasket, setAddBasket } = useCard();
-  const [foodCount, setFoodCount] = useState(1)
-
-
 
   const pathname = usePathname();
 
@@ -90,7 +87,6 @@ export const MyOrderItem = (props: OrderProps) => {
     </Stack>
   );
 };
-
 
 // const [a, setA] = useState([
 //   {
