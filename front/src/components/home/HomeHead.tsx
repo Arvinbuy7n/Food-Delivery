@@ -25,16 +25,15 @@ export const HomeHead = () => {
 
   return (
     <Stack>
-      <Stack bgcolor={"#18BA51"}>
+      <Stack bgcolor={"#18BA51"} sx={{ backgroundImage: "url(back.png)" }}>
         <Container>
           <Stack
             sx={{
-              backgroundImage: "url(back.png)",
               width: "auto",
               justifyContent: "space-between",
             }}
-            height={788}
             direction={"row"}
+            height={788}
             justifyContent={"center"}
           >
             <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
@@ -47,7 +46,7 @@ export const HomeHead = () => {
                   borderBottom: 1,
                   borderColor: "#FFF",
                   width: 360,
-                  mr: 25,
+                  mr: 24,
                 }}
               />
 
@@ -78,8 +77,8 @@ export const HomeHead = () => {
 
       <Container sx={{ border: 1, borderColor: "#E0E0E0" }}>
         <Stack
-          direction={"row"}
-          py={12}
+          flexDirection={{ xs: "column", sm: "row" }}
+          py={14}
           sx={{ justifyContent: "space-between" }}
         >
           <CardMenu
@@ -106,15 +105,17 @@ export const HomeHead = () => {
 
         <Discount handle={handleSeeAll} />
 
-        {categoryList.map((item, _index) => {
-          return (
-            <FoodSection
-              category={item.category}
-              handleSeeAll={handleSeeAll}
-              all={all}
-            />
-          );
-        })}
+        <Stack gap={3}>
+          {categoryList.map((item, _index) => {
+            return (
+              <FoodSection
+                category={item.category}
+                handleSeeAll={handleSeeAll}
+                all={all}
+              />
+            );
+          })}
+        </Stack>
       </Container>
     </Stack>
   );

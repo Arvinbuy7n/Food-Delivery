@@ -14,14 +14,9 @@ type CardFoodProps = {
 export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
   const { foodName, price, discount, foodImage, ingredient } = props;
   const [open, setOpen] = useState(false);
-  const [edit, setEdit] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const pathname = usePathname();
-
-  const handleClick = () => {
-    setEdit(true);
-  };
 
   return (
     <Stack gap={1} mb={6}>
@@ -70,7 +65,7 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
       </Modal>
 
       <Stack display={"flex"}>
-        <Typography fontSize={20} fontWeight={600} onClick={handleClick}>
+        <Typography fontSize={18} fontWeight={600}>
           {foodName}
         </Typography>
         <Stack direction={"row"} gap={2}>

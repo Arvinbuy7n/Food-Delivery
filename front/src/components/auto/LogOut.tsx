@@ -26,7 +26,7 @@ export const LogOut = (props: handleClose) => {
         <Stack direction={"row"} bgcolor={"#18BA5133"}>
           <Button
             sx={{
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: 600,
               color: "#000",
               "&:hover": {
@@ -41,9 +41,10 @@ export const LogOut = (props: handleClose) => {
           >
             Тийм
           </Button>
+          <Stack border={1} borderColor={"grey"}></Stack>
           <Button
             sx={{
-              fontSize: 18,
+              fontSize: 17,
               fontWeight: 600,
               px: 10,
               color: "#000",

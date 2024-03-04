@@ -32,6 +32,7 @@ export const MenuItem = (props: MenuProps) => {
         }}
         sx={{
           fontSize: 18,
+          fontWeight: 500,
           fontFamily: "sans-serif",
           color: "#000",
           "&:hover": {

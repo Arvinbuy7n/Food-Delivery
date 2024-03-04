@@ -56,6 +56,8 @@ const apart = [
   "Зайсан хотхон",
 ];
 
+const isValid = Boolean(district) && Boolean(khoroo) && Boolean(apart);
+
 export const AddressForm = (props: CustomProps) => {
   const {
     districts,
@@ -70,7 +72,7 @@ export const AddressForm = (props: CustomProps) => {
     setPhone,
   } = props;
   return (
-    <Card sx={{ p: 2, width: 432, borderRadius: 4 }}>
+    <Card sx={{ p: 3, width: 432, borderRadius: 4 }}>
       <Stack gap={4}>
         <Stack gap={2}>
           <Typography fontSize={14}>Хаяг аа оруулна уу</Typography>

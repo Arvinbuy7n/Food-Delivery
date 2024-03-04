@@ -30,7 +30,7 @@ export const Discount = (props: Props) => {
         </Stack>
 
         <Stack direction={"row"}>
-          <Typography fontSize={14} color={"#18BA51"}>
+          <Typography fontSize={14} fontWeight={400} color={"#18BA51"}>
             Бүгдийг харах
           </Typography>
 

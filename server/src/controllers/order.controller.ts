@@ -25,7 +25,7 @@ export const order: RequestHandler = async (req, res) => {
     });
 
     return res.json({
-      message: "New order added successfully",
+      message: "Захиалга амжилттай хийгдлээ",
     });
   } catch (err) {
     console.log(err);

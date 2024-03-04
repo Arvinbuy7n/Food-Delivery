@@ -115,7 +115,7 @@ export const Step = () => {
               <Typography fontSize={20} fontWeight={400}>
                 Захиалга баталгаажуулах
               </Typography>
-              <Typography fontSize={20} fontWeight={400}>
+              <Typography fontSize={16} fontWeight={400} color={"#0468C8"}>
                 Хүлээгдэж байна
               </Typography>
             </Stack>
@@ -123,7 +123,8 @@ export const Step = () => {
 
           <Card
             sx={{
-              width: 530,
+              width: 520,
+              borderRadius: 4,
             }}
           >
             <Stack py={2} px={1} height={580}>

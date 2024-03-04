@@ -32,7 +32,7 @@ export const UserInput = (props: UserInputProps) => {
         type="text"
         sx={{
           width: 392,
-          height: 56,
+          height: 60,
           bgcolor: "#F6F6F6",
           position: "relative",
         }}
@@ -63,14 +63,7 @@ export const UserInput = (props: UserInputProps) => {
         {label}
       </TextField>
 
-      <Typography
-        position={"absolute"}
-        ml={8}
-        mt={0.8}
-        fontSize={12}
-        fontWeight={400}
-        color={"#888A99"}
-      >
+      <Typography position={"absolute"} ml={7} fontSize={12} fontWeight={400}>
         {title}
       </Typography>
     </Stack>

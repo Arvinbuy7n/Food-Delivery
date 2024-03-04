@@ -42,9 +42,6 @@ export const UserProfile = (props: openModal) => {
   const [open, setClose] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [imagePro, setImagePro] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleClose = () => {
     setClose(false);
@@ -107,7 +104,7 @@ export const UserProfile = (props: openModal) => {
       <Stack gap={2}>
         <UserInput
           startIcon={<PersonOutlineOutlined />}
-          // title="Таны нэр"
+          title="Таны нэр"
           label={user?.name}
           endIcon={<EditOutlined />}
           name="name"
@@ -121,7 +118,7 @@ export const UserProfile = (props: openModal) => {
 
         <UserInput
           startIcon={<CallOutlined />}
-          // title="Утасны дугаар"
+          title="Утасны дугаар"
           endIcon={<EditOutlined />}
           label={user?.phone}
           name="phone"
@@ -133,7 +130,7 @@ export const UserProfile = (props: openModal) => {
         />
         <UserInput
           startIcon={<MailLockOutlined />}
-          // title="Имэйл хаяг"
+          title="Имэйл хаяг"
           label={user?.email}
           endIcon={<EditOutlined />}
           name="email"

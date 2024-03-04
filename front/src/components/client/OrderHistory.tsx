@@ -4,12 +4,13 @@ import { Card, Stack, Typography } from "@mui/material";
 import { History } from "./History";
 import { useCard } from "../providers/CartProvider";
 import { useState } from "react";
+import { Detail } from "./Details";
 
 export const OrderHistory = () => {
   const { orderList } = useCard();
   const [selected, setSelected] = useState("");
 
-  // const foods = orderList.find((item) => item._id == selected)?.foods;
+  const foods = orderList.find((item) => item._id == selected)?.foods;
 
   return (
     <Stack py={10} direction={"row"} justifyContent={"center"} gap={10}>
@@ -35,7 +36,11 @@ export const OrderHistory = () => {
             Захиалгын дэлгэрэнгүй
           </Typography>
 
-          <Stack></Stack>
+          <Card sx={{ height: 60, borderBottom: 1 }}>
+            {foods?.map((item, index) => (
+              <Detail key={index} {...item} />
+            ))}
+          </Card>
         </Stack>
       </Card>
     </Stack>

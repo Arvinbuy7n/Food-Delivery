@@ -2,9 +2,9 @@ import { Stack, Typography } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 
 type HistoryProps = {
-  deliveryStatus?: string;
-  createdAt?: Date;
-  _id?: string;
+  deliveryStatus: string;
+  createdAt: Date;
+  _id: string;
   setSelected: Dispatch<SetStateAction<string>>;
 };
 
@@ -18,6 +18,9 @@ export const History = (props: HistoryProps) => {
       borderBottom={1}
       pb={2}
       borderColor={"#0468C8"}
+      onClick={() => {
+        setSelected(_id);
+      }}
     >
       <Stack
         width={36}
@@ -43,9 +46,13 @@ export const History = (props: HistoryProps) => {
             Захиалга #{_id?.slice(-5)}
           </Typography>
 
-          <Typography color={"#0468C8"}>{deliveryStatus}</Typography>
+          <Typography color={"#0468C8"} fontSize={14}>
+            {deliveryStatus}
+          </Typography>
         </Stack>
-        <Typography mt={1.8}>{createdAt?.toString().slice(0, 10)}</Typography>
+        <Typography mt={1.3} fontSize={16} fontWeight={400}>
+          {createdAt?.toString().slice(0, 10)}
+        </Typography>
       </Stack>
     </Stack>
   );

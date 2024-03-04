@@ -36,7 +36,7 @@ export const FoodCategory = (props: Open) => {
     router.push("/home");
   }
   return (
-    <Stack direction={"row"} px={64}>
+    <Stack direction={"row"} px={36}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
@@ -53,16 +53,30 @@ export const FoodCategory = (props: Open) => {
             );
           })}
 
-          <Button
+          <Stack
             sx={{
               color: "#5E6166",
               border: 1,
               borderRadius: 2,
             }}
+            py={1}
+            direction={"row"}
             onClick={openModal}
+            justifyContent={"center"}
+            gap={0.5}
           >
-            + Create new category
-          </Button>
+            <Typography fontSize={18} fontWeight={500} color={"#5E6166"}>
+              +
+            </Typography>
+            <Typography
+              fontSize={18}
+              fontWeight={500}
+              color={"#5E6166"}
+              pt={0.2}
+            >
+              Create new category
+            </Typography>
+          </Stack>
         </Stack>
 
         <Modal open={isOpen}>

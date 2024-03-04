@@ -17,7 +17,6 @@ export const OrderDetail = ({
   const { foodName, foodImage, price, ingredient } = props;
   const { addFood, add, setAdd } = useCard();
 
-
   const basketClick = () => {
     addFood({
       food: props,
@@ -62,7 +61,7 @@ export const OrderDetail = ({
               </Stack>
               <Stack gap={4}>
                 <Stack>
-                  <Typography fontSize={28} fontWeight={700}>
+                  <Typography fontSize={26} fontWeight={700}>
                     {foodName}
                   </Typography>
                   <Stack direction={"row"}>
@@ -71,67 +70,72 @@ export const OrderDetail = ({
                       fontWeight={600}
                       color={"#18BA51"}
                     >
-                      {price}
-                    </Typography>
-                    <Typography
-                      color={"#18BA51"}
-                      fontSize={18}
-                      fontWeight={600}
-                    >
-                      ₮
+                      {price}₮
                     </Typography>
                   </Stack>
                 </Stack>
 
                 <Stack>
-                  <Typography fontSize={18} fontWeight={600}>
+                  <Typography fontSize={18} fontWeight={600} color={"#000"}>
                     Орц
                   </Typography>
-                  <Card sx={{ bgcolor: "grey.200" }}>
-                    <Typography p={1} fontSize={16}>
+                  <Card sx={{ bgcolor: "#F6F6F6" }}>
+                    <Typography p={1} fontSize={16} fontWeight={400}>
                       {ingredient}
                     </Typography>
                   </Card>
                 </Stack>
 
-                <Typography fontSize={18} fontWeight={600}>
+                <Typography fontSize={18} fontWeight={600} color={"#000"}>
                   Тоо
                 </Typography>
 
                 <Stack direction={"row"} justifyContent={"space-between"}>
-                  <Button
+                  <Typography
                     sx={{
                       bgcolor: "#18BA51",
                       color: "#FFF",
-                      fontSize: 14,
+                      fontSize: 20,
                       fontWeight: 700,
+                      py: 1,
+                      px: 2.3,
+                      borderRadius: 2,
                     }}
                     onClick={() => {
                       changeCount(-1);
                     }}
                   >
                     -
-                  </Button>
-                  <Typography fontSize={16} fontWeight={500} mt={1}>
+                  </Typography>
+                  <Typography fontSize={18} fontWeight={500} mt={1.3}>
                     {add}
                   </Typography>
-                  <Button
+                  <Typography
                     sx={{
                       bgcolor: "#18BA51",
                       color: "#FFF",
-                      fontSize: 14,
+                      fontSize: 20,
                       fontWeight: 700,
+                      py: 1,
+                      px: 2,
+                      borderRadius: 2,
                     }}
                     onClick={() => {
                       changeCount(1);
                     }}
                   >
                     +
-                  </Button>
+                  </Typography>
                 </Stack>
 
                 <Button
-                  sx={{ bgcolor: "#18BA51", color: "#fff", fontSize: 12 }}
+                  sx={{
+                    bgcolor: "#18BA51",
+                    color: "#fff",
+                    fontSize: 14,
+                    fontWeight: 400,
+                    py: 1,
+                  }}
                   onClick={() => {
                     basketClick();
                   }}
