@@ -2,6 +2,7 @@
 
 import { api } from "@/src/common/axios";
 import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import {
   Dispatch,
   PropsWithChildren,
@@ -55,7 +56,7 @@ type CardContextType = {
   add: number;
   setAdd: Dispatch<SetStateAction<number>>;
 
-  postOrder: (deliveryAddress: DeliveryAddress, order: Record[]) => void;
+  postOrder: (deliveryAddress: DeliveryAddress, order: CartFood[]) => void;
   getOrder: () => void;
 
   orderList: Order[];
@@ -66,6 +67,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   const [isRender, setIsRender] = useState(true);
   const [add, setAdd] = useState(1);
   const [orderList, setOrderList] = useState<Order[]>([]);
+  const [refresh, setRefresh] = useState(1);
+  const router = useRouter();
 
   const addFood = async ({ food, quantity }: CartFood) => {
     const clone = [...addBasket];
@@ -82,7 +85,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const postOrder = async (
     deliveryAddress: DeliveryAddress,
-    order: Record[]
+    order: CartFood[]
   ) => {
     try {
       const { data } = await axios.post(
@@ -93,27 +96,31 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
         },
         {
           headers: {
-            Authorization: localStorage.getItem("item"),
+            Authorization: localStorage.getItem("token"),
           },
         }
       );
       toast.success(data.message, {
         position: "top-center",
       });
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        toast.error(err.response?.data.message ?? err.message, {
+      setRefresh(refresh + 1);
+      router.push("/orderHistory");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message ?? error.message, {
+          position: "top-center",
           hideProgressBar: true,
         });
       }
+      console.log(error), "FFF";
     }
   };
 
   const getOrder = async () => {
     try {
-      const { data } = await api.get("order/wait", {
+      const { data } = await api.get("order/get", {
         headers: {
-          Authorization: localStorage.getItem("item"),
+          Authorization: localStorage.getItem("token"),
         },
       });
 
@@ -125,7 +132,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     getOrder();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     const basket = localStorage.getItem("secret-key");

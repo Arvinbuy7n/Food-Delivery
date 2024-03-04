@@ -12,17 +12,20 @@ export const orderSchema = new Schema({
       apart: String,
       addition: String,
       phone: Number,
-      paymentMethod: String,
+      paymentMethod: {
+        type: String,
+        required: false,
+      },
     },
   ],
   foods: [
     {
-      foodName: String,
+      discount: String,
       foodCategory: String,
+      foodImage: String,
+      foodName: String,
       ingredient: String,
       price: Number,
-      discount: String,
-      foodImage: String,
     },
   ],
 

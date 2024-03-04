@@ -7,23 +7,27 @@ import {
   TextField,
   TextFieldProps,
 } from "@mui/material";
-import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
+import React, {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  ReactNode,
+} from "react";
 
 type CustomSelectProps = {
-  label?: string;
   type: HTMLInputTypeAttribute;
   value?: string;
   required?: string;
   placeholder?: string;
   variant?: string;
   onChange?: ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
+  startIcon: ReactNode;
 };
 
 export const OrderSelect = (props: TextFieldProps) => {
-  const { label, type, ...rest } = props;
+  const { type, ...rest } = props;
 
   return (
-    <Stack justifyContent="center" gap={0.5}>
+    <Stack gap={0.5} justifyContent={"center"}>
       <TextField
         {...rest}
         select

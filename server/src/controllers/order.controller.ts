@@ -12,15 +12,15 @@ export const order: RequestHandler = async (req, res) => {
       });
     }
 
-    const { id } = jwt.verify(authorization, "item") as JwtPayload;
+    const { id } = jwt.verify(authorization, "secret-key") as JwtPayload;
 
     const { order, deliveryAddress } = req.body;
 
-    const food = await OrderModel.create({
+    const newOrder = await OrderModel.create({
       userid: id,
       deliveryAddress,
       foods: order,
-      deliveryStatus: "Waiting",
+      deliveryStatus: "Хүлээгдэж буй",
       createdAt: new Date(),
     });
 
@@ -42,7 +42,7 @@ export const getOrder: RequestHandler = async (req, res) => {
       });
     }
 
-    const { id } = jwt.verify(authorization, "item") as JwtPayload;
+    const { id } = jwt.verify(authorization, "secret-key") as JwtPayload;
 
     const orders = await OrderModel.find({ userid: id });
 

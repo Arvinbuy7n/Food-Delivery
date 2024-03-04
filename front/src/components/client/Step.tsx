@@ -6,6 +6,7 @@ import { AddressForm } from "./AddressForm";
 import { Check } from "@mui/icons-material";
 import { useCard } from "../providers/CartProvider";
 import { MyOrderItem } from "../customs/MyOrderItem";
+import { useRouter } from "next/navigation";
 
 export const Step = () => {
   const [district, setDistrict] = useState("");
@@ -13,7 +14,6 @@ export const Step = () => {
   const [apart, setApart] = useState("");
   const [addition, setAddition] = useState("");
   const [phone, setPhone] = useState("");
-  // const [paymentMethod, setPaymentMethod] = useState(true);
 
   const { postOrder, addBasket } = useCard();
 
@@ -33,7 +33,7 @@ export const Step = () => {
       <Stack direction={"row"} py={8} justifyContent={"center"} gap={10}>
         <Stack direction={"row"} justifyContent={"center"} gap={16}>
           <Stack gap={6}>
-            <Stack direction={"row"} gap={2}>
+            <Stack direction={"row"} gap={2} ml={3}>
               <Stack
                 width={48}
                 height={48}
@@ -63,7 +63,7 @@ export const Step = () => {
                 <Typography fontSize={20} fontWeight={400}>
                   Хаягийн мэдээлэл оруулах
                 </Typography>
-                <Typography fontSize={20} fontWeight={400}>
+                <Typography fontSize={16} fontWeight={400} color={"#0468C8"}>
                   Хүлээгдэж байна
                 </Typography>
               </Stack>
@@ -86,24 +86,6 @@ export const Step = () => {
 
         <Stack gap={6}>
           <Stack direction={"row"} gap={2}>
-            {/* <Stack
-              width={48}
-              height={48}
-              border={1}
-              borderColor={"#0468C8"}
-              borderRadius={"50%"}
-              mt={2}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <Stack
-                width={24}
-                height={24}
-                bgcolor={"#0468C8"}
-                borderRadius={"50%"}
-              ></Stack>
-            </Stack> */}
-
             <Stack
               width={48}
               height={48}
@@ -183,18 +165,18 @@ export const Step = () => {
                     bgcolor: "#18BA51",
                     color: "#FFF",
                   }}
-                  // onClick={() => {
-                  //   postOrder(
-                  //     {
-                  //       district,
-                  //       khoroo,
-                  //       apart,
-                  //       addition,
-                  //       phone,
-                  //     },
-                  //     addBasket
-                  //   );
-                  // }}
+                  onClick={() => {
+                    postOrder(
+                      {
+                        district,
+                        khoroo,
+                        apart,
+                        addition,
+                        phone,
+                      },
+                      addBasket
+                    );
+                  }}
                   variant="contained"
                   disabled={!Boolean(sumBasket) || !isValid}
                 >

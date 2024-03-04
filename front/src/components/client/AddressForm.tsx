@@ -8,7 +8,11 @@ import {
 } from "@mui/material";
 import { OrderSelect } from "./OrderSelect";
 import { Dispatch, SetStateAction } from "react";
-import { PlaceOutlined } from "@mui/icons-material";
+import {
+  AddLocation,
+  LocationOn,
+  LocationOnOutlined,
+} from "@mui/icons-material";
 
 type CustomProps = {
   districts: string;
@@ -66,14 +70,14 @@ export const AddressForm = (props: CustomProps) => {
     setPhone,
   } = props;
   return (
-    <Card sx={{ p: 2, width: 432 }}>
+    <Card sx={{ p: 2, width: 432, borderRadius: 4 }}>
       <Stack gap={4}>
         <Stack gap={2}>
-          <Typography>Хаяг аа оруулна уу</Typography>
+          <Typography fontSize={14}>Хаяг аа оруулна уу</Typography>
 
           <Stack>
             <OrderSelect
-              placeholder={"Дүүрэг сонгоно уу"}
+              label="Дүүрэг сонгоно уу"
               onChange={(event) => {
                 setDistricts(event.target.value);
               }}
@@ -81,35 +85,19 @@ export const AddressForm = (props: CustomProps) => {
               {district.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
-                    {item}
+                    <Stack direction={"row"} alignItems={"start"} gap={1}>
+                      <LocationOnOutlined />
+                      {item}
+                    </Stack>
                   </MenuItem>
                 );
               })}
             </OrderSelect>
-            {/* 
-            <OrderSelect
-              placeholder={"Дүүрэг сонгоно уу"}
-              name="district"
-              value={district}
-              onChange={(event) => {
-                setDistricts(event.target.value);
-              }}
-            >
-              {district.map((item: any, index) => (
-                <MenuItem key={index} value={item}>
-                  <Stack direction="row" gap={0.5}>
-                    <PlaceOutlined />
-                    {item}
-                  </Stack>
-                </MenuItem>
-              ))}
-            </OrderSelect> */}
           </Stack>
 
           <Stack>
             <OrderSelect
-              label="ss"
-              type=""
+              label="Хороо сонгоно уу"
               onChange={(event) => {
                 setKhoroos(event?.target.value);
               }}
@@ -117,7 +105,10 @@ export const AddressForm = (props: CustomProps) => {
               {khoroo.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
-                    {item}
+                    <Stack direction={"row"} alignItems={"start"} gap={1}>
+                      <LocationOnOutlined />
+                      {item}
+                    </Stack>
                   </MenuItem>
                 );
               })}
@@ -126,8 +117,7 @@ export const AddressForm = (props: CustomProps) => {
 
           <Stack>
             <OrderSelect
-              label=""
-              type=""
+              label="Байр, гудамж сонгоно уу"
               onChange={(event) => {
                 setAparts(event?.target.value);
               }}
@@ -135,7 +125,10 @@ export const AddressForm = (props: CustomProps) => {
               {apart.map((item, index) => {
                 return (
                   <MenuItem key={index} value={item}>
-                    {item}
+                    <Stack direction={"row"} alignItems={"start"} gap={1}>
+                      <LocationOnOutlined />
+                      {item}
+                    </Stack>
                   </MenuItem>
                 );
               })}
