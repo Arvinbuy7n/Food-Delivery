@@ -113,7 +113,6 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   };
 
   //add new category
-
   const addCategory = async (category: string) => {
     try {
       const { data } = await axios.post(

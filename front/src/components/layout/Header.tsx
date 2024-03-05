@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Menu,
   PersonOutlineOutlined,
   Search,
   ShoppingBasketOutlined,
@@ -22,15 +23,17 @@ import { MyOrder } from "../customs/MyOrder";
 import { useAuth } from "../providers/AuthProvider";
 import { useCard } from "../providers/CartProvider";
 import { useFood } from "../providers/FoodProvider";
+import { MobileMenu } from "../auto/MobileMenu";
 
 export const Header = () => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const pathname = usePathname();
+  const [menu, setMenu] = useState(false);
   const { user, isLogged, admin } = useAuth();
   const { addBasket } = useCard();
   const { setSearchValue } = useFood();
+  const pathname = usePathname();
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -48,6 +51,9 @@ export const Header = () => {
     setIsDrawerOpen(true);
   };
 
+  const handleClick = () => {
+    setMenu(false);
+  };
   return (
     <Container>
       <Stack direction={"row"} sx={{ justifyContent: "space-between", py: 1 }}>
@@ -184,31 +190,43 @@ export const Header = () => {
             </Drawer>
           </Stack>
 
-          <Stack direction={"row"} gap={1} sx={{ py: 1, px: 2 }}>
-            <PersonOutlineOutlined
-              onClick={() => {
-                router.push("/profile");
-              }}
-            />
-            <Typography
-              sx={{
-                "&:hover": {
-                  color: "#18BA51",
-                },
-              }}
-              fontSize={16}
-              fontWeight={700}
-              onClick={() => {
-                if (pathname == "/home" || pathname == "/foodmenu") {
-                  openModal();
-                } else {
-                  router.push("/login");
-                }
-              }}
-              display={{ xs: "none", lg: "flex" }}
-            >
-              {isLogged ? user?.name : "Нэвтрэх"}
-            </Typography>
+          <Stack direction={"row"} gap={3} sx={{ py: 1 }} px={{ xs: 0, lg: 2 }}>
+            <Stack direction={"row"} gap={1}>
+              <PersonOutlineOutlined
+                onClick={() => {
+                  router.push("/profile");
+                }}
+              />
+              <Typography
+                sx={{
+                  "&:hover": {
+                    color: "#18BA51",
+                  },
+                }}
+                fontSize={16}
+                fontWeight={700}
+                onClick={() => {
+                  if (pathname == "/home" || pathname == "/foodmenu") {
+                    openModal();
+                  } else {
+                    router.push("/login");
+                  }
+                }}
+                display={{ xs: "none", lg: "flex" }}
+              >
+                {isLogged ? user?.name : "Нэвтрэх"}
+              </Typography>
+            </Stack>
+
+            <Stack display={{ xs: "flex", lg: "none" }}>
+              <Menu
+                onClick={() => {
+                  setMenu(true);
+                }}
+              />
+            </Stack>
+
+            {menu && <MobileMenu onClose={handleClick} />}
 
             <Modal open={isModalOpen} onClose={closeModal}>
               <Box>

@@ -42,9 +42,15 @@ export const OrderDetail = ({
         zIndex: 10,
       }}
     >
-      <Stack width={950}>
+      <Stack width={{ xs: 380, lg: 950 }}>
         <Card sx={{ borderRadius: 4 }}>
-          <Stack height={535} p={4} bgcolor={"#FFF"} direction={"row"} gap={4}>
+          <Stack
+            height={535}
+            p={4}
+            bgcolor={"#FFF"}
+            flexDirection={{ xs: "column", lg: "row" }}
+            gap={4}
+          >
             <Card sx={{ borderRadius: 2, width: 490 }}>
               <Image src={foodImage} alt="food" width={500} height={500} />
             </Card>

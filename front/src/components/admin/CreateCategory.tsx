@@ -3,9 +3,12 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as yup from "yup";
 import { useFood } from "../providers/FoodProvider";
+import { Dispatch, SetStateAction, useState } from "react";
 
 type CreateCategoryProps = {
   handleClose: () => void;
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
 };
 
 const validationSchema = yup.object({

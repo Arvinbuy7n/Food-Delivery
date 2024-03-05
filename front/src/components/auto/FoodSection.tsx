@@ -51,7 +51,9 @@ export const FoodSection = (props: Props) => {
       <Stack>
         <Grid container gap={2}>
           {recordList
-            .filter((item) => item.foodName.includes(searchValue))
+            .filter((item) =>
+              item.foodName.toLowerCase().includes(searchValue.toLowerCase())
+            )
             .filter((name) => name.foodCategory.includes(category))
             .filter((_name, index) => index < all)
             .map((item, index) => (

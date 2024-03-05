@@ -50,7 +50,9 @@ export const Discount = (props: Props) => {
         <Grid container gap={2}>
           {recordList
             .filter((name) => name.discount)
-            .filter((item) => item.foodName.includes(searchValue))
+            .filter((item) =>
+              item.foodName.toLowerCase().includes(searchValue.toLowerCase())
+            )
             .map((item, index) => (
               <Grid key={index} item>
                 <CardFood

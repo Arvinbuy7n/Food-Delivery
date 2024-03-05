@@ -36,7 +36,7 @@ export const FoodCategory = (props: Open) => {
     router.push("/home");
   }
   return (
-    <Stack direction={"row"} px={64}>
+    <Stack direction={"row"} px={36}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
@@ -111,7 +111,9 @@ export const FoodCategory = (props: Open) => {
           <Grid container gap={2}>
             {recordList
               .filter((item) => item.foodCategory.includes(categoryName))
-              .filter((name) => name.foodName.includes(searchValue))
+              .filter((name) =>
+                name.foodName.toLowerCase().includes(searchValue.toLowerCase())
+              )
               .map((item, index) => (
                 <Grid key={index}>
                   <CardFood

@@ -72,6 +72,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       localStorage.setItem("token", token);
 
       setIsLogged(true);
+      setRefresh(refresh + 1);
 
       router.push("/home");
     } catch (error) {
@@ -220,7 +221,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   // newtersen user-iin medeelel shinechleh
-
   const changeUser = async (
     userImage: string,
     name: string,

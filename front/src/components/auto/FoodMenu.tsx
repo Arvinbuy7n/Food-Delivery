@@ -36,7 +36,9 @@ export const FoodMenu = (props: Props) => {
           <Grid container spacing={2}>
             {recordList
               .filter((name) => name.foodCategory.includes(categoryName))
-              .filter((item) => item.foodName.includes(searchValue))
+              .filter((item) =>
+                item.foodName.toLowerCase().includes(searchValue.toLowerCase())
+              )
               .map((item, index) => (
                 <Grid item key={index}>
                   <CardFood
