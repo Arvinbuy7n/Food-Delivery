@@ -42,7 +42,7 @@ export const CustomInput = (props: CustomInputProps) => {
           type={type === "password" && showPassword ? "text" : type}
           {...rest}
           sx={{
-            width: size === "small" ? "300px" : "384px",
+            width: size === "small" ? "190px" : "384px",
             background: "#F7F7F8",
           }}
           inputProps={{

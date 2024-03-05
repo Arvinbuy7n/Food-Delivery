@@ -22,6 +22,7 @@ export const sendEmail: RequestHandler = async (req, res) => {
         otp: otp,
       }
     );
+
     const transforter = nodemailer.createTransport({
       service: "Gmail",
       host: "smtp.gmail.com",

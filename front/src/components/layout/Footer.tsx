@@ -15,13 +15,17 @@ export const Footer = () => {
 
   return (
     <Stack
-      height={"600px"}
       bgcolor={"#18BA51"}
       sx={{
         backgroundImage: "url(back.png)",
       }}
     >
-      <Stack gap={6} px={26} py={16} alignItems={"center"}>
+      <Stack
+        gap={6}
+        px={{ xs: 4, md: 26 }}
+        py={{ xs: 8, md: 16 }}
+        alignItems={"center"}
+      >
         <Stack direction={"row"} gap={1}>
           <ImageListItem
             sx={{
@@ -35,7 +39,12 @@ export const Footer = () => {
           </Typography>
         </Stack>
 
-        <Stack display={"flex"} direction={"row"} gap={11} px={10}>
+        <Stack
+          flexDirection={{ xs: "column", lg: "row" }}
+          gap={{ xs: 4, lg: 11 }}
+          px={10}
+          textAlign={"center"}
+        >
           <Typography
             color={"#FFF"}
             fontWeight={600}
@@ -123,7 +132,7 @@ export const Footer = () => {
         </Stack>
 
         <Container
-          sx={{ borderBottom: 1, color: "#FFF", width: 1170 }}
+          sx={{ borderBottom: 1, color: "#FFF", width: { xs: 250, lg: 1170 } }}
         ></Container>
 
         <Stack gap={1} alignItems={"center"}>

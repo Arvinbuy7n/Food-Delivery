@@ -90,7 +90,6 @@ export const newPassword: RequestHandler = async (req, res) => {
 };
 
 // return one user
-
 export const getUser: RequestHandler = async (req, res) => {
   const { authorization } = req.headers;
 

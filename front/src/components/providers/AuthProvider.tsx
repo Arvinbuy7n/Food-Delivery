@@ -126,7 +126,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   // gmail-ruu  otp ywuulah
-
   const sendEmail = async (email: string) => {
     try {
       const { data } = await axios.post("http://localhost:8000/email/send", {
@@ -146,8 +145,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       }
     }
   };
-  // otp shalgah
 
+  // otp shalgah
   const checkOtp = async (otp: string) => {
     const email = localStorage.getItem("email");
 
@@ -174,7 +173,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   //newtersen user-iin password solih
-
   const newPassword = async (password: string) => {
     const email = localStorage.getItem("email");
     const otp = localStorage.getItem("otp");
@@ -201,7 +199,6 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   // newtersen hereglegchiin medeelel awah
-
   const getUser = async () => {
     try {
       const { data } = await api.get("auth/user", {

@@ -18,7 +18,7 @@ export const FoodMenu = (props: Props) => {
   return (
     <Container>
       <Stack gap={6}>
-        <Stack direction={"row"} py={4} gap={2}>
+        <Stack direction={"row"} py={4} gap={2} ml={{ xs: 6, lg: 0 }}>
           <Grid container justifyContent={"space-between"} gap={2}>
             {categoryList.map((item, _index) => {
               return (

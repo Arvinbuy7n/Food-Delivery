@@ -28,48 +28,43 @@ export const HomeHead = () => {
       <Stack bgcolor={"#18BA51"} sx={{ backgroundImage: "url(back.png)" }}>
         <Container>
           <Stack
-            sx={{
-              width: "auto",
-              justifyContent: "space-between",
-            }}
+            width={"100%"}
             direction={"row"}
-            height={788}
-            justifyContent={"center"}
+            height={{ xs: 500, md: 788 }}
+            gap={{ xs: 15, md: 30 }}
+            ml={{ xs: 1, lg: 0 }}
           >
-            <Stack justifyContent={"center"} alignItems={"center"} gap={2}>
-              <Typography fontSize={55} color={"#FFF"} fontWeight={600} mr={23}>
-                Pinecone Food delivery
+            <Stack gap={2} justifyContent={"center"} alignItems={"center"}>
+              <Typography
+                fontSize={55}
+                color={"#FFF"}
+                fontWeight={600}
+                borderBottom={1}
+              >
+                Pinecone <br></br> Food delivery
               </Typography>
 
-              <Container
-                sx={{
-                  borderBottom: 1,
-                  borderColor: "#FFF",
-                  width: 360,
-                  mr: 24,
-                }}
-              />
-
-              <Typography fontSize={22} color={"#FFF"} fontWeight={700} mr={30}>
+              <Typography fontSize={22} color={"#FFF"} fontWeight={700} mr={7}>
                 Horem ipsum dolor sit amet, <br></br> consectetur adipiscing
                 elit.
               </Typography>
             </Stack>
 
-            <Stack justifyContent={"center"} alignItems={"center"} pr={20}>
+            <Stack
+              justifyContent={"center"}
+              alignItems={"center"}
+              display={{ md: "flex", xs: "none" }}
+            >
               <Image src={"/photo.png"} alt="" width={440} height={430}></Image>
 
-              <ImageListItem
-                sx={{
-                  width: 300,
-                  height: 300,
-                  position: "absolute",
-                  ml: 48,
-                  mt: 13,
-                }}
-              >
-                <img src="hool.png" />
-              </ImageListItem>
+              <Stack position={"absolute"} ml={48} mt={13}>
+                <Image
+                  src={"/hool.png"}
+                  alt=""
+                  width={300}
+                  height={300}
+                ></Image>
+              </Stack>
             </Stack>
           </Stack>
         </Container>
@@ -78,8 +73,9 @@ export const HomeHead = () => {
       <Container sx={{ border: 1, borderColor: "#E0E0E0" }}>
         <Stack
           flexDirection={{ xs: "column", sm: "row" }}
-          py={14}
-          sx={{ justifyContent: "space-between" }}
+          py={{ md: 14, xs: 6 }}
+          gap={{ xs: 4 }}
+          alignItems={"center"}
         >
           <CardMenu
             startIcon={<ImportContacts />}

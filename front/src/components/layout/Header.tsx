@@ -55,7 +55,7 @@ export const Header = () => {
           <Stack mt={0.3}>
             <Image src="/code.webp" alt="logo" width={35} height={36} />
           </Stack>
-          <Stack direction={"row"}>
+          <Stack direction={"row"} display={{ xs: "none", lg: "flex" }}>
             <Typography
               fontSize={17}
               fontWeight={700}
@@ -120,7 +120,7 @@ export const Header = () => {
           </Stack>
         </Stack>
 
-        <Stack direction={"row"} gap={3}>
+        <Stack direction={"row"} gap={{ xs: 1, md: 3 }}>
           <Stack>
             <CustomInput
               placeholder="Хайх"
@@ -148,6 +148,7 @@ export const Header = () => {
               }}
               fontSize={16}
               fontWeight={700}
+              display={{ xs: "none", lg: "flex" }}
               onClick={() => {
                 if (pathname == "/foodmenu" || pathname == "/home") {
                   openDrawer();
@@ -204,6 +205,7 @@ export const Header = () => {
                   router.push("/login");
                 }
               }}
+              display={{ xs: "none", lg: "flex" }}
             >
               {isLogged ? user?.name : "Нэвтрэх"}
             </Typography>

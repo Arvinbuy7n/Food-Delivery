@@ -19,7 +19,11 @@ export const Discount = (props: Props) => {
 
   return (
     <Stack gap={4}>
-      <Stack sx={{ justifyContent: "space-between" }} direction={"row"}>
+      <Stack
+        sx={{ justifyContent: "space-between" }}
+        direction={"row"}
+        px={{ xs: 2, lg: 0 }}
+      >
         <Stack direction={"row"} gap={0.5}>
           <IconButton sx={{ width: 22, height: 22, mt: 0.5, color: "#18BA51" }}>
             {<Star />}
