@@ -1,18 +1,7 @@
-import {
-  Card,
-  Checkbox,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Card, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { OrderSelect } from "./OrderSelect";
 import { Dispatch, SetStateAction } from "react";
-import {
-  AddLocation,
-  LocationOn,
-  LocationOnOutlined,
-} from "@mui/icons-material";
+import { LocationOnOutlined } from "@mui/icons-material";
 
 type CustomProps = {
   districts: string;
