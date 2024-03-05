@@ -10,7 +10,9 @@ export const OrderHistory = () => {
   const { orderList } = useCard();
   const [selected, setSelected] = useState("");
 
-  const foods = orderList.find((item) => item._id == selected)?.foods;
+  const food = orderList.find((item) => item._id == selected)?.foods;
+
+  console.log(food);
 
   return (
     <Stack py={10} direction={"row"} justifyContent={"center"} gap={10}>
@@ -37,9 +39,9 @@ export const OrderHistory = () => {
           </Typography>
 
           <Card sx={{ height: 60, borderBottom: 1 }}>
-            {foods?.map((item, index) => (
+            {/* {foods?.map((item, index) => (
               <Detail key={index} {...item} />
-            ))}
+            ))} */}
           </Card>
         </Stack>
       </Card>

@@ -10,7 +10,7 @@ export const Detail = (props: DetailProps) => {
   return (
     <Stack>
       <Stack direction={"row"} justifyContent={"space-between"}>
-        <Typography fontSize={20} fontWeight={400} color={"yellow"}>
+        <Typography fontSize={20} fontWeight={400} border={2}>
           {foodName}
         </Typography>
         {/* <Typography fontSize={16} fontWeight={400}>
