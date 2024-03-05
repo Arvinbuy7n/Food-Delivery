@@ -109,6 +109,7 @@ export const HomeHead = () => {
           {categoryList.map((item, _index) => {
             return (
               <FoodSection
+                key={_index}
                 category={item.category}
                 handleSeeAll={handleSeeAll}
                 all={all}

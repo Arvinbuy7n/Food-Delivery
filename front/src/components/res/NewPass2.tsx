@@ -12,7 +12,7 @@ const validationSchema = yup.object({
 });
 
 type checkProps = {
-  checkOtp: () => void;
+  checkOtp?: () => void;
 };
 
 export const NewPass2 = (props: checkProps) => {
@@ -43,7 +43,7 @@ export const NewPass2 = (props: checkProps) => {
 
         <Stack gap={4}>
           <Typography>
-            Таны хаяг "{user?.email}" руу сэргээх <br></br> код илгээх болно.{" "}
+            Таны хаяг {user?.email} руу сэргээх <br></br> код илгээх болно.{" "}
           </Typography>
 
           <CustomInput

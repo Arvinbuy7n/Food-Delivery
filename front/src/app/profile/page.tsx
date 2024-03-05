@@ -1,5 +1,5 @@
 import { UserProfile } from "@/src/components/auto/UserProfile";
 
-export default function () {
+export default function Page() {
   return <UserProfile />;
 }

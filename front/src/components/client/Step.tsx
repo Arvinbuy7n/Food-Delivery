@@ -132,6 +132,7 @@ export const Step = () => {
                 {addBasket.map((item, _index) => {
                   return (
                     <MyOrderItem
+                      key={_index}
                       image={item.food.foodImage}
                       name={item.food.foodName}
                       ingredient={item.food.ingredient}

@@ -13,7 +13,7 @@ const validationSchema = yup.object({
 });
 
 type handleProps = {
-  newPassword: () => void;
+  newPassword?: () => void;
 };
 
 export const NewPass3 = (props: handleProps) => {

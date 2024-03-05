@@ -7,8 +7,8 @@ import { useFood } from "../providers/FoodProvider";
 import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
-  categoryName: string;
-  setCategoryName: Dispatch<SetStateAction<string>>;
+  categoryName?: string;
+  setCategoryName?: Dispatch<SetStateAction<string>>;
 };
 
 export const FoodMenu = (props: Props) => {
@@ -23,6 +23,7 @@ export const FoodMenu = (props: Props) => {
             {categoryList.map((item, _index) => {
               return (
                 <MenuItem
+                  key={_index}
                   label={item.category}
                   setCategoryName={setCategoryName}
                 />

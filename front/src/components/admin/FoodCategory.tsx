@@ -46,6 +46,7 @@ export const FoodCategory = (props: Open) => {
           {categoryList.map((item, _index) => {
             return (
               <MenuItem
+                key={_index}
                 label={item.category}
                 endIcon={<MoreVert />}
                 setCategoryName={setCategoryName}
