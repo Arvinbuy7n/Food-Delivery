@@ -57,7 +57,6 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   const [searchValue, setSearchValue] = useState("");
 
   //add new food
-
   const addFood = async (
     foodName: string,
     foodCategory: string,

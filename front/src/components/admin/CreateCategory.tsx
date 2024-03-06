@@ -7,8 +7,6 @@ import { Dispatch, SetStateAction, useState } from "react";
 
 type CreateCategoryProps = {
   handleClose: () => void;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
 };
 
 const validationSchema = yup.object({

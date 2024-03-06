@@ -5,6 +5,7 @@ import { MenuItem } from "../customs/MenuItem";
 import { CardFood } from "..";
 import { useFood } from "../providers/FoodProvider";
 import { Dispatch, SetStateAction, useState } from "react";
+import { SearchResult } from "./SearchResult";
 
 type Props = {
   categoryName?: string;
@@ -16,7 +17,7 @@ export const FoodMenu = (props: Props) => {
   const [categoryName, setCategoryName] = useState("");
 
   return (
-    <Container>
+    <Container sx={{ pt: 7 }}>
       <Stack gap={6}>
         <Stack direction={"row"} py={4} gap={2} ml={{ xs: 6, lg: 0 }}>
           <Grid container justifyContent={"space-between"} gap={2}>
