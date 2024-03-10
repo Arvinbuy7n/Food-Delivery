@@ -34,6 +34,7 @@ export const Header = () => {
   const { user, isLogged, admin } = useAuth();
   const { addBasket } = useCard();
   const pathname = usePathname();
+  const [badge, setBadge] = useState(false);
 
   const { setSearchValue, searchValue } = useFood();
 
@@ -150,11 +151,6 @@ export const Header = () => {
                 onChange={(event) => {
                   setSearchValue(event.target.value);
                 }}
-                onClick={() => {
-                  if (!searchValue.length) {
-                    return <SearchResult />;
-                  }
-                }}
               ></CustomInput>
             </Stack>
 
@@ -163,6 +159,12 @@ export const Header = () => {
               gap={1}
               sx={{ py: 1, px: 2 }}
               position={"relative"}
+              onClick={() => {
+                if (pathname == "/foodmenu" || pathname == "/home") {
+                  openDrawer();
+                }
+                return false;
+              }}
             >
               <ShoppingBasketOutlined />
               <Typography
@@ -174,12 +176,6 @@ export const Header = () => {
                 fontSize={16}
                 fontWeight={700}
                 display={{ xs: "none", lg: "flex" }}
-                onClick={() => {
-                  if (pathname == "/foodmenu" || pathname == "/home") {
-                    openDrawer();
-                  }
-                  return false;
-                }}
               >
                 Сагс
               </Typography>
@@ -187,7 +183,7 @@ export const Header = () => {
                 position={"absolute"}
                 top={3}
                 left={26}
-                bgcolor={"#F16767"}
+                bgcolor={addBasket.length == 0 ? "none" : "#F16767"}
                 borderRadius={2}
                 px={0.6}
                 fontSize={12}
@@ -195,23 +191,23 @@ export const Header = () => {
               >
                 {addBasket.length}
               </Stack>
-
-              <Drawer
-                anchor={"right"}
-                open={isDrawerOpen}
-                onClose={closeDrawer}
-              >
-                <Box role="presentation" width={"600px"} px={4}>
-                  <MyOrder
-                    closeButton={closeDrawer}
-                    foodName=""
-                    price={0}
-                    ingredients=""
-                    foodImage=""
-                  />
-                </Box>
-              </Drawer>
             </Stack>
+
+            <Drawer anchor={"right"} open={isDrawerOpen} onClose={closeDrawer}>
+              <Box
+                role="presentation"
+                width={{ xs: "350px", md: "600px" }}
+                px={4}
+              >
+                <MyOrder
+                  closeButton={closeDrawer}
+                  foodName=""
+                  price={0}
+                  ingredients=""
+                  foodImage=""
+                />
+              </Box>
+            </Drawer>
 
             <Stack
               direction={"row"}
@@ -219,12 +215,16 @@ export const Header = () => {
               sx={{ py: 1 }}
               px={{ xs: 0, lg: 2 }}
             >
-              <Stack direction={"row"} gap={1}>
-                <PersonOutlineOutlined
-                  onClick={() => {
+              <Stack
+                direction={"row"}
+                gap={1}
+                onClick={() => {
+                  if (isLogged) {
                     router.push("/profile");
-                  }}
-                />
+                  } else openModal();
+                }}
+              >
+                <PersonOutlineOutlined />
                 <Typography
                   sx={{
                     "&:hover": {
@@ -233,13 +233,6 @@ export const Header = () => {
                   }}
                   fontSize={16}
                   fontWeight={700}
-                  onClick={() => {
-                    if (pathname == "/home" || pathname == "/foodmenu") {
-                      openModal();
-                    } else {
-                      router.push("/login");
-                    }
-                  }}
                   display={{ xs: "none", lg: "flex" }}
                 >
                   {isLogged ? user?.name : "Нэвтрэх"}

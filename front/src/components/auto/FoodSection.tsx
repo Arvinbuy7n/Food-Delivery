@@ -20,7 +20,7 @@ export const FoodSection = (props: Props) => {
   const { recordList, searchValue } = useFood();
 
   return (
-    <Stack gap={4}>
+    <Stack gap={4} mt={8}>
       <Stack
         sx={{ justifyContent: "space-between" }}
         direction={"row"}
@@ -37,7 +37,7 @@ export const FoodSection = (props: Props) => {
 
         <Stack direction={"row"}>
           <Typography fontSize={14} color={"#18BA51"} onClick={handleSeeAll}>
-            Бүгдийг харах
+            {all == 4 ? "Бүгдийг харах" : "Багасгаж харах"}
           </Typography>
 
           <InputAdornment position="end">

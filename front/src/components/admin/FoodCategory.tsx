@@ -10,6 +10,7 @@ import { CreateFood } from "./CreateFood";
 import { useFood } from "../providers/FoodProvider";
 import { useAuth } from "../providers/AuthProvider";
 import { useRouter } from "next/navigation";
+import { SearchResult } from "../auto/SearchResult";
 
 type Open = {
   isOpen?: Boolean;
@@ -35,8 +36,9 @@ export const FoodCategory = (props: Open) => {
   if (!admin) {
     router.push("/home");
   }
+
   return (
-    <Stack direction={"row"} px={64} pt={7}>
+    <Stack direction={"row"} px={36} pt={7}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu
@@ -115,7 +117,7 @@ export const FoodCategory = (props: Open) => {
                 name.foodName.toLowerCase().includes(searchValue.toLowerCase())
               )
               .map((item, index) => (
-                <Grid key={index}>
+                <Grid key={index} mb={6}>
                   <CardFood
                     foodName={item.foodName}
                     price={item.price}

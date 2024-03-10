@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, ImageListItem, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import { CardMenu } from "../customs/CardMenu";
 import {
   AccessTime,
@@ -99,7 +99,7 @@ export const HomeHead = () => {
           />
         </Stack>
 
-        <Discount handle={handleSeeAll} />
+        <Discount handle={handleSeeAll} see={all} />
 
         <Stack gap={3}>
           {categoryList.map((item, _index) => {

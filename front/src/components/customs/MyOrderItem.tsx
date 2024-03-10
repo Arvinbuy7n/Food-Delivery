@@ -20,10 +20,16 @@ export const MyOrderItem = (props: OrderProps) => {
 
   return (
     <Stack borderTop={1} borderColor={"grey.500"}>
-      <Stack direction={"row"} px={2} py={4} justifyContent={"space-between"}>
+      <Stack
+        flexDirection={{ xs: "column", md: "row" }}
+        px={2}
+        py={4}
+        justifyContent={"space-between"}
+        gap={{ xs: 3, md: 0 }}
+      >
         <Image src={image} alt="pizza" width={240} height={150}></Image>
 
-        <Stack gap={2} width={"45%"}>
+        <Stack gap={2} width={{ xs: "100%", md: "45%" }}>
           <Stack direction={"row"} justifyContent={"space-between"}>
             <Stack>
               <Typography fontSize={18} fontWeight={600}>
@@ -52,7 +58,11 @@ export const MyOrderItem = (props: OrderProps) => {
           </Typography>
 
           {pathname != "/step" && (
-            <Stack direction={"row"} gap={4}>
+            <Stack
+              direction={"row"}
+              gap={4}
+              justifyContent={{ xs: "center", md: "start" }}
+            >
               <Typography
                 sx={{
                   bgcolor: "#18BA51",

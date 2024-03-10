@@ -27,9 +27,9 @@ export const MobileMenu = (props: Mobile) => {
       }}
       zIndex={10}
     >
-      {/* <Stack alignItems={"end"} borderBottom={1}>
+      <Stack alignItems={"end"} borderBottom={1} px={2} py={1}>
         <Close />
-      </Stack> */}
+      </Stack>
       <Typography
         fontSize={18}
         fontWeight={500}

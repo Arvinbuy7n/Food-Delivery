@@ -40,7 +40,7 @@ export const MyOrder = (props: handleProps) => {
               px: 2,
             }}
           >
-            <Stack direction={"row"} gap={22} pb={2}>
+            <Stack direction={"row"} gap={{ xs: 3, md: 22 }} pb={2}>
               <InputAdornment position="start" sx={{ mt: 2 }}>
                 <IconButton>
                   <ArrowBackIos onClick={closeButton} />

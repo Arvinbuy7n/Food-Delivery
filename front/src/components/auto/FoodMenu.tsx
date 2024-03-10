@@ -16,6 +16,16 @@ export const FoodMenu = (props: Props) => {
   const { categoryList, recordList, searchValue } = useFood();
   const [categoryName, setCategoryName] = useState("");
 
+  const search = recordList
+    .filter((name) => name.foodCategory.includes(categoryName))
+    .filter((item) =>
+      item.foodName.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+  if (!search.length) {
+    return <SearchResult />;
+  }
+
   return (
     <Container sx={{ pt: 7 }}>
       <Stack gap={6}>
@@ -41,7 +51,7 @@ export const FoodMenu = (props: Props) => {
                 item.foodName.toLowerCase().includes(searchValue.toLowerCase())
               )
               .map((item, index) => (
-                <Grid item key={index}>
+                <Grid item key={index} mb={6}>
                   <CardFood
                     {...item}
                     setCategoryName={setCategoryName}

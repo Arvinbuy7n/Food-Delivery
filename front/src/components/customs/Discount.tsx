@@ -8,14 +8,26 @@ import {
 } from "@mui/material";
 import { useFood } from "../providers/FoodProvider";
 import { CardFood } from "..";
+import { SearchResult } from "../auto/SearchResult";
 
 type Props = {
   handle: () => void;
+  see: number;
 };
 
 export const Discount = (props: Props) => {
   const { recordList, searchValue } = useFood();
-  const { handle } = props;
+  const { handle, see } = props;
+
+  const searchFood = recordList
+    .filter((name) => name.discount)
+    .filter((item) =>
+      item.foodName.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+  if (!searchFood.length) {
+    return <SearchResult />;
+  }
 
   return (
     <Stack gap={4}>
@@ -35,7 +47,7 @@ export const Discount = (props: Props) => {
 
         <Stack direction={"row"}>
           <Typography fontSize={14} fontWeight={400} color={"#18BA51"}>
-            Бүгдийг харах
+            {see == 4 ? "Бүгдийг харах" : "Багасгаж харах"}
           </Typography>
 
           <InputAdornment position="end">
