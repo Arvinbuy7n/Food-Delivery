@@ -71,7 +71,8 @@ export const Header = () => {
             justifyContent: "space-between",
             py: 1,
           }}
-          px={{ xs: 2, lg: 0 }}
+          // px={{ xs: 2, lg: 0 }}
+          pr={6}
         >
           <Stack direction={"row"} gap={1}>
             <Stack mt={{ xs: 1, lg: 0.3 }}>
