@@ -9,8 +9,7 @@ import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
 import { useFood } from "../providers/FoodProvider";
 import { useAuth } from "../providers/AuthProvider";
-import { useRouter } from "next/navigation";
-import { SearchResult } from "../auto/SearchResult";
+import { redirect } from "next/navigation";
 
 type Open = {
   isOpen?: Boolean;
@@ -25,7 +24,6 @@ export const FoodCategory = (props: Open) => {
   const [categoryName, setCategoryName] = useState("");
   const { categoryList, recordList, searchValue } = useFood();
   const { admin } = useAuth();
-  const router = useRouter();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -34,7 +32,7 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   if (!admin) {
-    router.push("/home");
+    redirect("/home");
   }
 
   return (
