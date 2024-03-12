@@ -71,9 +71,10 @@ export const Header = () => {
             justifyContent: "space-between",
             py: 1,
           }}
+          px={{ xs: 2, lg: 0 }}
         >
           <Stack direction={"row"} gap={1}>
-            <Stack mt={0.3}>
+            <Stack mt={{ xs: 1, lg: 0.3 }}>
               <Image src="/code.webp" alt="logo" width={35} height={36} />
             </Stack>
             <Stack direction={"row"} display={{ xs: "none", lg: "flex" }}>
@@ -215,7 +216,7 @@ export const Header = () => {
 
             <Stack
               direction={"row"}
-              gap={3}
+              gap={{ xs: 2, lg: 3 }}
               sx={{ py: 1 }}
               px={{ xs: 0, lg: 2 }}
             >
