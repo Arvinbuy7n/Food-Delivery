@@ -45,8 +45,13 @@ export const Discount = (props: Props) => {
           </Typography>
         </Stack>
 
-        <Stack direction={"row"}>
-          <Typography fontSize={14} fontWeight={400} color={"#18BA51"}>
+        <Stack direction={"row"} pt={{ xs: 1, sm: 0 }}>
+          <Typography
+            fontSize={14}
+            fontWeight={400}
+            color={"#18BA51"}
+            sx={{ cursor: "pointer" }}
+          >
             {see == 4 ? "Бүгдийг харах" : "Багасгаж харах"}
           </Typography>
 

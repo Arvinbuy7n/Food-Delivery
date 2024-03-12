@@ -36,7 +36,14 @@ export const FoodSection = (props: Props) => {
         </Stack>
 
         <Stack direction={"row"}>
-          <Typography fontSize={14} color={"#18BA51"} onClick={handleSeeAll}>
+          <Typography
+            fontSize={14}
+            color={"#18BA51"}
+            onClick={handleSeeAll}
+            sx={{
+              cursor: "pointer",
+            }}
+          >
             {all == 4 ? "Бүгдийг харах" : "Багасгаж харах"}
           </Typography>
 

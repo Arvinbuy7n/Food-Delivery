@@ -86,6 +86,7 @@ export const Header = () => {
                   },
                   px: 2,
                   py: 1,
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   router.push("/home");
@@ -102,6 +103,7 @@ export const Header = () => {
                   },
                   px: 2,
                   py: 1,
+                  cursor: "pointer",
                 }}
                 onClick={() => {
                   router.push("/foodmenu");
@@ -118,6 +120,7 @@ export const Header = () => {
                   },
                   px: 2,
                   py: 1,
+                  cursor: "pointer",
                 }}
               >
                 Хүргэлтийн бүс
@@ -130,6 +133,7 @@ export const Header = () => {
                     px: 2,
                     py: 1,
                     color: "#18BA51",
+                    cursor: "pointer",
                   }}
                   onClick={() => {
                     router.push("admin");
@@ -157,7 +161,7 @@ export const Header = () => {
             <Stack
               direction={"row"}
               gap={1}
-              sx={{ py: 1, px: 2 }}
+              sx={{ py: 1, px: 2, cursor: "pointer" }}
               position={"relative"}
               onClick={() => {
                 if (pathname == "/foodmenu" || pathname == "/home") {
@@ -222,6 +226,9 @@ export const Header = () => {
                   if (isLogged) {
                     router.push("/profile");
                   } else openModal();
+                }}
+                sx={{
+                  cursor: "pointer",
                 }}
               >
                 <PersonOutlineOutlined />

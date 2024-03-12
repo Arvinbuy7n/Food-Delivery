@@ -30,7 +30,7 @@ export const HomeHead = () => {
           <Stack
             width={"100%"}
             direction={"row"}
-            height={{ xs: 500, md: 788 }}
+            height={788}
             gap={{ xs: 15, md: 30 }}
             ml={{ xs: 1, lg: 0 }}
           >

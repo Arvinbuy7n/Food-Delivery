@@ -49,7 +49,9 @@ export const MyOrderItem = (props: OrderProps) => {
                 setAddBasket(basket);
               }}
             >
-              <Image src="/close.png" alt="" width={26} height={26} />
+              <Stack sx={{ cursor: "pointer" }}>
+                <Image src="/close.png" alt="" width={26} height={26} />
+              </Stack>
             </Stack>
           </Stack>
 

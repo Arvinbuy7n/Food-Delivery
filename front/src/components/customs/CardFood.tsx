@@ -19,7 +19,7 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
   const pathname = usePathname();
 
   return (
-    <Stack gap={1} ml={{ xs: 6, md: 0 }}>
+    <Stack gap={1} ml={{ xs: 5, md: 0, cursor: "pointer" }}>
       <Stack borderRadius={4} overflow={"hidden"} position={"relative"}>
         <Image
           src={foodImage}
