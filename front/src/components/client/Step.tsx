@@ -30,7 +30,7 @@ export const Step = () => {
 
   return (
     <Container sx={{ pt: 7 }}>
-      <Stack direction={"row"} py={8} justifyContent={"center"} gap={10}>
+      <Stack direction={"column"} py={8} justifyContent={"center"} gap={10}>
         <Stack direction={"row"} justifyContent={"center"} gap={16}>
           <Stack gap={6}>
             <Stack direction={"row"} gap={2} ml={3}>
