@@ -11,7 +11,7 @@ import {
 } from "react";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { api } from "../../common/axios";
+import { api } from "../../common";
 
 type Category = {
   category: string;
@@ -66,8 +66,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     foodImage?: string
   ) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8000/foods/new",
+      const { data } = await api.post(
+        "/foods/new",
         {
           foodName,
           foodCategory,
@@ -114,8 +114,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   //add new category
   const addCategory = async (category: string) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8000/foods/title",
+      const { data } = await api.post(
+        "/foods/title",
         {
           category,
         },

@@ -37,6 +37,7 @@ export const Upload = (props: ImageUrlProps) => {
       }
     }
   };
+
   return (
     <Stack>
       <Container sx={{ border: 1, borderColor: "#D6D7DC" }}>

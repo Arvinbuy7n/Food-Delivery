@@ -1,6 +1,6 @@
 "use client";
 
-import { api } from "@/src/common/axios";
+import { api } from "@/src/common";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import {
@@ -88,8 +88,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     order: CartFood[]
   ) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8000/order/wait",
+      const { data } = await api.post(
+        "/order/wait",
         {
           deliveryAddress,
           order,

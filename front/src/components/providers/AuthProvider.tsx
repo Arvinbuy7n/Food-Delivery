@@ -12,8 +12,7 @@ import {
 import { toast } from "react-toastify";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { api } from "@/src/common/axios";
-import { headers } from "next/headers";
+import { api } from "@/src/common";
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
@@ -62,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/login", {
+      const { data } = await api.post("/auth/login", {
         email,
         password,
       });
@@ -92,7 +91,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     password: string
   ) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/sign", {
+      const { data } = await api.post("/auth/sign", {
         name,
         email,
         address,
@@ -129,7 +128,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // gmail-ruu  otp ywuulah
   const sendEmail = async (email: string) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/email/send", {
+      const { data } = await api.post("/email/send", {
         email,
       });
 
@@ -152,7 +151,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const email = localStorage.getItem("email");
 
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/code", {
+      const { data } = await api.post("/auth/code", {
         email,
         otp,
       });
@@ -179,7 +178,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const otp = localStorage.getItem("otp");
 
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/new", {
+      const { data } = await api.post("/auth/new", {
         email,
         password,
         otp,
@@ -228,8 +227,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     email: string
   ) => {
     try {
-      const { data } = await axios.post(
-        "http://localhost:8000/auth/change",
+      const { data } = await api.post(
+        "/auth/change",
         {
           userImage,
           name,

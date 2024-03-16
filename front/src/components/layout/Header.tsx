@@ -24,7 +24,6 @@ import { useAuth } from "../providers/AuthProvider";
 import { useCard } from "../providers/CartProvider";
 import { useFood } from "../providers/FoodProvider";
 import { MobileMenu } from "../auto/MobileMenu";
-import { SearchResult } from "../auto/SearchResult";
 
 export const Header = () => {
   const router = useRouter();
