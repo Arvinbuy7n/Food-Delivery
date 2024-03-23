@@ -88,8 +88,8 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     order: CartFood[]
   ) => {
     try {
-      const { data } = await api.post(
-        "/order/wait",
+      const { data } = await axios.post(
+        "http://localhost:8000/order/wait",
         {
           deliveryAddress,
           order,
@@ -118,7 +118,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const getOrder = async () => {
     try {
-      const { data } = await api.get("order/get", {
+      const { data } = await axios.get("http://localhost:8000/order/get", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

@@ -66,8 +66,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
     foodImage?: string
   ) => {
     try {
-      const { data } = await api.post(
-        "/foods/new",
+      const { data } = await axios.post(
+        "http://localhost:8000/foods/new",
         {
           foodName,
           foodCategory,
@@ -114,8 +114,8 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   //add new category
   const addCategory = async (category: string) => {
     try {
-      const { data } = await api.post(
-        "/foods/title",
+      const { data } = await axios.post(
+        "http://localhost:8000/foods/title",
         {
           category,
         },
@@ -140,7 +140,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getCategory = async () => {
     try {
-      const { data } = await api.get("/foods/name", {
+      const { data } = await axios.get("http://localhost:8000/foods/name", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },

@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await api.post("/auth/login", {
+      const { data } = await axios.post("http://localhost:8000/auth/login", {
         email,
         password,
       });
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     password: string
   ) => {
     try {
-      const { data } = await api.post("/auth/sign", {
+      const { data } = await axios.post("http://localhost:8000/auth/sign", {
         name,
         email,
         address,
@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // gmail-ruu  otp ywuulah
   const sendEmail = async (email: string) => {
     try {
-      const { data } = await api.post("/email/send", {
+      const { data } = await axios.post("http://localhost:8000/email/send", {
         email,
       });
 
@@ -178,7 +178,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const otp = localStorage.getItem("otp");
 
     try {
-      const { data } = await api.post("/auth/new", {
+      const { data } = await axios.post("http://localhost:8000/auth/new", {
         email,
         password,
         otp,
@@ -201,7 +201,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // newtersen hereglegchiin medeelel awah
   const getUser = async () => {
     try {
-      const { data } = await api.get("auth/user", {
+      const { data } = await axios.get("http://localhost:8000/auth/user", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -227,8 +227,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     email: string
   ) => {
     try {
-      const { data } = await api.post(
-        "/auth/change",
+      const { data } = await axios.post(
+        "http://localhost:8000/auth/change",
         {
           userImage,
           name,
