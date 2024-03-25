@@ -61,10 +61,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/login", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          email,
+          password,
+        }
+      );
 
       const { token } = data;
 
@@ -91,12 +94,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     password: string
   ) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/sign", {
-        name,
-        email,
-        address,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          name,
+          email,
+          address,
+          password,
+        }
+      );
 
       const { token } = data;
 
@@ -128,9 +134,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // gmail-ruu  otp ywuulah
   const sendEmail = async (email: string) => {
     try {
-      const { data } = await axios.post("http://localhost:8000/email/send", {
-        email,
-      });
+      const { data } = await axios.post(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          email,
+        }
+      );
 
       localStorage.setItem("email", email);
 
@@ -151,10 +160,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const email = localStorage.getItem("email");
 
     try {
-      const { data } = await api.post("/auth/code", {
-        email,
-        otp,
-      });
+      const { data } = await api.post(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          email,
+          otp,
+        }
+      );
 
       localStorage.setItem("otp", otp);
 
@@ -178,11 +190,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const otp = localStorage.getItem("otp");
 
     try {
-      const { data } = await axios.post("http://localhost:8000/auth/new", {
-        email,
-        password,
-        otp,
-      });
+      const { data } = await axios.post(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          email,
+          password,
+          otp,
+        }
+      );
 
       toast.success(data.message, {
         position: "top-center",
@@ -201,11 +216,14 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   // newtersen hereglegchiin medeelel awah
   const getUser = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/auth/user", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const { data } = await axios.get(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       const { role } = data;
 
@@ -228,7 +246,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   ) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/auth/change",
+        "https://fooddelivery-x50y.onrender.com",
         {
           userImage,
           name,

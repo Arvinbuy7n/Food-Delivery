@@ -89,7 +89,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
   ) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/order/wait",
+        "https://fooddelivery-x50y.onrender.com",
         {
           deliveryAddress,
           order,
@@ -118,11 +118,14 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const getOrder = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/order/get", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const { data } = await axios.get(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       setOrderList(data);
     } catch (error) {

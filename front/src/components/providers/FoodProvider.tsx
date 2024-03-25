@@ -67,7 +67,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   ) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/foods/new",
+        "https://fooddelivery-x50y.onrender.com",
         {
           foodName,
           foodCategory,
@@ -99,7 +99,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getFood = async () => {
     try {
-      const { data } = await api.get("/foods/add", {
+      const { data } = await api.get("https://fooddelivery-x50y.onrender.com", {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
@@ -115,7 +115,7 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
   const addCategory = async (category: string) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/foods/title",
+        "https://fooddelivery-x50y.onrender.com",
         {
           category,
         },
@@ -140,11 +140,14 @@ export const FoodProvider = ({ children }: PropsWithChildren) => {
 
   const getCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/foods/name", {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      });
+      const { data } = await axios.get(
+        "https://fooddelivery-x50y.onrender.com",
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
 
       setCategoryList(data);
     } catch (err) {
