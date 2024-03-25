@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const login = async (email: string, password: string) => {
     try {
       const { data } = await axios.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/login",
         {
           email,
           password,
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   ) => {
     try {
       const { data } = await axios.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/sign",
         {
           name,
           email,
@@ -135,7 +135,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const sendEmail = async (email: string) => {
     try {
       const { data } = await axios.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/email/send",
         {
           email,
         }
@@ -161,7 +161,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     try {
       const { data } = await api.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/code",
         {
           email,
           otp,
@@ -191,7 +191,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     try {
       const { data } = await axios.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/new",
         {
           email,
           password,
@@ -217,7 +217,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/user",
         {
           headers: {
             Authorization: localStorage.getItem("token"),
@@ -246,7 +246,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   ) => {
     try {
       const { data } = await axios.post(
-        "https://fooddelivery-x50y.onrender.com",
+        "https://fooddelivery-x50y.onrender.com/auth/change",
         {
           userImage,
           name,
