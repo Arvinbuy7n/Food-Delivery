@@ -3,90 +3,106 @@ import { UserModel } from "../models";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const login: RequestHandler = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await UserModel.findOne({
-    email,
-    password,
-  });
-
-  if (!user) {
-    return res.status(401).json({
-      message: "User not found",
+    const user = await UserModel.findOne({
+      email,
+      password,
     });
+
+    if (!user) {
+      return res.status(401).json({
+        message: "User not found",
+      });
+    }
+
+    const id = user._id;
+    const role = user.role;
+
+    const token = jwt.sign({ id, role }, "secret-key");
+
+    res.json({
+      token,
+    });
+  } catch (err) {
+    console.log(err);
   }
-
-  const id = user._id;
-  const role = user.role;
-
-  const token = jwt.sign({ id, role }, "secret-key");
-
-  res.json({
-    token,
-  });
 };
 
 export const signUp: RequestHandler = async (req, res) => {
-  const { name, email, password, address } = req.body;
+  try {
+    const { name, email, password, address } = req.body;
 
-  const userExist = await UserModel.findOne({ email: email });
+    const userExist = await UserModel.findOne({ email: email });
 
-  if (userExist) {
-    return res.status(401).json({
-      message: "User already exist",
+    if (userExist) {
+      return res.status(401).json({
+        message: "User already exist",
+      });
+    }
+
+    await UserModel.create({
+      name,
+      email,
+      password,
+      address,
+      updatedAt: new Date(),
+      createdAt: new Date(),
+      role: "user",
     });
+
+    return res.json({
+      message: "Амжилттай бүртгэгдлээ.",
+    });
+  } catch (err) {
+    console.log(err);
   }
-
-  await UserModel.create({
-    name,
-    email,
-    password,
-    address,
-    updatedAt: new Date(),
-    createdAt: new Date(),
-    role: "user",
-  });
-
-  return res.json({
-    message: "Амжилттай бүртгэгдлээ.",
-  });
 };
 
 export const checkOtp: RequestHandler = async (req, res) => {
-  const { email, otp } = req.body;
+  try {
+    const { email, otp } = req.body;
 
-  const check = await UserModel.findOne({ email, otp });
+    const check = await UserModel.findOne({ email, otp });
 
-  if (!check) {
-    return res.status(401).json({
-      message: "Code is correct",
-    });
+    if (!check) {
+      return res.status(401).json({
+        message: "Code is correct",
+      });
+    }
+
+    return res.json(true);
+  } catch (err) {
+    console.log(err);
   }
-
-  return res.json(true);
 };
 
 export const newPassword: RequestHandler = async (req, res) => {
-  const { email, otp, password } = req.body;
+  try {
+    const { email, otp, password } = req.body;
 
-  const user = await UserModel.findOne({ email, otp });
+    const user = await UserModel.findOne({ email, otp });
 
-  if (!user) {
-    return res.status(401).json({
-      message: "Email is correct",
+    if (!user) {
+      return res.status(401).json({
+        message: "Email is correct",
+      });
+    }
+
+    await UserModel.updateOne(
+      {
+        email,
+      },
+      { password }
+    );
+
+    return res.json({
+      message: "Нууц үг амжилттай солигдлоо",
     });
+  } catch (err) {
+    console.log(err);
   }
-
-  await UserModel.updateOne(
-    {
-      email,
-    },
-    { password }
-  );
-
-  return res.json({
-    message: "Нууц үг амжилттай солигдлоо",
-  });
 };
 
 // return one user
@@ -99,18 +115,20 @@ export const getUser: RequestHandler = async (req, res) => {
     });
   }
 
-  const payload = jwt.verify(authorization, "secret-key");
+  try {
+    const payload = jwt.verify(authorization, "secret-key");
 
-  const { id } = payload as JwtPayload;
+    const { id } = payload as JwtPayload;
 
-  const users = await UserModel.findOne({ _id: id });
+    const users = await UserModel.findOne({ _id: id });
 
-  res.json(users);
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const changeUser: RequestHandler = async (req, res) => {
-  const { name, userImage, email, phone } = req.body;
-
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -119,23 +137,29 @@ export const changeUser: RequestHandler = async (req, res) => {
     });
   }
 
-  const payload = jwt.verify(authorization, "secret-key") as JwtPayload;
+  try {
+    const { name, userImage, email, phone } = req.body;
 
-  const id = payload.id;
+    const payload = jwt.verify(authorization, "secret-key") as JwtPayload;
 
-  await UserModel.findOneAndUpdate(
-    {
-      _id: id,
-    },
-    {
-      userImage,
-      name,
-      phone,
-      email,
-    }
-  );
+    const id = payload.id;
 
-  return res.json({
-    message: "Мэдээлэл амжилттай хадгалагдлаа",
-  });
+    await UserModel.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        userImage,
+        name,
+        phone,
+        email,
+      }
+    );
+
+    return res.json({
+      message: "Мэдээлэл амжилттай хадгалагдлаа",
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
