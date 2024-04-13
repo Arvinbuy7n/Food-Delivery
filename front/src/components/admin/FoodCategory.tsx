@@ -32,11 +32,11 @@ export const FoodCategory = (props: Open) => {
   const handleClose = () => closeFood(false);
 
   if (!admin) {
-    redirect("/home");
+    redirect("/");
   }
 
   return (
-    <Stack direction={"row"} px={36} pt={7}>
+    <Stack direction={"row"} px={24} pt={7}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
         <Typography fontSize={22} fontWeight={700}>
           Food menu

@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
 
-export const GoogleMap = () => {
+export const AdminDashboard = () => {
   return <Stack></Stack>;
 };

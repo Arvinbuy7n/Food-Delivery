@@ -25,7 +25,7 @@ export const CardFood = ({ setCategoryName, ...props }: CardFoodProps) => {
           src={foodImage}
           alt=""
           onClick={() => {
-            if (pathname == "/foodmenu" || pathname == "/home") {
+            if (pathname == "/foodmenu" || pathname == "/") {
               handleOpen();
             }
           }}

@@ -85,7 +85,7 @@ export const Newtreh = (props: handleProps) => {
               fontFamily={"sans-serif"}
               color="#3F4145"
               onClick={() => {
-                router.push("/new1");
+                router.push("/auto/new1");
               }}
             >
               Нууц үг сэргээх
@@ -106,6 +106,7 @@ export const Newtreh = (props: handleProps) => {
             }}
             onClick={() => {
               formik.handleSubmit();
+              handleSign();
             }}
           >
             Нэвтрэх
@@ -128,7 +129,7 @@ export const Newtreh = (props: handleProps) => {
             }}
             onClick={() => {
               if (pathname) {
-                router.push("/sign");
+                router.push("/auto/sign");
               }
               handleSign();
             }}

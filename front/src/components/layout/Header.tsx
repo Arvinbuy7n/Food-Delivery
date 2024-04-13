@@ -90,7 +90,7 @@ export const Header = () => {
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  router.push("/home");
+                  router.push("/");
                 }}
               >
                 Нүүр
@@ -165,7 +165,7 @@ export const Header = () => {
               sx={{ py: 1, px: 2, cursor: "pointer" }}
               position={"relative"}
               onClick={() => {
-                if (pathname == "/foodmenu" || pathname == "/home") {
+                if (pathname == "/foodmenu" || pathname == "/") {
                   openDrawer();
                 }
                 return false;

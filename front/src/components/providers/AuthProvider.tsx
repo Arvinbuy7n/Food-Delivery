@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       setIsLogged(true);
       setRefresh(refresh + 1);
 
-      router.push("/home");
+      router.push("/");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -110,7 +110,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
       setIsLogged(true);
 
-      router.push("/login");
+      router.push("/auto/login");
 
       toast.success(data.message);
     } catch (error) {
@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     setAdmin(false);
 
-    router.push("/login");
+    router.push("/auto/login");
   };
 
   // gmail-ruu  otp ywuulah
@@ -145,7 +145,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
       toast.success(data.message);
 
-      router.push("/new2");
+      router.push("/auto/new2");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {
@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       toast.success(data.message);
 
       if (data) {
-        router.push("/new3");
+        router.push("/auto/new3");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -203,7 +203,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         position: "top-center",
       });
 
-      router.push("/login");
+      router.push("/auto/login");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message ?? error.message, {

@@ -32,7 +32,7 @@ export const Footer = () => {
               width: 25,
             }}
           >
-            <img src="num.webp"></img>
+            <img src="/num.webp"></img>
           </ImageListItem>
           <Typography fontSize={20} fontWeight={700} color={"#FFF"}>
             Food Delivery
@@ -51,7 +51,7 @@ export const Footer = () => {
             fontSize={16}
             sx={{ borderBottom: 1 }}
             onClick={() => {
-              router.push("/home");
+              router.push("/");
             }}
           >
             Нүүр
@@ -62,6 +62,7 @@ export const Footer = () => {
             fontWeight={600}
             fontSize={16}
             sx={{ borderBottom: 1 }}
+            whiteSpace={"nowrap"}
           >
             Холбоо барих
           </Typography>
@@ -74,6 +75,7 @@ export const Footer = () => {
             onClick={() => {
               router.push("/foodmenu");
             }}
+            whiteSpace={"nowrap"}
           >
             Хоолны цэс
           </Typography>
@@ -84,6 +86,7 @@ export const Footer = () => {
             fontSize={16}
             sx={{ borderBottom: 1 }}
             onClick={() => [router.push("/service")]}
+            whiteSpace={"nowrap"}
           >
             Үйлчилгээний нөхцөл
           </Typography>
@@ -92,7 +95,7 @@ export const Footer = () => {
             color={"#FFF"}
             fontWeight={600}
             fontSize={16}
-            sx={{ borderBottom: 1 }}
+            sx={{ borderBottom: 1, whiteSpace: "nowrap" }}
           >
             Хүргэлтийн бүс
           </Typography>
@@ -101,7 +104,7 @@ export const Footer = () => {
             color={"#FFF"}
             fontWeight={600}
             fontSize={16}
-            sx={{ borderBottom: 1 }}
+            sx={{ borderBottom: 1, whiteSpace: "nowrap" }}
           >
             Нууцлалын бодлого
           </Typography>

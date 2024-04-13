@@ -1,9 +1,7 @@
 import mongoose, { Schema, model } from "mongoose";
 
 export const orderSchema = new Schema({
-  userid: {
-    type: mongoose.Schema.Types.ObjectId,
-  },
+  userid: mongoose.Schema.Types.ObjectId,
 
   deliveryAddress: [
     {
@@ -35,6 +33,7 @@ export const orderSchema = new Schema({
   },
 
   createdAt: Date,
+  updatedAt: Date,
 
   deliveredAt: {
     type: Date,

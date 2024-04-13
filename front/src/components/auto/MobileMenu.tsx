@@ -35,7 +35,7 @@ export const MobileMenu = (props: Mobile) => {
         fontWeight={500}
         borderBottom={1}
         onClick={() => {
-          router.push("/home");
+          router.push("/");
         }}
       >
         Нүүр

@@ -2,16 +2,6 @@ import { RequestHandler } from "express";
 import { FoodModel } from "../models";
 import { CategoryModel } from "../models/category.model";
 
-export const getAllFoods: RequestHandler = async (_req, res) => {
-  try {
-    const foods = await FoodModel.find({});
-
-    res.json(foods);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const addFood: RequestHandler = async (req, res) => {
   try {
     const { foodName, foodCategory, ingredient, price, discount, foodImage } =
@@ -25,7 +15,7 @@ export const addFood: RequestHandler = async (req, res) => {
       });
     }
 
-    const food = await FoodModel.create({
+    await FoodModel.create({
       foodName,
       foodCategory,
       ingredient,
@@ -35,7 +25,7 @@ export const addFood: RequestHandler = async (req, res) => {
     });
 
     return res.json({
-      message: "New food added",
+      message: "Шинэ хоол амжилттай үүслээ.",
     });
   } catch (err) {
     console.log(err);
@@ -64,12 +54,12 @@ export const addCategory: RequestHandler = async (req, res) => {
       });
     }
 
-    const categories = await CategoryModel.create({
+    await CategoryModel.create({
       category,
     });
 
     return res.json({
-      message: "New category created",
+      message: "Шинэ ангилал амжилттай үүслээ.",
     });
   } catch (err) {
     console.log(err);

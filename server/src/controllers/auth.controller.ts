@@ -105,7 +105,6 @@ export const newPassword: RequestHandler = async (req, res) => {
   }
 };
 
-// return one user
 export const getUser: RequestHandler = async (req, res) => {
   const { authorization } = req.headers;
 
@@ -157,7 +156,7 @@ export const changeUser: RequestHandler = async (req, res) => {
     );
 
     return res.json({
-      message: "Мэдээлэл амжилттай хадгалагдлаа",
+      message: "Мэдээлэл амжилттай шинэчлэгдлээ.",
     });
   } catch (err) {
     console.log(err);

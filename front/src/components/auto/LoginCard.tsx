@@ -69,7 +69,7 @@ export const LoginCard = () => {
               fontFamily={"sans-serif"}
               color="#3F4145"
               onClick={() => {
-                router.push("/new1");
+                router.push("/auto/new1");
               }}
             >
               Нууц үг сэргээх
@@ -111,7 +111,7 @@ export const LoginCard = () => {
               py: 1.3,
             }}
             onClick={() => {
-              router.push("/sign");
+              router.push("/auto/sign");
             }}
           >
             Бүртгүүлэх
