@@ -24,6 +24,7 @@ import { useAuth } from "../providers/AuthProvider";
 import { UserPhoto } from "../upload/UserPro";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useRouter } from "next/navigation";
 
 type openModal = {
   open?: boolean;
@@ -38,6 +39,7 @@ const validationSchema = yup.object({
 
 export const UserProfile = (props: openModal) => {
   const { user, changeUser } = useAuth();
+  const router = useRouter();
 
   const [open, setClose] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -141,7 +143,15 @@ export const UserProfile = (props: openModal) => {
           helperText={formik.touched.email && formik.errors.email}
         />
 
-        <Stack direction={"row"} gap={1.5} px={2} py={1}>
+        <Stack
+          direction={"row"}
+          gap={1.5}
+          px={2}
+          py={1}
+          onClick={() => {
+            router.push("/orderHistory");
+          }}
+        >
           <IconButton sx={{ bgcolor: "#FFF", border: 1, color: "#000" }}>
             {<History />}
           </IconButton>

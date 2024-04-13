@@ -6,7 +6,6 @@ import { AddressForm } from "./AddressForm";
 import { Check } from "@mui/icons-material";
 import { useCard } from "../providers/CartProvider";
 import { MyOrderItem } from "../customs/MyOrderItem";
-import { useRouter } from "next/navigation";
 
 export const Step = () => {
   const [district, setDistrict] = useState("");
@@ -16,6 +15,8 @@ export const Step = () => {
   const [phone, setPhone] = useState("");
 
   const { postOrder, addBasket } = useCard();
+
+  console.log(addBasket);
 
   const isValid =
     Boolean(district) &&

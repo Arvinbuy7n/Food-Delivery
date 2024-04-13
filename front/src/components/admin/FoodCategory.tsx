@@ -9,7 +9,7 @@ import { CreateCategory } from "./CreateCategory";
 import { CreateFood } from "./CreateFood";
 import { useFood } from "../providers/FoodProvider";
 import { useAuth } from "../providers/AuthProvider";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 type Open = {
   isOpen?: Boolean;
@@ -24,6 +24,7 @@ export const FoodCategory = (props: Open) => {
   const [categoryName, setCategoryName] = useState("");
   const { categoryList, recordList, searchValue } = useFood();
   const { admin } = useAuth();
+  const router = useRouter();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -38,7 +39,13 @@ export const FoodCategory = (props: Open) => {
   return (
     <Stack direction={"row"} px={24} pt={7}>
       <Stack width={"25%"} height={"100%"} py={2} px={4} gap={5}>
-        <Typography fontSize={22} fontWeight={700}>
+        <Typography
+          fontSize={22}
+          fontWeight={700}
+          onClick={() => {
+            router.push("/admin/dashboard");
+          }}
+        >
           Food menu
         </Typography>
 

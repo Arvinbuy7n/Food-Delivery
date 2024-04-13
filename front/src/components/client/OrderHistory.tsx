@@ -10,9 +10,7 @@ export const OrderHistory = () => {
   const { orderList } = useCard();
   const [selected, setSelected] = useState("");
 
-  const food = orderList.find((item) => item._id == selected)?.foods;
-
-  console.log(food);
+  // const food = orderList.find((item) => item._id == selected)?.foods;
 
   return (
     <Container sx={{ pt: 7 }}>
@@ -39,11 +37,7 @@ export const OrderHistory = () => {
               Захиалгын дэлгэрэнгүй
             </Typography>
 
-            <Card sx={{ height: 60, borderBottom: 1 }}>
-              {/* {foods?.map((item, index) => (
-              <Detail key={index} {...item} />
-            ))} */}
-            </Card>
+            <Card sx={{ height: 60, borderBottom: 1 }}></Card>
           </Stack>
         </Card>
       </Stack>

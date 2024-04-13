@@ -55,10 +55,8 @@ type CardContextType = {
   setAddBasket: Dispatch<SetStateAction<CartFood[]>>;
   add: number;
   setAdd: Dispatch<SetStateAction<number>>;
-
   postOrder: (deliveryAddress: DeliveryAddress, order: CartFood[]) => void;
   getOrder: () => void;
-
   orderList: Order[];
 };
 
